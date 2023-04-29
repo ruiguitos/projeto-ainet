@@ -31,3 +31,6 @@ MAIL_ENCRYPTION=tls
 
 https://mailtrap.io/inboxes/2190065/messages
 
+
+
+--> change sidebar.blade.php && sidebar_admin.blade.php !!
