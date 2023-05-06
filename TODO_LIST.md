@@ -1,9 +1,9 @@
--> assim que sair enunciado, meter pasta database para dentro da pasta projeto [x]
--> alterar DB_DATABASE dentro do ficheiro .env de acordo com o ficheiro de base de dados fornecidos (linha 15)
--> alterar APP_NAME dentro do .env (opcional)
--> ou alterar ficheiro app.php (linha 18)
+- assim que sair enunciado, meter pasta database para dentro da pasta projeto [x]
+- alterar DB_DATABASE dentro do ficheiro .env de acordo com o ficheiro de base de dados fornecidos (linha 15)
+- alterar APP_NAME dentro do .env (opcional)
+- ou alterar ficheiro app.php (linha 18)
 
--> ver bootstrap com side menus
+- ver bootstrap com side menus
 
 ### BOOTSTRAP
 composer require laravel/ui
