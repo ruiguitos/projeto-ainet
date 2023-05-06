@@ -1,4 +1,4 @@
-@extends('template.layout')
+@extends('layout')
 
 @section('subtitulo')
 @endsection
