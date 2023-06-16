@@ -14,7 +14,7 @@
                             <p>Podes fazer o login
                                 <a href="{{ route('login') }}">aqui</a>.
                             </p>
-                            @endauth
+                        @endauth
                     </div>
                 </div>
             </div>
