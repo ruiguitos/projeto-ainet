@@ -84,28 +84,38 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link" href="/dashboard">
-                        <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                        Admin Dashboard
-                    </a>
 
-                    <a class="nav-link" href="/catalogo">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Catálogo de T-Shirts
-                    </a>
+                    <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
+                        <a class="nav-link" href="/catalogo">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Catálogo de T-Shirts
+                        </a>
 
-                    <a class="nav-link" href="#">
-                        <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                        Catálogo de Imagens
-                    </a>
+                        <a class="nav-link" href="/imagens">
+                            <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
+                            Catálogo de Imagens
+                        </a>
 
-                    <div class="sb-sidenav-menu-heading">Espaço Privado</div>
-                    <a class="nav-link" href="#">
-                        <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
-                       ddasdasdasdasdasdas
-                    </a>
+                    <div class="sb-sidenav-menu-heading">Espaço Admin</div>
+                        <a class="nav-link" href="/dashboard">
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            Admin Dashboard
+                        </a>
+                        <a class="nav-link" href="/clientes">
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            Clientes
+                        </a>
+                        <a class="nav-link" href="/encomendas">
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            Encomendas
+                        </a>
+
                 </div>
             </div>
+{{--            <div class="sb-sidenav-footer">--}}
+{{--                <div class="small">Logged in as: </div>--}}
+{{--                {{ Auth::user()->name }}--}}
+{{--            </div>--}}
         </nav>
     </div>
     <div id="layoutSidenav_content">
