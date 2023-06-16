@@ -1,8 +1,5 @@
 @extends('layout')
 
-@section('subtitulo')
-@endsection
-
 @section('main')
     <div class="container">
         <div class="row justify-content-center">
@@ -18,7 +15,6 @@
                                 <a href="{{ route('login') }}">aqui</a>.
                             </p>
                             @endauth
-                            </p>
                     </div>
                 </div>
             </div>
