@@ -28,8 +28,7 @@
             @endforeach
         </div>
     </div>
-    <div>
-        <a href="{{ url()->previous() }}">
-            <button class="rounded-button">Go Back</button></a>
-    </div>
+    <footer>
+        <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black; align-items: flex-end">Voltar à Pagina Inicial</a>
+    </footer>
 @endsection
