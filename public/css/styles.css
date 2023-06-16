@@ -1,0 +1,53 @@
+.grid-container {
+   display: grid;
+   grid-template-columns: repeat(5, 1fr);
+   grid-gap: 10px;
+}
+
+.tshirt-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.tshirt-image {
+    width: 150px;
+    height: 150px;
+}
+
+.search-bar {
+    margin-bottom: 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+}
+
+.order-options {
+    margin-bottom: 10px;
+}
+
+.order-button {
+    margin-right: 10px;
+}
+
+.filter-container {
+    margin-bottom: 10px;
+}
+
+.filter-container select {
+    margin-right: 10px;
+}
+
+.rounded-button {
+    border-radius: 10px;
+}
+
+.add-quantity {
+    margin-top: 10px;
+    display: flex
+}
