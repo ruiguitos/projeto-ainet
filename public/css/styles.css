@@ -103,3 +103,7 @@
 .add-quantity button:hover {
     background-color: #286090;
 }
+
+.price {
+    margin-top: 15px;
+}
