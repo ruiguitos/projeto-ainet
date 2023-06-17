@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagem;
 use App\Models\Preco;
 use App\Models\TShirt;
 use App\Models\Categoria;
@@ -11,17 +12,23 @@ class CatalogoController extends Controller
 {
     public function index()
     {
-        $tshirt_images = TShirt::select('id', 'name', 'category_id', 'description', 'image_url')->paginate(20);
+        $tshirt_images = Imagem::select('id', 'name', 'category_id', 'description', 'image_url')->paginate(20);
         $prices = Preco::all();
+
         return view('catalogo.index', compact('tshirt_images', 'prices'));
     }
 
     public function show($id)
     {
-        $tshirt_images = TShirt::findOrFail($id);
+        $tshirt_images = Imagem::findOrFail($id);
         $prices = Preco::all();
         $categories = Categoria::all();
-        return view('catalogo.show', compact('tshirt_images', 'prices', 'categories'));
+//        return view('catalogo.show', compact('tshirt_images', 'prices', 'categories'));
+
+        return view('catalogo.show')
+            ->withCatalogo($tshirt_images)
+            ->withCatalogo($prices)
+            ->withCatalogo($categories);
     }
 
 //    public function filter(Request $request)
