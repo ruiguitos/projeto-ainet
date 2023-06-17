@@ -13,6 +13,7 @@ class Tshirt extends Model{
     protected $table = 'order_items';
     public $timestamps = false;
     protected $fillable = [
+        'id' ,
         'order_id',
         'tshirt_image_id',
         'color_code',
@@ -33,4 +34,6 @@ class Tshirt extends Model{
     public function colorCode(): BelongsTo{
         return $this->belongsTo(Cor::Class,"color_code",'code'); //->withTrashed();
     }
+
+
 }

@@ -52,10 +52,12 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <img
-                        src="{{Auth::user()->photo_url ? asset('storage/photos/' . Auth::user()->photo_url) : asset('img/default_img.png') }}"
-                        alt="Imagem do Cliente" class="img-profile rounded-circle" height="45">
-
+                    @if(Auth::user()->photo_url)
+                        <img src="{{ asset('storage/photos/' . Auth::user()->photo_url) }}"
+                             class="img-profile rounded-circle" height="45">
+                    @else
+                        <img src="{{ asset('img/default_img.png') }}" class="img-profile rounded-circle" height="45">
+                    @endif
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -97,7 +99,8 @@
                             Imagens
                         </a>
 
-                    <div class="sb-sidenav-menu-heading">Espaço Admin</div>
+                    @if(Auth::user()->user_type == 'A')
+                        <div class="sb-sidenav-menu-heading">Espaço Admin</div>
                         <a class="nav-link" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Admin Dashboard
@@ -110,6 +113,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Encomendas
                         </a>
+                    @endif
 
                 </div>
             </div>

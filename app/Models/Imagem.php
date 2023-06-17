@@ -17,7 +17,7 @@ class Imagem extends Model
 
     protected $table = 'tshirt_images';
 
-    protected $fillable = ['customer_id', 'category_id', 'name', 'description', 'image_url', 'extra_info'];
+    protected $fillable = ['id', 'customer_id', 'category_id', 'name', 'description', 'image_url', 'extra_info'];
 
     public function tshirt(): HasMany
     {
@@ -26,7 +26,7 @@ class Imagem extends Model
 
     public function costumerId(): BelongsTo
     {
-        return $this->belongsTo(Cliente::Class, 'customer_id', 'id');
+        return $this->belongsTo(Customer::Class, 'customer_id', 'id');
     }
 
     public function categoryId() : BelongsTo

@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('main')
+@section('subtitulo')
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -74,6 +74,11 @@
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
+                        <a class="nav-link" href="/administradores">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Administradores
+                        </a>
+
                         <a class="nav-link" href="/clientes">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Clientes
@@ -90,7 +95,7 @@
                         </a>
 
                         <a class="nav-link" href="/dashboard/charts">
-                            <div class="sb-nav-link-icon"><i class  ="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gráficos
                         </a>
                         <a class="nav-link" href="/dashboard/tables">
@@ -217,16 +222,18 @@
                 </table>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous">
         </script>
         <script src="js/scripts.js"></script>
         @vite('resources/js/app.js')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                crossorigin="anonymous"></script>
         <script src="resources/demo/chart-area-demo.js"></script>
         <script src="resources/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
         </body>
-        </div>
+    </div>
 
 @endsection

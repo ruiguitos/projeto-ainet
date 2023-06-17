@@ -29,6 +29,6 @@
         </div>
     </div>
     <footer>
-        <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black; align-items: flex-end">Voltar à Pagina Inicial</a>
+        <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black; align-items: flex-end; margin-top: 15px\\">Voltar à Pagina Inicial</a>
     </footer>
 @endsection

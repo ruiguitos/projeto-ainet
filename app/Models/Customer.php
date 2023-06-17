@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customer extends Model
 {
     use HasFactory, SoftDeletes;
-
+    public $timestamps = false;
     protected $table = 'customers';
 
     protected $fillable = [
@@ -23,7 +23,7 @@ class Customer extends Model
     ];
 
     public function userId(): BelongsTo{
-        return $this->belongsTo(User::Class, 'id', 'id');
+        return $this->belongsTo(User::Class);
     }
 
     public function order(): HasMany{

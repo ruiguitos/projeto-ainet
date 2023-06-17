@@ -23,12 +23,13 @@ class CatalogoController extends Controller
         $tshirt_images = Imagem::findOrFail($id);
         $prices = Preco::all();
         $categories = Categoria::all();
-//        return view('catalogo.show', compact('tshirt_images', 'prices', 'categories'));
 
-        return view('catalogo.show')
-            ->withCatalogo($tshirt_images)
-            ->withCatalogo($prices)
-            ->withCatalogo($categories);
+        return view('catalogo.show', compact('tshirt_images', 'prices', 'categories'));
+
+//        return view('catalogo.show')
+//            ->withCatalogo($tshirt_images)
+//            ->withCatalogo($prices)
+//            ->withCatalogo($categories);
     }
 
 //    public function filter(Request $request)

@@ -17,6 +17,7 @@ class Encomenda extends Model{
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'status',
         'customer_id',
         'date',
@@ -31,12 +32,12 @@ class Encomenda extends Model{
 
     public function tshirt(): HasMany{
 
-        return $this->hasMany(Imagem::class, 'order_id', 'id');
+        return $this->hasMany(Tshirt::class, 'order_id', 'id');
     }
 
     public function customerRef(): BelongsTo{
 
-        return $this->belongsTo(Cliente::class, 'customer_id', 'id');
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 
 }

@@ -15,11 +15,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 //CATALOGO
-Route::get('/catalogo', [App\Http\Controllers\CatalogoController::class, 'index'])->name('catalogo.index');
-Route::get('/catalogo/{id}', [App\Http\Controllers\CatalogoController::class, 'show'])->name('catalogo.show');
+Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo.index');
+Route::get('/catalogo/{id}', [CatalogoController::class, 'show'])->name('catalogo.show');
 
 //IMAGEM
 Route::get('/imagem', [App\Http\Controllers\ImagemController::class, 'index'])->name('imagem.index');
@@ -57,7 +58,12 @@ Route::view('/cores', 'cores.index');
 
 
 //Clientes
-Route::get('/clientes', [UserController::class, 'showClients'])->name('clientes.index');
+Route::view('/clientes', 'clientes.index');
+Route::get('/clientes', [App\Http\Controllers\UserController::class, 'index'])->name('clientes.index');
+
+
+
+
 
 //Encomendas
 Route::view('/encomendas', 'encomendas.index');

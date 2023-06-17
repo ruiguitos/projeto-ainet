@@ -16,48 +16,45 @@
 
         <div class="grid-container">
             @foreach ($tshirt_images as $tshirt)
-                <div class="tshirt-item">
-                    <div class="tshirt-image">
-                        <a href="{{ route('catalogo.show', $tshirt->id) }}">
-                            <p>{{ $tshirt->name }}</p>
-                        </a>
-                        {{$tshirt->image_url}}
+                <div class="tshirt-image">
+                    <a href="{{ route('catalogo.show', $tshirt->id) }}">
+{{--                        <img src="{{ asset('storage/tshirt_images/' . $tshirt->image_url) }}" alt="T-Shirt Image">--}}
+                        <p>{{ $tshirt->name }}</p>
+                    </a>
+                </div>
 
-                    </div>
 
-                    <div class="description">
-                        <p>
-                            <strong>Description:</strong> {{ $tshirt->description }}
-                        </p>
+                <div class="description">
+                    <p>
+                        <strong>Description:</strong> {{ $tshirt->description }}
+                    </p>
+                </div>
+                {{--                    <div class="category">--}}
+                {{--                        <p>--}}
+                {{--                            Category: {{ $tshirt->category_id }}--}}
+                {{--                        </p>--}}
+                {{--                    </div>--}}
+                @foreach($prices as $price)
+                    <div class="price">
+                        <p><strong>Price:</strong> {{ $price->unit_price_catalog }}€</p>
                     </div>
-                    {{--                    <div class="category">--}}
-                    {{--                        <p>--}}
-                    {{--                            Category: {{ $tshirt->category_id }}--}}
-                    {{--                        </p>--}}
-                    {{--                    </div>--}}
-                    @foreach($prices as $price)
-                        <div class="price">
-                            <p> <strong>Price:</strong> {{ $price->unit_price_catalog }}€</p>
-                        </div>
-                    @endforeach
-                    <div class="add-to-cart">
-                        <form action="{{ route('carrinho.add', $tshirt->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="rounded-button">Add to Cart</button>
-                        </form>
-                        <div class="add-quantity">
-                            <label for="quantity">Quantity: </label>
-                            <input type="number" id="quantity" name="quantity" min="1" value="1">
-                        </div>
+                @endforeach
+                <div class="add-to-cart">
+                    <form action="{{ route('carrinho.add', $tshirt->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="rounded-button">Add to Cart</button>
+                    </form>
+                    <div class="add-quantity">
+                        <label for="quantity">Quantity: </label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1">
                     </div>
                 </div>
-            @endforeach
-        </div>
+        @endforeach
+    </div>
 
-        <div class="footer">
-            <!-- Footer content goes here -->
-            {{ $tshirt_images->links() }}
-        </div>
+    <div class="footer">
+        <!-- Footer content goes here -->
+        {{ $tshirt_images->links() }}
     </div>
 @endsection
 

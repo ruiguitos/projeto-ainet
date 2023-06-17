@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Lista de Clientes</h1>
+    <h1>Clients</h1>
 
     <table class="table">
         <thead>
@@ -12,22 +12,19 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($users as $user)
+        @foreach($clients as $client)
             <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <!-- Add more columns as needed -->
+                <td>{{ $client->name }}</td>
+                <td>{{ $client->email }}</td>
+                <!-- Display additional columns as needed -->
             </tr>
         @endforeach
         </tbody>
     </table>
 
-    <footer>
-        <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black; align-items: flex-end">Voltar à
-            Pagina Inicial</a>
-    </footer>
+    <br>
+    <center><a href="{{ route('home')}}" class="btn btn-default" style="border-color: black">Voltar à Pagina Inicial</a>
+    </center>
 
+    {{ $clients->links() }}
 @endsection
-
-
-

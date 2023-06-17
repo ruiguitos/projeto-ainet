@@ -21,6 +21,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id' ,
         'name',
         'email',
         'password',
@@ -51,7 +52,12 @@ class User extends Authenticatable
     ];
 
     public function customer(): HasOne{
-        return $this->hasOne(Cliente::class, 'id','id');
+        return $this->hasOne(Customer::class, 'id','id');
+    }
+
+    public function scopeClients($query)
+    {
+        return $query->where('user_type', 'C');
     }
 
 }
