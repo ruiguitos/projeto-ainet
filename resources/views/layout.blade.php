@@ -61,6 +61,7 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
                     <li><a class="dropdown-item" href="/password/reset">Alterar Senha</a></li>
+                    <li><a class="dropdown-item" href="/carrinho">Carrinho</a></li>
                     <li>
                         <hr class="dropdown-divider"/>
                     </li>
