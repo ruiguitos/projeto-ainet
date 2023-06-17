@@ -1,53 +1,105 @@
 .grid-container {
-   display: grid;
-   grid-template-columns: repeat(5, 1fr);
-   grid-gap: 10px;
-}
-
-.tshirt-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border: 1px solid black;
-    padding: 10px;
-}
-
-.tshirt-image {
-    width: 125px;
-    height: 125px;
-}
-
-.search-bar {
-    margin-bottom: 10px;
-}
-
-.footer {
-    text-align: center;
-    padding: 20px;
-}
-
-.order-options {
-    margin-bottom: 10px;
-}
-
-.order-button {
-    margin-right: 10px;
-}
-
-.filter-container {
-    margin-bottom: 10px;
-}
-
-.filter-container select {
-    margin-right: 10px;
-}
-
-.rounded-button {
-    border-radius: 10px;
-}
-
-.add-quantity {
-    margin-top: 10px;
-    display: flex
-}
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
+ }
+ 
+ .tshirt-item {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+     border: 1px solid #ccc;
+     padding: 20px;
+     transition: border-color 0.3s ease;
+ }
+ 
+ .tshirt-item:hover {
+     border-color: #999;
+ }
+ 
+ .tshirt-image {
+     width: 150px;
+     height: 150px;
+     object-fit: cover;
+     margin-bottom: 10px;
+ }
+ 
+ .search-bar {
+     margin-bottom: 20px;
+ }
+ 
+ .footer {
+     text-align: center;
+     padding: 20px;
+     background-color: #f5f5f5;
+ }
+ 
+ .order-options {
+     margin-bottom: 20px;
+ }
+ 
+ .order-button {
+     margin-right: 10px;
+     padding: 10px 20px;
+     background-color: #337ab7;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+ 
+ .order-button:hover {
+     background-color: #286090;
+ }
+ 
+ .filter-container {
+     margin-bottom: 20px;
+ }
+ 
+ .filter-container select {
+     margin-right: 10px;
+     padding: 5px;
+ }
+ 
+ .rounded-button {
+     border-radius: 10px;
+     padding: 10px 20px;
+     background-color: #337ab7;
+     color: #fff;
+     border: none;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+ 
+ .rounded-button:hover {
+     background-color: #286090;
+ }
+ 
+ .add-quantity {
+     margin-top: 10px;
+     display: flex;
+     align-items: center;
+ }
+ 
+ .add-quantity input[type="number"] {
+     width: 50px;
+     padding: 5px;
+     margin-right: 10px;
+ }
+ 
+ .add-quantity button {
+     padding: 5px 10px;
+     background-color: #337ab7;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+ 
+ .add-quantity button:hover {
+     background-color: #286090;
+ }
