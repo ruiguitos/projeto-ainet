@@ -88,12 +88,12 @@
                     <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
                         <a class="nav-link" href="/catalogo">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Catálogo de T-Shirts
+                            T-Shirts
                         </a>
 
-                        <a class="nav-link" href="/imagens">
+                        <a class="nav-link" href="/imagem">
                             <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                            Catálogo de Imagens
+                            Imagens
                         </a>
 
                     <div class="sb-sidenav-menu-heading">Espaço Admin</div>
