@@ -7,35 +7,21 @@ use App\Models\User;
 use App\Http\Requests\UserPost;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class UserController extends Controller
 {
-
-    public function getUserTypeAttribute()
+    public function showClients()
     {
-        $userTypeMapping = [
-            'admin' => ['letter' => 'A', 'designation' => 'Administrator'],
-            'employee' => ['letter' => 'E', 'designation' => 'Employee'],
-            'customer' => ['letter' => 'C', 'designation' => 'Customer'],
-        ];
+        $users = User::where('user_type', 'C')->get();
 
-        $userType = $this->attributes['user_type'] ?? null;
+        return view('clients.index', compact('users'));
 
-        if (array_key_exists($userType, $userTypeMapping)) {
-            $userTypeData = $userTypeMapping[$userType];
-            return $userTypeData['letter'] . ' - ' . $userTypeData['designation'];
-        }
-
-        return null;
     }
 
-    public function admin_index(Request $request)
+    public function index(Request $request)
     {
-        $qry = User::wherein('tipo', ['A', 'F']);
-        $users = $qry->paginate(14);
 
-        return view('users.admin')
-            ->withUsers($users);
     }
 
     public function ativar(User $user)
@@ -47,7 +33,7 @@ class UserController extends Controller
             return redirect()->route('admin.users')
                 ->with('alert-msg', 'User "' . $userId . '" Ativado com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
 
             return redirect()->route('admin.users')
                 ->with('alert-msg', 'Não foi possível ativar o User' . $userId)
@@ -55,6 +41,7 @@ class UserController extends Controller
         }
 
     }
+
     public function desativar(User $user)
     {
         $userId = $user->id;
@@ -64,7 +51,7 @@ class UserController extends Controller
             return redirect()->route('admin.users')
                 ->with('alert-msg', 'User "' . $userId . '" desativado com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
 
             return redirect()->route('admin.users')
                 ->with('alert-msg', 'Não foi possível desativar o User')
@@ -134,7 +121,7 @@ class UserController extends Controller
             return redirect()->route('admin.users')
                 ->with('alert-msg', 'User "' . $user->name . '" foi apagado com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
 
             return redirect()->route('admin.users')
                 ->with('alert-msg', 'Não foi possível apagar o User "' . $oldName . '". Erro: ' . $th->errorInfo[2])
