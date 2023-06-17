@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
+    public function getUserTypeAttribute()
+    {
+        $userTypeMapping = [
+            'admin' => ['letter' => 'A', 'designation' => 'Administrator'],
+            'employee' => ['letter' => 'E', 'designation' => 'Employee'],
+            'customer' => ['letter' => 'C', 'designation' => 'Customer'],
+        ];
+
+        $userType = $this->attributes['user_type'] ?? null;
+
+        if (array_key_exists($userType, $userTypeMapping)) {
+            $userTypeData = $userTypeMapping[$userType];
+            return $userTypeData['letter'] . ' - ' . $userTypeData['designation'];
+        }
+
+        return null;
+    }
+
     public function admin_index(Request $request)
     {
         $qry = User::wherein('tipo', ['A', 'F']);
