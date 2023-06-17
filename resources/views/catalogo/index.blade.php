@@ -6,15 +6,20 @@
 
     <div class="container-fluid">
 
-
-
         <div class="search-container">
-            <div class="search-bar">
-                <form action="{{ route('catalogo.index') }}" method="GET">
-                    <input type="text" name="search" placeholder="Search by Name">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+            <form action="{{ route('catalogo.index') }}" method="GET">
+                <input type="text" name="search" placeholder="Search by Name">
+                <select name="orderBy">
+                    <option value="name">Order by Name</option>
+                    <option value="price">Order by Price</option>
+                </select>
+                <select name="orderDirection">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+
         </div>
 
         <div class="grid-container">
