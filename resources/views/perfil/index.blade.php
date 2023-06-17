@@ -1,4 +1,7 @@
 @extends('layout')
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
 @section('main')
     <table class="table">
         <thead>
@@ -7,16 +10,21 @@
             <td>{{Auth::user()->name}}</td>
         </tr>
         <tr>
+            <th>Foto</th>
+            <td>{{Auth::user()->photo_url}}</td>
+
+        </tr>
+        <tr>
             <th>Tipo de utilizador:</th>
             <td>{{Auth::user()->user_type}}</td>
         </tr>
         <tr>
             <th>Email</th>
-            <td>{{Auth::user()->email}}</td>
+            <td>{{ Auth::user()->email }}</td>
         </tr>
         <tr>
             <th>Verified at:</th>
-            <td>{{Auth::user()->email_verified_at}}</td>
+            <td>{{ Auth::user()->email_verified_at }}</td>
         </tr>
         </thead>
     </table>
@@ -31,11 +39,11 @@
         </tr>
         <tr>
             <th>Tipo de Pagamento</th>
-        {{--                        @if(Auth::user()->customer->ref_type == 'MC')--}}
+        {{--                        @if(Auth::user()->customers->ref_type == 'MC')--}}
         {{--                            <td>Master Card</td>--}}
-        {{--                        @elseif(Auth::user()->customer->ref_type == 'PAYPAL')--}}
+        {{--                        @elseif(Auth::user()->customers->ref_type == 'PAYPAL')--}}
         {{--                            <td>Pay Pal</td>--}}
-        {{--                        @elseif(Auth::user()->customer->ref_type == 'VISA')--}}
+        {{--                        @elseif(Auth::user()->customers->ref_type == 'VISA')--}}
         {{--                            <td>Visa</td>--}}
         {{--                        @else--}}
         {{--                            <td></td>--}}
@@ -43,11 +51,11 @@
         {{--        </tr>--}}
         <tr>
             <th>Referência de Pagamento</th>
-            {{--            <td>{{Auth::user()->customer->payment_ref}}</td>--}}
+            {{--            <td>{{Auth::user()->customers->payment_ref}}</td>--}}
         </tr>
     </table>
     <center>
-        {{--        <a href="{{ route('perfil.edit', Auth::user()->customer->id) }}" class="btn btn-primary btn-sm"--}}
+        {{--        <a href="{{ route('perfil.edit', Auth::user()->customers->id) }}" class="btn btn-primary btn-sm"--}}
         {{--           role="button" aria-pressed="true" style="border-color: black">Alterar Perfil</a>--}}
     </center>
     <br>
