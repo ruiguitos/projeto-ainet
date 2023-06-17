@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\ImagemController;
 
 Route::get('/', function () {
     return view('home');
@@ -19,6 +20,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //CATALOGO
 Route::get('/catalogo', [App\Http\Controllers\CatalogoController::class, 'index'])->name('catalogo.index');
 Route::get('/catalogo/{id}', [App\Http\Controllers\CatalogoController::class, 'show'])->name('catalogo.show');
+
+//IMAGEM
+Route::get('/imagem', [App\Http\Controllers\ImagemController::class, 'index'])->name('imagem.index');
+
 
 
 //ADMIN DASHBOARD
@@ -42,7 +47,7 @@ Route::post('/carrinho/add/{tshirt}', [CarrinhoController::class, 'add'])->name(
 
 
 //Categorias
-Route::view('/categorias', [App\Http\Controllers\CatalogoController::class, 'index'])->name('categorias.index');
+Route::view('/categorias', [CatalogoController::class, 'index'])->name('categorias.index');
 
 //Cores
 Route::view('/cores', 'cores.index');
