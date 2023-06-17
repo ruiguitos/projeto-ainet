@@ -8,12 +8,7 @@
             <img src="/img/plain_white.png" alt="Logo" class="bg-dark" width="50" height="50">
             ImagineShirt
         </a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-3 me-lg-0" id="sidebarToggle" href="#">
-            <i
-                class="fas fa-bars">
-            </i>
-        </button>
+
         @guest
             <ul class="navbar-nav ms-auto me-1 me-lg-3">
                 @if (Route::has('login'))
@@ -43,12 +38,12 @@
                         <img
                             src="{{Auth::user()->photo_url ? asset('storage/photos/' . Auth::user()->photo_url) : asset('img/default_img.png') }}"
                             alt="Imagem do Cliente" class="img-profile rounded-circle" height="45">
-
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
                         <li><a class="dropdown-item" href="/password/reset">Alterar Senha</a></li>
+                        <li><a class="dropdown-item" href="/carrinho">Carrinho</a></li>
+                        <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
@@ -105,11 +100,31 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as: </div>
-                    {{ Auth::user()->name }}
+                    <div class="small">
+                        <strong>Logged in as:</strong>
+                    </div>
+                    @php
+                        $fullName = Auth::user()->name;
+                        $nameParts = explode(' ', $fullName);
+                        $firstName = $nameParts[0];
+                        $lastName = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';
+                    @endphp
+                    {{ $firstName }} {{ $lastName }}
+                    <div class="small" style="margin-top: 10px">
+                        <strong>User type:</strong>
+                        @php
+                            $userType = Auth::user()->user_type;
+                            $userTypeMeanings = [
+                                'A' => 'Administrador',
+                                'E' => 'Empregado',
+                            ];
+                        @endphp
+                        {{ isset($userTypeMeanings[$userType]) ? $userTypeMeanings[$userType] : 'Unknown' }}
+                    </div>
                 </div>
             </nav>
         </div>
+
         <div class="container-fluid">
             <h1>Dashboard</h1>
             <ol class="breadcrumb mb-4">
