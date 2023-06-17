@@ -39,6 +39,7 @@ Route::put('/perfil/{customer}', [CustomerController::class, 'update'])->name('p
 Route::delete('/perfil/{customer}', [CustomerController::class, 'destroy'])->name('perfil.destroy');
 Route::delete('/perfil/{customer}/photo', [CustomerController::class, 'destroy_photo'])->name('perfil.photo.destroy');
 
+
 //CARRINHO
 Route::view('/carrinho', 'carrinho.index');
 Route::view('/pagamento', 'carrinho.pagamento');
@@ -56,7 +57,7 @@ Route::view('/cores', 'cores.index');
 
 
 //Clientes
-Route::view('/clientes', 'clientes.index');
+Route::get('/clientes', [UserController::class, 'showClients'])->name('clientes.index');
 
 //Encomendas
 Route::view('/encomendas', 'encomendas.index');
