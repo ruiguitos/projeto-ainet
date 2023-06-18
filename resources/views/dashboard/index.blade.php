@@ -74,24 +74,24 @@
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
-                        <a class="nav-link" href="/administradores">
+                        <a class="nav-link" href="/categoria">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Administradores
+                            Categoria Disponíveis
                         </a>
 
-                        <a class="nav-link" href="/clientes">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Clientes
-                        </a>
-
-                        <a class="nav-link" href="/empregados">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Empregados
+                        <a class="nav-link" href="/cores">
+                            <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
+                            Cores
                         </a>
 
                         <a class="nav-link" href="/encomendas">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Encomendas Registadas
+                        </a>
+
+                        <a class="nav-link" href="/encomendas">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Status Encomendas
                         </a>
 
                         <a class="nav-link" href="/dashboard/charts">
@@ -102,6 +102,24 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Dados
                         </a>
+
+                        <div class="sb-sidenav-menu-heading">Utilizadores</div>
+                        <a class="nav-link" href="/users/admins">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Administradores
+                        </a>
+
+                        <a class="nav-link" href="/users/clientes">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Clientes
+                        </a>
+
+                        <a class="nav-link" href="/users/empregados">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Empregados
+                        </a>
+
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

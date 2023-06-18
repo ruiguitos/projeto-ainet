@@ -22,7 +22,7 @@ class Cor extends Model{
 
     public $timestamps = false;
 
-    public function tshirt(): HasMany{
+    public function getCor(): HasMany{
         return $this->hasMany(Tshirt::Class, 'color_code', 'code');
     }
 

@@ -1,28 +1,46 @@
 @extends('layout')
-
+@section('title','Cor' )
 @section('main')
-
-    <h2>Cores</h2>
-    <div class="genero-area">
-{{--        @foreach($colors as $color)--}}
-{{--            <div class="genero">--}}
-{{--                <div class="genero-info-area">--}}
-{{--                    <div class="genero-info">--}}
-{{--                        <span class="genero-label">Codigo</span>--}}
-{{--                        <span class="genero-info-desc">{{$color->code}}</span>--}}
-{{--                    </div>--}}
-{{--                    <div class="genero-info">--}}
-{{--                        <span class="genero-label">Nome</span>--}}
-{{--                        <span class="genero-info-desc">{{$color->name}}</span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
+    <div class="row mb-3">
+        <div class="col-3">
+            <a  href="{{route('cores.create')}}" class="btn btn-success" role="button" aria-pressed="true">Adicionar Nova Cor</a>
+        </div>
     </div>
-    <br>
 
-    <center>
-        <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black">Voltar à Pagina Inicial</a>
-    </center>
-
+    <table class="table table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th>Código da Cor</th>
+            <th>Nome da Cor</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($colors as $cor)
+            <tr>
+                <td>{{$cor->code}}</td>
+                <td>{{$cor->name}}</td>
+                <td>
+                    <a href="{{route('cores.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                <td>
+                        @can('delete', $cor)
+                    <form action="{{route('cores.destroy', ['cor' => $cor]) }}" method="POST">
+                                @csrf
+                    @method("DELETE")
+                    <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                </form>
+@endcan
+                </td>
+                <td>
+                    <form action="{{route('cores.destroy', ['cor' => $cor]) }}" method="POST">
+                        @crsf
+                        @method("DELETE")
+                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection
+

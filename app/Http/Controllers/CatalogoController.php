@@ -15,6 +15,9 @@ class CatalogoController extends Controller
         $tshirt_images = Imagem::select('id', 'name', 'category_id', 'description', 'image_url')->paginate(20);
         $prices = Preco::all();
 
+        $query = Imagem::query();
+
+
         return view('catalogo.index', compact('tshirt_images', 'prices'));
     }
 
@@ -22,7 +25,7 @@ class CatalogoController extends Controller
     {
         $tshirt_images = Imagem::findOrFail($id);
         $prices = Preco::all();
-        $categories = Categoria::all();
+        $categories = Categoria::select('id','name');
 
         return view('catalogo.show', compact('tshirt_images', 'prices', 'categories'));
 
@@ -32,32 +35,32 @@ class CatalogoController extends Controller
 //            ->withCatalogo($categories);
     }
 
-//    public function filter(Request $request)
-//    {
-//        $categories = Categoria::all();
-//        $query = Categoria::query();
-//
-//        // Filter by category
-//        if ($request->has('category')) {
-//            $category = $request->input('category');
-//            $query->where('category_id', $category);
-//        }
-//
-//        // Sort by name
-//        if ($request->has('sort')) {
-//            $sort = $request->input('sort');
-//            $query->orderBy('name', $sort);
-//        }
-//
-//        // Search by name
-//        if ($request->has('search')) {
-//            $search = $request->input('search');
-//            $query->where('name', 'like', "%$search%");
-//        }
-//
-//        $tshirts = $query->get();
-//
-//        return view('catalog.index', compact('tshirts', 'categories'));
-//    }
+    public function filter(Request $request)
+    {
+        $categories = Preco::all();
+        $query = Preco::query();
+
+        // Filter by category
+        if ($request->has('category')) {
+            $category = $request->input('category');
+            $query->where('category_id', $category);
+        }
+
+        // Sort by name
+        if ($request->has('sort')) {
+            $sort = $request->input('sort');
+            $query->orderBy('name', $sort);
+        }
+
+        // Search by name
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $tshirts = $query->get();
+
+        return view('catalog.index', compact('tshirts', 'categories'));
+    }
 
 }

@@ -8,6 +8,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>ImagineShirt</title>
+    <link rel="icon" type="image/x-icon" href="/img/plain_white.png">
     @vite('resources/sass/app.scss')
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -62,7 +63,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-                    <li><a class="dropdown-item" href="/password/reset">Alterar Senha</a></li>
+                    <li><a class="dropdown-item" href="/password/reset">Alterar Senha (NOT WORKING)</a></li>
                     <li><a class="dropdown-item" href="/carrinho">Carrinho</a></li>
                     <li>
                         <hr class="dropdown-divider"/>
@@ -91,29 +92,21 @@
                     <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
                         <a class="nav-link" href="/catalogo">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            T-Shirts
+                            Estampas
                         </a>
 
-                        <a class="nav-link" href="/imagem">
+                        <a class="nav-link" href="/camisolas">
                             <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                            Imagens
+                            Camisolas
                         </a>
 
-                    @if(Auth::user()->user_type == 'A')
+{{--                    @if(Auth::user()->user_type === 'A')--}}
                         <div class="sb-sidenav-menu-heading">Espaço Admin</div>
                         <a class="nav-link" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Admin Dashboard
                         </a>
-                        <a class="nav-link" href="/clientes">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Clientes
-                        </a>
-                        <a class="nav-link" href="/encomendas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Encomendas
-                        </a>
-                    @endif
+{{--                    @endif--}}
 
                 </div>
             </div>
