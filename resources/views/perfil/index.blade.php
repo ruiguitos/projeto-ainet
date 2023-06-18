@@ -72,13 +72,24 @@
             </tr>
         </table>
 
-        <!-- Edit Profile button -->
-        <div style="display: flex; justify-content: center; margin-bottom: 15px">
+        <div class="container">
+            <div style="display: flex; justify-content: center; margin-bottom: 15px">
                 <a href="{{ route('perfil.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
                    aria-pressed="true" style="border-color: black">
                     Editar Perfil
                 </a>
+            </div>
+
+            <!-- Edit Photo button -->
+            <div style="display: flex; justify-content: center; margin-bottom: 15px">
+                <a href="{{ route('perfil.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
+                   aria-pressed="true" style="border-color: black">
+                    Editar Foto
+                </a>
+            </div>
         </div>
+        <!-- Edit Profile button -->
+
 
         <div style="display: flex; justify-content: center; margin-bottom: 15px">
             <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black">Voltar à Pagina

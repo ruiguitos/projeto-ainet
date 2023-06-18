@@ -5,7 +5,7 @@
 
     <div class="container-fluid">
         <div class="search-container">
-            <form action="{{ route('catalogo.index') }}" method="GET">
+            <form action="{{ route('catalogo.index') }}" method="GET" class="form-group">
                 <input type="text" name="search" placeholder="Search by Name">
                 <select name="orderBy">
                     <option value="name">Order by Name</option>
@@ -15,10 +15,29 @@
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>
-                <button type="submit">Search</button>
+                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
             </form>
-
         </div>
+
+{{--        <div class="row mb-5">--}}
+{{--            <div class="search-container">--}}
+{{--                <form method="GET" action="{{route('catalogo.index')}}" class="form-group">--}}
+{{--                    <div class="input-group">--}}
+{{--                        <select class="custom-select" name="category" id="inputCategory" aria-label="Category">--}}
+{{--                            <option value="" {{'' == old('category', $selectedCategory) ? 'selected' : ''}}>Todas as Categorias</option>--}}
+{{--                            @foreach ($categories as $abr => $name)--}}
+{{--                                <option value={{$abr}} {{$abr == old('categoria', $selectedCategory) ? 'selected' : ''}}>{{$name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                        <input type='text' class="form-control" name="search" placeholder="Procurar Nome">--}}
+{{--                        <input type='text' class="form-control" name="searchDesc" placeholder="Procurar Descrição">--}}
+{{--                        <div class="input-group-append">--}}
+{{--                            <button class="btn btn-outline-secondary" type="submit">Filtrar</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="grid-container">
             @foreach ($tshirt_images as $tshirt)

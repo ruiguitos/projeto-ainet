@@ -69,28 +69,36 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="/home">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Home
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                            Homepage
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
                         <a class="nav-link" href="/categoria">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
                             Categoria Disponíveis
                         </a>
 
                         <a class="nav-link" href="/cores">
-                            <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
                             Cores
                         </a>
 
                         <a class="nav-link" href="/encomendas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
                             Encomendas Registadas
                         </a>
 
                         <a class="nav-link" href="/encomendas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
                             Status Encomendas
                         </a>
 
@@ -105,21 +113,20 @@
 
                         <div class="sb-sidenav-menu-heading">Utilizadores</div>
                         <a class="nav-link" href="/users/admins">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i>
+                            </div>
                             Administradores
                         </a>
 
                         <a class="nav-link" href="/users/clientes">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
                             Clientes
                         </a>
 
                         <a class="nav-link" href="/users/empregados">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
                             Empregados
                         </a>
-
-
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

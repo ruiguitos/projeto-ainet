@@ -92,7 +92,7 @@
                     <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
                         <a class="nav-link" href="/catalogo">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Estampas
+                            Catálogo
                         </a>
 
                         <a class="nav-link" href="/camisolas">
@@ -100,7 +100,7 @@
                             Camisolas
                         </a>
 
-{{--                    @if(Auth::user()->user_type === 'A')--}}
+{{--                    @if(Auth::user()->user_type === 'A') //CHANGE--}}
                         <div class="sb-sidenav-menu-heading">Espaço Admin</div>
                         <a class="nav-link" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>

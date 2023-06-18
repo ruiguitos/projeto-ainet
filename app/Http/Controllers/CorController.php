@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CorPost;
 use App\Models\Cor;
-use App\Models\Imagem;
-use App\Models\Preco;
 
 class CorController
 {

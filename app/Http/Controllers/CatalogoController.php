@@ -60,7 +60,12 @@ class CatalogoController extends Controller
 
         $tshirts = $query->get();
 
-        return view('catalog.index', compact('tshirts', 'categories'));
+//        return view('catalog.index', compact('tshirts', 'categories'));
+
+        return view('catalogo.index')
+            ->withCatalogo($tshirts)
+            ->withCategorias($categories);
+
     }
 
 }

@@ -23,14 +23,6 @@
                 <td>
                     <a href="{{route('cores.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                 <td>
-                        @can('delete', $cor)
-                    <form action="{{route('cores.destroy', ['cor' => $cor]) }}" method="POST">
-                                @csrf
-                    @method("DELETE")
-                    <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
-                </form>
-@endcan
-                </td>
                 <td>
                     <form action="{{route('cores.destroy', ['cor' => $cor]) }}" method="POST">
                         @crsf

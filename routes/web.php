@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\CustomerController;
+//use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
+//use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\CorController;
-use App\Http\Controllers\ImagemController;
+//use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\CamisolaController;
 
 
@@ -51,11 +51,11 @@ Route::view('/dashboard/tables', 'dashboard.tables');
 
 //PERFIL
 Route::view('/perfil', 'perfil.index');
-Route::get('/perfil/{customer}', [CustomerController::class, 'index'])->name('perfil.index');
-Route::get('/perfil/{customer}/edit', [CustomerController::class, 'edit'])->name('perfil.edit');
-Route::put('/perfil/{customer}', [CustomerController::class, 'update'])->name('perfil.update');
-Route::delete('/perfil/{customer}', [CustomerController::class, 'destroy'])->name('perfil.destroy');
-Route::delete('/perfil/{customer}/photo', [CustomerController::class, 'destroy_photo'])->name('perfil.photo.destroy');
+Route::get('/perfil/{customer}', [UserController::class, 'index'])->name('perfil.index');
+Route::get('/perfil/{customer}/edit', [UserController::class, 'edit'])->name('perfil.edit');
+Route::put('/perfil/{customer}', [UserController::class, 'update'])->name('perfil.update');
+Route::delete('/perfil/{customer}', [UserController::class, 'destroy'])->name('perfil.destroy');
+Route::delete('/perfil/{customer}/photo', [UserController::class, 'destroy_photo'])->name('perfil.photo.destroy');
 
 
 
@@ -72,8 +72,6 @@ Route::view('/pagamento', 'carrinho.pagamento');
 #######################################################################################################################################
 //Categorias
 Route::view('/categorias', [CatalogoController::class, 'index'])->name('categorias.index');
-
-
 
 
 
@@ -103,15 +101,15 @@ Route::delete('/cores/{cor}/destroy', [CorController::class, 'destroy'])->name('
 //Users Admins
 Route::view('/users/admins', 'users.admins.index');
 Route::get('/users/admins', [App\Http\Controllers\UserController::class, 'indexAdmins'])->name('users.admins.index');
-Route::get('/users/admins/{admin}/edit', [UserController::class, 'edit'])->name('users.admins.edit')
+Route::get('/users/admins/{admin}/edit', [UserController::class, 'editAdmin'])->name('users.admins.edit')
     ->middleware('can:view,admin');
-Route::get('/users/admins/create', [UserController::class, 'create'])->name('users.admins.create')
+Route::get('/users/admins/create', [UserController::class, 'createAdmin'])->name('users.admins.create')
     ->middleware('can:create,App\Models\User');
-Route::post('/users/admins/store', [UserController::class, 'store'])->name('users.admins.store')
+Route::post('/users/admins/store', [UserController::class, 'storeAdmin'])->name('users.admins.store')
     ->middleware('can:create,App\Models\User');
-Route::put('/users/admins/{admin}/update', [UserController::class, 'update'])->name('users.admins.update')
+Route::put('/users/admins/{admin}/update', [UserController::class, 'updateAdmin'])->name('users.admins.update')
     ->middleware('can:update,admin');
-Route::delete('/users/admins/{admin}/destroy', [UserController::class, 'destroy'])->name('users.admins.destroy')
+Route::delete('/users/admins/{admin}/destroy', [UserController::class, 'destroyAdmin'])->name('users.admins.destroy')
     ->middleware('can:delete,admin');
 
 //Users Clientes
@@ -151,17 +149,6 @@ Route::view('/encomendas', 'encomendas.index');
 
 
 #######################################################################################################################################
-//Empregados
-Route::view('/empregados', 'empregados.index');
-Route::view('/clientes', 'clientes.index');
-
-
-
-
-
-#######################################################################################################################################
-
-
 
 //Route::get('carrinho', [EstampaController::class, 'cart'])->name('carrinho.index');
 //Route::post('add-to-cart/{id}', [EstampaController::class, 'addToCart']);
