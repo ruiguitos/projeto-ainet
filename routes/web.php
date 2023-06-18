@@ -100,21 +100,47 @@ Route::delete('/cores/{cor}/destroy', [CorController::class, 'destroy'])->name('
 
 
 #######################################################################################################################################
-//Users Clientes
+//Users Admins
 Route::view('/users/admins', 'users.admins.index');
 Route::get('/users/admins', [App\Http\Controllers\UserController::class, 'indexAdmins'])->name('users.admins.index');
+Route::get('/users/admins/{admin}/edit', [UserController::class, 'edit'])->name('users.admins.edit')
+    ->middleware('can:view,admin');
+Route::get('/users/admins/create', [UserController::class, 'create'])->name('users.admins.create')
+    ->middleware('can:create,App\Models\User');
+Route::post('/users/admins/store', [UserController::class, 'store'])->name('users.admins.store')
+    ->middleware('can:create,App\Models\User');
+Route::put('/users/admins/{admin}/update', [UserController::class, 'update'])->name('users.admins.update')
+    ->middleware('can:update,admin');
+Route::delete('/users/admins/{admin}/destroy', [UserController::class, 'destroy'])->name('users.admins.destroy')
+    ->middleware('can:delete,admin');
 
 //Users Clientes
 Route::view('/users/clientes', 'users.clientes.index');
 Route::get('/users/clientes', [App\Http\Controllers\UserController::class, 'indexClientes'])->name('users.clientes.index');
+Route::get('/users/clientes/{cliente}/edit', [UserController::class, 'edit'])->name('users.clientes.edit')
+    ->middleware('can:view,cliente');
+Route::get('/users/clientes/create', [UserController::class, 'create'])->name('users.clientes.create')
+    ->middleware('can:create,App\Models\User');
+Route::post('/users/clientes/store', [UserController::class, 'store'])->name('users.clientes.store')
+    ->middleware('can:create,App\Models\User');
+Route::put('/users/clientes/{cliente}/update', [UserController::class, 'update'])->name('users.clientes.update')
+    ->middleware('can:update,cliente');
+Route::delete('/users/clientes/{cliente}/destroy', [UserController::class, 'destroy'])->name('users.clientes.destroy')
+    ->middleware('can:delete,cliente');
 
 //Users Empregados
 Route::view('/users/empregados', 'users.empregados.index');
 Route::get('/users/empregados', [App\Http\Controllers\UserController::class, 'indexEmpregados'])->name('users.empregados.index');
-
-
-
-
+Route::get('/users/empregados/{empregado}/edit', [UserController::class, 'edit'])->name('users.empregados.edit')
+    ->middleware('can:view,empregado');
+Route::get('/users/empregados/create', [UserController::class, 'create'])->name('users.empregados.create')
+    ->middleware('can:create,App\Models\User');
+Route::post('/users/empregados/store', [UserController::class, 'store'])->name('users.empregados.store')
+    ->middleware('can:create,App\Models\User');
+Route::put('/users/empregados/{empregado}/update', [UserController::class, 'update'])->name('users.empregados.update')
+    ->middleware('can:update,empregado');
+Route::delete('/users/empregados/{empregado}/destroy', [UserController::class, 'destroy'])->name('users.empregados.destroy')
+    ->middleware('can:delete,empregado');
 
 #######################################################################################################################################
 //Encomendas
