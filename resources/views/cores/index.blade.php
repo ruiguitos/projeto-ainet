@@ -29,7 +29,7 @@
                     @method("DELETE")
                     <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
                 </form>
-@endcan
+                        @endcan
                 </td>
                 <td>
                     <form action="{{route('cores.destroy', ['cor' => $cor]) }}" method="POST">

@@ -88,11 +88,10 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-
                     <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
                         <a class="nav-link" href="/catalogo">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Estampas
+                            Catálogo
                         </a>
 
                         <a class="nav-link" href="/camisolas">
@@ -103,11 +102,10 @@
 {{--                    @if(Auth::user()->user_type === 'A')--}}
                         <div class="sb-sidenav-menu-heading">Espaço Admin</div>
                         <a class="nav-link" href="/dashboard">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
                             Admin Dashboard
                         </a>
 {{--                    @endif--}}
-
                 </div>
             </div>
 {{--            <div class="sb-sidenav-footer">--}}
