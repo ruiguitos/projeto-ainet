@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EncomendaController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomerController;
@@ -145,7 +146,21 @@ Route::delete('/users/empregados/{empregado}/destroy', [UserController::class, '
 #######################################################################################################################################
 //Encomendas
 Route::view('/encomendas', 'encomendas.index');
+Route::get('/encomendas', [EncomendaController::class, 'index'])->name('encomendas.index');
 
+//Route::get('/cores', [CorController::class, 'index'])->name('cores.index')
+//    ->middleware('can:viewAny,App\Models\Cor');
+
+Route::get('/encomendas/{encomenda}/edit', [EncomendaController::class, 'edit'])->name('encomendas.edit')
+    ->middleware('can:view,encomenda');
+Route::get('/encomendas/create', [EncomendaController::class, 'create'])->name('encomendas.create')
+    ->middleware('can:create,App\Models\Encomenda');
+Route::post('/encomendas/store', [EncomendaController::class, 'store'])->name('encomendas.store')
+    ->middleware('can:create,App\Models\Encomenda');
+Route::put('/encomendas/{encomenda}/update', [EncomendaController::class, 'update'])->name('encomendas.update')
+    ->middleware('can:update,encomenda');
+Route::delete('/encomendas/{encomenda}/destroy', [EncomendaController::class, 'destroy'])->name('encomendas.destroy')
+    ->middleware('can:delete,encomenda');
 
 
 

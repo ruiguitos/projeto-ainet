@@ -17,7 +17,6 @@
                 </select>
                 <button type="submit">Search</button>
             </form>
-
         </div>
 
         <div class="grid-container">
