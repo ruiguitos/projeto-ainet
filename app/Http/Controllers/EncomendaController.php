@@ -13,7 +13,7 @@ class EncomendaController extends Controller
 {
     public function index()
     {
-        $orders = Encomenda::select('id', 'status', 'customer_id', 'date', 'total_price', 'notes', 'nif', 'address', 'payment_type', 'payment_ref', 'receipt_url')->paginate(100);
+        $orders = Encomenda::select('id', 'status', 'customer_id', 'date', 'total_price', 'notes', 'nif', 'address', 'payment_type', 'payment_ref', 'receipt_url')->paginate(20);
         $order_items = Encomenda::all();
 
 
