@@ -27,7 +27,7 @@ class UserController extends Controller
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
             ->where('user_type', 'A')
-            ->paginate(20);
+            ->paginate(18);
         return view('users.admins.index', compact('users'));
     }
 
@@ -36,7 +36,7 @@ class UserController extends Controller
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
             ->where('user_type', 'C')
-            ->paginate(20);
+            ->paginate(18);
         return view('users.clientes.index', compact('users'));
     }
 
@@ -45,7 +45,7 @@ class UserController extends Controller
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
             ->where('user_type', 'E')
-            ->paginate(20);
+            ->paginate(18);
 
         return view('users.empregados.index', compact('users'));
     }
