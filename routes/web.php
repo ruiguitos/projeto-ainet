@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EncomendaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 //use App\Http\Controllers\CustomerController;
@@ -72,8 +74,18 @@ Route::view('/pagamento', 'carrinho.pagamento');
 
 #######################################################################################################################################
 //Categorias
-Route::view('/categorias', [CatalogoController::class, 'index'])->name('categorias.index');
+Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
 
+Route::get('/categorias/{categoria}/edit', [CategoriaController::class, 'edit'])->name('categorias.edit')
+    ->middleware('can:view,categoria');
+Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create')
+    ->middleware('can:create,App\Models\Categoria');
+Route::post('/categorias/store', [CategoriaController::class, 'store'])->name('categorias.store')
+    ->middleware('can:create,App\Models\Categoria');
+Route::put('/categorias/{categoria}/update', [CategoriaController::class, 'update'])->name('categorias.update')
+    ->middleware('can:update,categoria');
+Route::delete('/categorias/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('categorias.destroy')
+    ->middleware('can:delete,categoria');
 
 
 #######################################################################################################################################
