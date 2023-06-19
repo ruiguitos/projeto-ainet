@@ -47,6 +47,24 @@
                         </button>
                     </form>
                 </td>
+                <td>
+                    <a href="{{route('users.clientes.edit', ['cliente' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                <td>
+                    @can('delete', $user)
+                        <form action="{{route('users.clientes.destroy', ['cliente' => $user]) }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                        </form>
+                    @endcan
+                </td>
+                <td>
+                    <form action="{{route('users.clientes.destroy', ['cliente' => $user]) }}" method="POST">
+                        @crsf
+                        @method("DELETE")
+                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                    </form>
+                </td>
             </tr>
         @endforeach
 

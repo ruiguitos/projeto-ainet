@@ -119,6 +119,8 @@ Route::delete('/users/admins/{admin}/destroy', [UserController::class, 'destroyA
 //Users Clientes
 Route::view('/users/clientes', 'users.clientes.index');
 Route::get('/users/clientes', [App\Http\Controllers\UserController::class, 'indexClientes'])->name('users.clientes.index');
+Route::put('/user/clientes/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])->name('users.clientes.index');
+
 Route::get('/users/clientes/{cliente}/edit', [UserController::class, 'edit'])->name('users.clientes.edit')
     ->middleware('can:view,cliente');
 Route::get('/users/clientes/create', [UserController::class, 'create'])->name('users.clientes.create')
@@ -133,6 +135,8 @@ Route::delete('/users/clientes/{cliente}/destroy', [UserController::class, 'dest
 //Users Empregados
 Route::view('/users/empregados', 'users.empregados.index');
 Route::get('/users/empregados', [App\Http\Controllers\UserController::class, 'indexEmpregados'])->name('users.empregados.index');
+Route::put('/user/empregados/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])->name('users.empregados.index');
+
 Route::get('/users/empregados/{empregado}/edit', [UserController::class, 'edit'])->name('users.empregados.edit')
     ->middleware('can:view,empregado');
 Route::get('/users/empregados/create', [UserController::class, 'create'])->name('users.empregados.create')
