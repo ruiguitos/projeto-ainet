@@ -43,7 +43,7 @@
             @foreach ($tshirt_images as $tshirt)
                 <div class="tshirt-container">
                     <p>
-                        <a href="{{ route('catalogo.show', $tshirt->id) }}">
+                        <a href="{{ route('catalogo.shared.show', $tshirt->id) }}">
                             <img src="{{ asset('storage/tshirt_images/' . $tshirt->image_url) }}"
                                  style="height: 15rem; width: 15rem; border: 5px">
                         </a>

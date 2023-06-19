@@ -49,13 +49,13 @@
                     </form>
                 </td>
                 <td>
-                    <a href="{{route('encomendas.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                    <a href="{{route('users.empregados.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
                 </td>
                 <td>
-                    <a href="{{route('users.empregados.edit', ['empregado' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                    <a href="{{route('users.empregados.shared.edit', ['empregado' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                 <td>
                     @can('delete', $user)
-                        <form action="{{route('users.empregados.destroy', ['empregado' => $user]) }}" method="POST">
+                        <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
@@ -63,7 +63,7 @@
                     @endcan
                 </td>
                 <td>
-                    <form action="{{route('users.empregados.destroy', ['empregado' => $user]) }}" method="POST">
+                    <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}" method="POST">
                         @csrf
                         @method("DELETE")
                         <input type="submit" class="btn btn-danger btn-sm" value="Apagar">

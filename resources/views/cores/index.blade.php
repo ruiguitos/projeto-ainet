@@ -24,13 +24,13 @@
                 <td>{{$cor->code}}</td>
                 <td>{{$cor->name}}</td>
                 <td>
-                    <a href="{{route('cores.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                    <a href="{{route('cores.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
                 </td>
                 <td>
-                    <a href="{{route('cores.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                    <a href="{{route('cores.shared.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                 <td>
                     @can('delete', $cor)
-                        <form action="{{route('categorias.destroy', ['cor' => $cor]) }}" method="POST">
+                        <form action="{{route('cores.shared.destroy', ['cor' => $cor]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
@@ -38,7 +38,7 @@
                     @endcan
                 </td>
                 <td>
-                    <form action="{{route('cores.destroy', ['cor' => $cor]) }}" method="POST">
+                    <form action="{{route('cores.shared.destroy', ['cor' => $cor]) }}" method="POST">
                         @csrf
                         @method("DELETE")
                         <input type="submit" class="btn btn-danger btn-sm" value="Apagar">

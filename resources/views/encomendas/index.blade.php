@@ -44,13 +44,13 @@
                         <td> C/ Receita </td>
                     @endif
                     <td>
-                        <a href="{{route('encomendas.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                        <a href="{{route('encomendas.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
                     </td>
                     <td>
-                        <a href="{{route('encomendas.edit', ['encomenda' => $order]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        <a href="{{route('encomendas.shared.edit', ['encomenda' => $order]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                     <td>
                         @can('delete', $order)
-                            <form action="{{route('encomendas.destroy', ['encomenda' => $order]) }}" method="POST">
+                            <form action="{{route('encomendas.shared.destroy', ['encomenda' => $order]) }}" method="POST">
                                 @csrf
                                 @method("DELETE")
                                 <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
@@ -58,7 +58,7 @@
                         @endcan
                     </td>
                     <td>
-                        <form action="{{route('encomendas.destroy', ['encomenda' => $order]) }}" method="POST">
+                        <form action="{{route('encomendas.shared.destroy', ['encomenda' => $order]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">

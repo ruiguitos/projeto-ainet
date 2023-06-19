@@ -21,13 +21,13 @@
                 <td>{{$category->id}}</td>
                 <td>{{$category->name}}</td>
                 <td>
-                    <a href="{{route('categorias.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                    <a href="{{route('categorias.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
                 </td>
                 <td>
-                    <a href="{{route('categorias.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                    <a href="{{route('categorias.shared.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                 <td>
                     @can('delete', $category)
-                        <form action="{{route('categorias.destroy', ['categoria' => $category]) }}" method="POST">
+                        <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
@@ -35,7 +35,7 @@
                     @endcan
                 </td>
                 <td>
-                    <form action="{{route('categorias.destroy', ['categoria' => $category]) }}" method="POST">
+                    <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">
                         @csrf
                         @method("DELETE")
                         <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
