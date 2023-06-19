@@ -1,5 +1,4 @@
 @extends('layout')
-
 @section('subtitulo')
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -74,11 +73,11 @@
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
-                        <a class="nav-link" href="/categoria">
+                        <a class="nav-link" href="/categorias">
                             <div class="sb-nav-link-icon">
                                 <i class="fa-solid fa-list"></i>
                             </div>
-                            Categoria Disponíveis
+                            Categorias
                         </a>
 
                         <a class="nav-link" href="/cores">
