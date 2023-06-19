@@ -30,8 +30,22 @@
                     <div class="price">
                         <p><strong>Price:</strong> {{ $tshirt->unit_price }}€</p>
                     </div>
+
+                    <div class="size">
+                        <p><strong>Price:</strong> {{ $tshirt->size }}</p>
+                    </div>
                 </div>
             @endforeach
+                <div class="add-to-cart">
+                    <form action="{{ route('carrinho.add', $tshirt->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="rounded-button">Add to Cart</button>
+                    </form>
+                    <div class="add-quantity">
+                        <label for="quantity">Quantity: </label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1">
+                    </div>
+                </div>
         </div>
 
         <div style="margin-top: 15px; margin-bottom: 15px; display: flex; justify-content: center; position: inherit">
@@ -40,6 +54,6 @@
             </a>
         </div>
 
-        {{--        <footer>{{ $tshirt->links() }}</footer>--}}
+{{--                <footer>{{ $tshirt->links() }}</footer>--}}
     </div>
 @endsection

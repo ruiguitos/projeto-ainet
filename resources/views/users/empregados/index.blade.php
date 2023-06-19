@@ -2,8 +2,19 @@
 @section('title','Empregados' )
 @section('main')
 
-    <title class="Empregados"></title>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">@yield('titulo', 'Empregados')</h1>
+        @yield('subtitulo')
+        <div class="mt-4">
+            @yield('main')
+        </div>
+    </div>
 
+    <ol class="breadcrumb">
+        {{--        <li class="breadcrumb-item">Dashboard</li>--}}
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Empregados</li>
+    </ol>
 
     <table class="table table-sm">
         <thead class="thead-dark">
@@ -18,20 +29,19 @@
         </thead>
         <tbody>
         @foreach($users as $user)
-            @if($user->user_type == "E")
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->user_type }}</td>
-                    @if($user->blocked == 1)
-                        <td> Bloqueado </td>
-                    @else
-                        <td> Ativo </td>
-                    @endif
-                </tr>
-            @endif
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->user_type }}</td>
+                @if($user->blocked == 1)
+                    <td> Bloqueado </td>
+                @else
+                    <td> Ativo </td>
+                @endif
+            </tr>
         @endforeach
         </tbody>
     </table>
+    <footer>{{ $users->links() }}</footer>
 @endsection

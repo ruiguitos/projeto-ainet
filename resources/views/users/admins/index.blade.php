@@ -12,7 +12,6 @@
             <th>Email</th>
             <th>User type</th>
             <th>Estado</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -29,20 +28,9 @@
                     @else
                         <td> Ativo </td>
                     @endif
-{{--                    <td>--}}
-{{--                        <a href="{{route('users.admins.edit', ['user' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
-{{--                    <td>--}}
-{{--                    <td>--}}
-{{--                        <form action="{{route('users.admins.destroy', ['user' => $user]) }}" method="POST">--}}
-{{--                            @crsf--}}
-{{--                            @method("DELETE")--}}
-{{--                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-{{--                        </form>--}}
-{{--                    </td>--}}
                 </tr>
             @endif
         @endforeach
         </tbody>
     </table>
 @endsection
-
