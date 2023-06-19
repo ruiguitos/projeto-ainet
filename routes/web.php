@@ -102,6 +102,8 @@ Route::delete('/cores/{cor}/destroy', [CorController::class, 'destroy'])->name('
 //Users Admins
 Route::view('/users/admins', 'users.admins.index');
 Route::get('/users/admins', [App\Http\Controllers\UserController::class, 'indexAdmins'])->name('users.admins.index');
+Route::put('/user/admins/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])->name('users.admins.index');
+
 Route::get('/users/admins/{admin}/edit', [UserController::class, 'editAdmin'])->name('users.admins.edit')
     ->middleware('can:view,admin');
 Route::get('/users/admins/create', [UserController::class, 'createAdmin'])->name('users.admins.create')
@@ -112,6 +114,7 @@ Route::put('/users/admins/{admin}/update', [UserController::class, 'updateAdmin'
     ->middleware('can:update,admin');
 Route::delete('/users/admins/{admin}/destroy', [UserController::class, 'destroyAdmin'])->name('users.admins.destroy')
     ->middleware('can:delete,admin');
+
 
 //Users Clientes
 Route::view('/users/clientes', 'users.clientes.index');

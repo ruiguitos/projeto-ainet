@@ -39,6 +39,15 @@
                 @else
                     <td> Ativo </td>
                 @endif
+                <td>
+                    <form id="toggleForm" action="{{ route('users.empregados.index', ['id' => $user->id]) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn {{ $user->blocked ? 'btn-success' : 'btn-danger' }}">
+                            {{ $user->blocked ? 'Unblock' : 'Block' }}
+                        </button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

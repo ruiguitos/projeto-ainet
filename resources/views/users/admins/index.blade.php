@@ -1,8 +1,14 @@
 @extends('layout')
-
-
-@section('title','Cor' )
+{{--@section('title','Cor' )--}}
 @section('main')
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">@yield('titulo', 'Administradores')</h1>
+        @yield('subtitulo')
+        <div class="mt-4">
+            @yield('main')
+        </div>
+    </div>
 
     <table class="table table-sm">
         <thead class="thead-dark">
@@ -12,6 +18,7 @@
             <th>Email</th>
             <th>User type</th>
             <th>Estado</th>
+            <th>Actions </th>
         </tr>
         </thead>
         <tbody>
@@ -28,9 +35,39 @@
                     @else
                         <td> Ativo </td>
                     @endif
+                    <td>
+                        <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn {{ $user->blocked ? 'btn-success' : 'btn-danger' }}">
+                                {{ $user->blocked ? 'Unblock' : 'Block' }}
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endif
         @endforeach
         </tbody>
     </table>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#toggleForm').submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        });
+    });
+</script>

@@ -50,4 +50,14 @@ class UserController extends Controller
         return view('users.empregados.index', compact('users'));
     }
 
+    public function toggleBlocked(Request $request, $id)
+    {
+        $users = User::findOrFail($id);
+        $users->blocked = !$users->blocked;
+        $users->save();
+
+        // Redirect or return response as needed
+        return redirect()->back();
+    }
+
 }
