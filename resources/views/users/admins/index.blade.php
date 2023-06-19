@@ -1,5 +1,4 @@
 @extends('layout')
-{{--@section('title','Cor' )--}}
 @section('main')
 
     <h1 class="mt-4">@yield('titulo', 'Administradores')</h1>
@@ -14,8 +13,9 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>User type</th>
+{{--            <th>User type</th>--}}
             <th>Estado</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->user_type }}</td>
+{{--                    <td>{{ $user->user_type }}</td>--}}
 {{--                    @if($user->blocked == 1)--}}
 {{--                        <td> Bloqueado </td>--}}
 {{--                    @else--}}
@@ -40,6 +40,9 @@
                                 {{ $user->blocked ? 'Desativado' : 'Ativado' }}
                             </button>
                         </form>
+                    </td>
+                    <td>
+                        <a href="{{route('encomendas.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
                     </td>
                     <td>
                         <a href="{{route('users.admins.edit', ['admin' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
@@ -85,11 +88,11 @@
                                         </a>
 
                                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
-                                        <a class="nav-link" href="/categoria">
+                                        <a class="nav-link" href="/categorias">
                                             <div class="sb-nav-link-icon">
                                                 <i class="fa-solid fa-list"></i>
                                             </div>
-                                            Categoria Disponíveis
+                                            Categorias
                                         </a>
 
                                         <a class="nav-link" href="/cores">

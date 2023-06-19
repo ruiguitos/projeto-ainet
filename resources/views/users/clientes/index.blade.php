@@ -1,5 +1,4 @@
 @extends('layout')
-
 @section('main')
 
     <h1 class="mt-4">@yield('titulo', 'Clientes')</h1>
@@ -45,6 +44,9 @@
                     </form>
                 </td>
                 <td>
+                    <a href="{{route('encomendas.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                </td>
+                <td>
                     <a href="{{route('users.clientes.edit', ['cliente' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                 <td>
                     @can('delete', $user)
@@ -88,11 +90,11 @@
                                         </a>
 
                                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
-                                        <a class="nav-link" href="/categoria">
+                                        <a class="nav-link" href="/categorias">
                                             <div class="sb-nav-link-icon">
                                                 <i class="fa-solid fa-list"></i>
                                             </div>
-                                            Categoria Disponíveis
+                                            Categorias
                                         </a>
 
                                         <a class="nav-link" href="/cores">
