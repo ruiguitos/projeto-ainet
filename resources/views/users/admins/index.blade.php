@@ -15,7 +15,10 @@
             <th>Email</th>
 {{--            <th>User type</th>--}}
             <th>Estado</th>
+            <th></th>
             <th>Actions</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

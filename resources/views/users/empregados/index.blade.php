@@ -19,8 +19,12 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>User type</th>
+{{--            <th>User type</th>--}}
             <th>Estado</th>
+            <th></th>
+            <th>Actions</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +33,7 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->user_type }}</td>
+{{--                <td>{{ $user->user_type }}</td>--}}
 {{--                @if($user->blocked == 1)--}}
 {{--                    <td> Bloqueado </td>--}}
 {{--                @else--}}
@@ -173,9 +177,5 @@
                     </div>
                 </div>
             </div>
-
-    <footer>
-        {{ $users->links() }}
-    </footer>
 
 @endsection

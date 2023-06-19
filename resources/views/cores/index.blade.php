@@ -1,12 +1,21 @@
 @extends('layout')
 @section('main')
 
+    <h1 class="mt-4">@yield('titulo', 'Cores')</h1>
+    @yield('subtitulo')
+    <div class="mt-4">
+        @yield('main')
+    </div>
+
     <table class="table table-sm">
         <thead class="thead-dark">
         <tr>
             <th>Código da Cor</th>
             <th>Nome da Cor</th>
+            <th></th>
             <th>Actions</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

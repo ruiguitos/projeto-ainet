@@ -15,7 +15,10 @@
             <th>Tipo Pagamento</th>
             <th>Referência Pagamento</th>
             <th>Receita</th>
+            <th></th>
             <th>Actions</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

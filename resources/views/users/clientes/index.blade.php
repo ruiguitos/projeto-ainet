@@ -20,7 +20,10 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Estado</th>
+            <th></th>
             <th>Actions</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
