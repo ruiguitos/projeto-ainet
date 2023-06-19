@@ -16,9 +16,13 @@
 
 ## Build project
 
-`npm i #to install node dependencies`
+`php artisan migrate:fresh ## drops tables`
 
-`npm run dev #run the project`
+`php artisan db:seed ## creates database` 
+
+`npm i ## installs node dependencies`
+
+`npm run dev ## runs the project`
 
 
 
