@@ -9,14 +9,26 @@
             <tr>
                 <th>Nome</th>
                 <td>{{Auth::user()->name}}</td>
+                <td></td>
             </tr>
             <tr>
                 <th>Foto</th>
                 <td>{{Auth::user()->photo_url}}</td>
+                <td>
+                    <!-- Edit Photo button -->
+                    <div style="display: flex; justify-content: center; margin-bottom: 15px">
+                        <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
+                           aria-pressed="true" style="border-color: black">
+                            Editar Foto
+                        </a>
+                    </div>
+                </td>
+
 
             </tr>
             <tr>
-                <th>Tipo de utilizador:</th>
+                <th>Tipo de utilizador</th>
+
                 <td>
                     @php
                         $userType = Auth::user()->user_type;
@@ -27,18 +39,27 @@
                         ];
                     @endphp
                     {{ isset($userTypeMeanings[$userType]) ? $userTypeMeanings[$userType] : 'Unknown' }}
+                <th></th>
                 </td>
             </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ Auth::user()->email }}</td>
+                <td></td>
             </tr>
             <tr>
-                <th>Verified at:</th>
-                <td>{{ Auth::user()->email_verified_at }}</td>
+                <th>Data de criação</th>
+                <td>{{ Auth::user()->created_at }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Última atualização de perfil</th>
+                <td>{{ Auth::user()->updated_at }}</td>
+                <td></td>
             </tr>
             </thead>
         </table>
+
         <table class="table">
             <tr>
                 <th>NIF</th>
@@ -62,6 +83,7 @@
                     @endif
                 </td>
             </tr>
+
             <tr>
                 <th>Referência de Pagamento</th>
                 <td>
@@ -74,19 +96,12 @@
 
         <div class="container">
             <div style="display: flex; justify-content: center; margin-bottom: 15px">
-                <a href="{{ route('perfil.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
+                <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
                    aria-pressed="true" style="border-color: black">
                     Editar Perfil
                 </a>
             </div>
 
-            <!-- Edit Photo button -->
-            <div style="display: flex; justify-content: center; margin-bottom: 15px">
-                <a href="{{ route('perfil.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
-                   aria-pressed="true" style="border-color: black">
-                    Editar Foto
-                </a>
-            </div>
         </div>
         <!-- Edit Profile button -->
 
