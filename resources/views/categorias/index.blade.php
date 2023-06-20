@@ -7,15 +7,15 @@
         @yield('main')
     </div>
 
-    <table class="table table-sm">
+    <table class="table table-striped ">
         <thead class="thead-dark">
         <tr>
-            <th>ID Categoria</th>
-            <th>Nome Categoria</th>
-            <th></th>
-            <th>Actions</th>
-            <th></th>
-            <th></th>
+            <th scope="row" style="width:5%">ID</th>
+            <th scope="row">Nome Categoria</th>
+            <th scope="row"></th>
+            <th scope="row">Actions</th>
+            <th scope="row"></th>
+            <th scope="row"></th>
         </tr>
         </thead>
         <tbody>

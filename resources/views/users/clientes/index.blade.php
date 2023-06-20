@@ -13,7 +13,7 @@
         <li class="breadcrumb-item active">Clientes</li>
     </ol>
 
-    <table class="table table-sm">
+    <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>

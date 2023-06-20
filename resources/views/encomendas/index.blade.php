@@ -1,7 +1,7 @@
 @extends('layout')
 @section('subtitulo')
 
-    <table class="table table-sm">
+    <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>ID Encomenda</th>

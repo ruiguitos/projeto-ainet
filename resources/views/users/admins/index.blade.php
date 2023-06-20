@@ -7,7 +7,13 @@
         @yield('main')
     </div>
 
-    <table class="table table-sm">
+    <ol class="breadcrumb">
+        {{--        <li class="breadcrumb-item">Dashboard</li>--}}
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Administradores</li>
+    </ol>
+
+    <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>

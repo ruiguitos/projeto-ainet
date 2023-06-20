@@ -7,7 +7,7 @@
         @yield('main')
     </div>
 
-    <table class="table table-sm">
+    <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>Código da Cor</th>
