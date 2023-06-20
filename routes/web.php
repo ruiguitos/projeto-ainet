@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EncomendaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -54,11 +55,11 @@ Route::view('/dashboard/tables', 'dashboard.tables');
 
 //PERFIL
 Route::view('/perfil', 'perfil.index');
-Route::get('/perfil/{customer}', [UserController::class, 'index'])->name('perfil.index');
-Route::get('/perfil/{customer}/edit', [UserController::class, 'edit'])->name('perfil.shared.edit');
-Route::put('/perfil/{customer}', [UserController::class, 'update'])->name('perfil.shared.update');
-Route::delete('/perfil/{customer}', [UserController::class, 'destroy'])->name('perfil.shared.destroy');
-Route::delete('/perfil/{customer}/photo', [UserController::class, 'destroy_photo'])->name('perfil.photo.destroy');
+Route::get('/perfil/{user}', [UserController::class, 'index'])->name('perfil.index');
+Route::get('/perfil/{user}/edit', [UserController::class, 'edit'])->name('perfil.shared.edit');
+Route::put('/perfil/{user}', [UserController::class, 'update'])->name('perfil.shared.update');
+Route::delete('/perfil/{user}', [UserController::class, 'destroy'])->name('perfil.shared.destroy');
+Route::delete('/perfil/{user}/photo', [UserController::class, 'destroy_photo'])->name('perfil.photo.destroy');
 
 
 
