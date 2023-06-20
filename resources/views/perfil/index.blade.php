@@ -14,22 +14,13 @@
             <tr>
                 <th>Nome</th>
                 <td>{{Auth::user()->name}}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Foto</th>
                 <td>{{Auth::user()->photo_url}}</td>
                 <td>
-                    <!-- Edit Photo button -->
-                    <div style="display: flex; justify-content: center; margin-bottom: 15px">
-                        <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
-                           aria-pressed="true" style="border-color: black">
-                            Editar Foto
-                        </a>
-                    </div>
+                    <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
+                       aria-pressed="true" style="border-color: black">
+                        Editar Foto
+                    </a>
                 </td>
-
-
             </tr>
             <tr>
                 <th>Tipo de utilizador</th>
@@ -100,7 +91,8 @@
         </table>
 
 
-
+<br>
+<br>
         <div class="container">
             <div style="display: flex; justify-content: center; margin-bottom: 15px">
                 <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
@@ -112,7 +104,12 @@
         </div>
         <!-- Edit Profile button -->
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
         <div style="display: flex; justify-content: center; margin-bottom: 15px">
             <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black">Voltar à Pagina
                     Inicial
