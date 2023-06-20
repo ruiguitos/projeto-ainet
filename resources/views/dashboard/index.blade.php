@@ -72,6 +72,11 @@
                             Homepage
                         </a>
 
+                        <a class="nav-link" href="/dashboard">
+                            <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
+                            Admin Dashboard
+                        </a>
+
                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
                         <a class="nav-link" href="/categorias">
                             <div class="sb-nav-link-icon">
