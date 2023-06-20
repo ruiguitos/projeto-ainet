@@ -3,6 +3,11 @@
     use Illuminate\Support\Facades\Auth;
 @endphp
 @section('main')
+    <h1 class="mt-4">@yield('titulo', 'Perfil')</h1>
+    @yield('subtitulo')
+    <div class="mt-4">
+        @yield('main')
+    </div>
     <div class="container-fluid" style="margin-top: 15px">
         <table class="table">
             <thead>
@@ -39,7 +44,7 @@
                         ];
                     @endphp
                     {{ isset($userTypeMeanings[$userType]) ? $userTypeMeanings[$userType] : 'Unknown' }}
-                <th></th>
+
                 </td>
             </tr>
             <tr>
@@ -57,42 +62,44 @@
                 <td>{{ Auth::user()->updated_at }}</td>
                 <td></td>
             </tr>
+
+            @foreach($customers as $customer)
+
+                @if(Auth::user()->id == $customer->id)
+                    <tr>
+                        <th>NIF</th>
+                        <td> {{$customer->nif}} </td>
+                    </tr>
+                    <tr>
+                        <th>Morada</th>
+                        <td> {{$customer->address}} </td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de pagamento</th>
+                        <td>
+                            @if ($customer->default_payment_type == 'MC')
+                                Master Card
+                            @elseif ($customer->default_payment_type == 'PAYPAL')
+                                PayPal
+                            @elseif ($customer->default_payment_type == 'VISA')
+                                Visa
+                            @else
+                                Não Atribuido
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Referência de Pagamento</th>
+                        <td> {{$customer->default_payment_ref}} </td>
+                    </tr>
+                @endif
+
+            @endforeach
+
             </thead>
         </table>
 
-        <table class="table">
-            <tr>
-                <th>NIF</th>
-                <td>{{ Auth::user()->nif }}</td>
-            </tr>
-            <tr>
-                <th>Endereço</th>
-                <td>{{Auth::user()->address}}</td>
-            </tr>
-            <tr>
-                <th>Tipo de Pagamento</th>
-                <td>
-                    @if (Auth::user()->customers)
-                        @if (Auth::user()->customers->ref_type == 'MC')
-                            Master Card
-                        @elseif (Auth::user()->customers->ref_type == 'PAYPAL')
-                            Pay Pal
-                        @elseif (Auth::user()->customers->ref_type == 'VISA')
-                            Visa
-                        @endif
-                    @endif
-                </td>
-            </tr>
 
-            <tr>
-                <th>Referência de Pagamento</th>
-                <td>
-                    @if (Auth::user()->customers)
-                        {{ Auth::user()->customers->payment_ref }}
-                    @endif
-                </td>
-            </tr>
-        </table>
 
         <div class="container">
             <div style="display: flex; justify-content: center; margin-bottom: 15px">

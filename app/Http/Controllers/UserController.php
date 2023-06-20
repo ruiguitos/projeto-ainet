@@ -34,7 +34,7 @@ class UserController extends Controller
 
     public function indexClientes(): View
     {
-//        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
+        //$customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref');
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
             ->where('user_type', 'C')
             ->paginate(18);

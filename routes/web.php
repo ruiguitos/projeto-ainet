@@ -6,7 +6,7 @@ use App\Http\Controllers\EncomendaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-//use App\Http\Controllers\CustomerController;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 //use App\Http\Controllers\DashboardController;
@@ -54,8 +54,13 @@ Route::view('/dashboard/tables', 'dashboard.tables');
 #######################################################################################################################################
 
 //PERFIL
-Route::view('/perfil', 'perfil.index');
-Route::get('/perfil/{user}', [UserController::class, 'index'])->name('perfil.index');
+//Route::view('/perfil', 'perfil.index');
+Route::get('/perfil', [CustomerController::class, 'index'])->name('perfil.index');
+Route::get('/perfil/{user}', [App\Http\Controllers\CustomerController::class, 'indexclientes'])->name('perfil.index');
+
+//Route::get('/perfil/{user}', [CustomerController::class, 'indexclientes'])->name('perfil.index');
+//Route::get('/perfil/{user}', [App\Http\Controllers\CustomerController::class, 'indexclientes'])->name('perfil.index');
+
 Route::get('/perfil/{user}/edit', [UserController::class, 'edit'])->name('perfil.shared.edit');
 Route::put('/perfil/{user}', [UserController::class, 'update'])->name('perfil.shared.update');
 Route::delete('/perfil/{user}', [UserController::class, 'destroy'])->name('perfil.shared.destroy');
