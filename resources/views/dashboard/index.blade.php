@@ -128,29 +128,29 @@
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">
-                        <strong>Logged in as:</strong>
-                    </div>
-                    @php
-                        $fullName = Auth::user()->name;
-                        $nameParts = explode(' ', $fullName);
-                        $firstName = $nameParts[0];
-                        $lastName = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';
-                    @endphp
-                    {{ $firstName }} {{ $lastName }}
-                    <div class="small" style="margin-top: 10px">
-                        <strong>User type:</strong>
-                        @php
-                            $userType = Auth::user()->user_type;
-                            $userTypeMeanings = [
-                                'A' => 'Administrador',
-                                'E' => 'Empregado',
-                            ];
-                        @endphp
-                        {{ isset($userTypeMeanings[$userType]) ? $userTypeMeanings[$userType] : 'Unknown' }}
-                    </div>
-                </div>
+{{--                <div class="sb-sidenav-footer">--}}
+{{--                    <div class="small">--}}
+{{--                        <strong>Logged in as:</strong>--}}
+{{--                    </div>--}}
+{{--                    @php--}}
+{{--                        $fullName = Auth::user()->name;--}}
+{{--                        $nameParts = explode(' ', $fullName);--}}
+{{--                        $firstName = $nameParts[0];--}}
+{{--                        $lastName = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';--}}
+{{--                    @endphp--}}
+{{--                    {{ $firstName }} {{ $lastName }}--}}
+{{--                    <div class="small" style="margin-top: 10px">--}}
+{{--                        <strong>User type:</strong>--}}
+{{--                        @php--}}
+{{--                            $userType = Auth::user()->user_type;--}}
+{{--                            $userTypeMeanings = [--}}
+{{--                                'A' => 'Administrador',--}}
+{{--                                'E' => 'Empregado',--}}
+{{--                            ];--}}
+{{--                        @endphp--}}
+{{--                        {{ isset($userTypeMeanings[$userType]) ? $userTypeMeanings[$userType] : 'Unknown' }}--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </nav>
         </div>
 

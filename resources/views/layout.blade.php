@@ -53,6 +53,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
+                {{-- Adiciona foto de utilizador e verifica se tem foto ou nao. se tiver mete a foto, senão mete uma default --}}
                     @if(Auth::user()->photo_url)
                         <img src="{{ asset('storage/photos/' . Auth::user()->photo_url) }}"
                              class="img-profile rounded-circle" height="45">
