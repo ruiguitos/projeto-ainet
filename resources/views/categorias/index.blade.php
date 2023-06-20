@@ -12,7 +12,10 @@
         <tr>
             <th>ID Categoria</th>
             <th>Nome Categoria</th>
+            <th></th>
             <th>Actions</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
