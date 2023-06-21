@@ -8,13 +8,20 @@
     <div class="mt-4">
         @yield('main')
     </div>
+    <a>
+        @if(Auth::user()->photo_url)
+            <img src="{{ asset('storage/photos/' . Auth::user()->photo_url) }}"
+                 class="img-profile rounded-circle" height="130">
+        @else
+            <img src="{{ asset('img/default_img.png') }}" class="img-profile rounded-circle" height="130">
+        @endif
+    </a>
     <div class="container-fluid" style="margin-top: 15px">
         <table class="table">
             <thead>
             <tr>
                 <th>Nome</th>
                 <td>{{Auth::user()->name}}</td>
-                <td>{{Auth::user()->photo_url}}</td>
                 <td>
                     <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
                        aria-pressed="true" style="border-color: black">
