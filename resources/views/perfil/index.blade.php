@@ -3,7 +3,6 @@
     use Illuminate\Support\Facades\Auth;
 @endphp
 @section('main')
-    <h1 class="mt-4">@yield('titulo', 'Perfil')</h1>
     @yield('subtitulo')
     <div class="mt-4">
         @yield('main')
