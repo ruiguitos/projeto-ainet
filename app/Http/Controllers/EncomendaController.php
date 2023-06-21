@@ -16,12 +16,18 @@ class EncomendaController extends Controller
         $orders = Encomenda::select('id', 'status', 'customer_id', 'date', 'total_price', 'notes', 'nif', 'address', 'payment_type', 'payment_ref', 'receipt_url')->paginate(20);
         $order_items = Encomenda::all();
 
-
-
-
         return view('encomendas.index', compact('orders', 'order_items'));
     }
 
+    public function encomendaTshirt(): View
+    {
+        $users = Encomenda::select('orders.id', 'orders.status', 'orders.customer_id', 'orders.date', 'orders.total_price', 'orders.notes', 'orders.nif', 'orders.address', 'orders.payment_type', 'orders.payment_ref', 'orders.receipt_url',
+            'order_items.id', 'order_items.order_id', 'order_items.tshirt_image_id', 'order_items.color_code', 'order_items.size', 'order_items.qty', 'order_items.unit_price', 'order_items.sub_total')
+            ->join('order_items', 'order.id', '=', 'order_items.order_id')
+            ->where('users.user_type', 'C');
+
+        return view('perfil.index', compact('users'));
+    }
 
     public function edit(Order $Order)
     {

@@ -59,38 +59,38 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="numero" class="col-md-4 col-form-label text-md-end">Nº Aluno</label>
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="numero" class="col-md-4 col-form-label text-md-end">Nº Aluno</label>--}}
 
-                            <div class="col-md-6">
-                                <input id="numero" type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{ old('numero') }}" required>
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="numero" type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{ old('numero') }}" required>--}}
 
-                                @error('numero')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+{{--                                @error('numero')--}}
+{{--                                <span class="invalid-feedback" role="alert">--}}
+{{--                                    <strong>{{ $message }}</strong>--}}
+{{--                                </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="row mb-3">
-                            <label for="curso" class="col-md-4 col-form-label text-md-end">Curso</label>
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="curso" class="col-md-4 col-form-label text-md-end">Curso</label>--}}
 
-                            <div class="col-md-6">
-                                <select id="curso" class="form-select @error('curso') is-invalid @enderror" name="curso" required>
-                                    @foreach ($cursos as $curso)
-                                    <option {{ old('curso', '') == $curso->abreviatura ? 'selected' : '' }} value="{{ $curso->abreviatura }}">
-                                        {{ $curso->nome }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                @error('curso')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <select id="curso" class="form-select @error('curso') is-invalid @enderror" name="curso" required>--}}
+{{--                                    @foreach ($cursos as $curso)--}}
+{{--                                    <option {{ old('curso', '') == $curso->abreviatura ? 'selected' : '' }} value="{{ $curso->abreviatura }}">--}}
+{{--                                        {{ $curso->nome }}--}}
+{{--                                    </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                @error('curso')--}}
+{{--                                <span class="invalid-feedback" role="alert">--}}
+{{--                                    <strong>{{ $message }}</strong>--}}
+{{--                                </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
