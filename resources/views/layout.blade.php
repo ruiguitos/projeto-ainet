@@ -328,10 +328,18 @@
                     @endif
                 </div>
             </div>
-            {{--            <div class="sb-sidenav-footer">--}}
-            {{--                <div class="small">Logged in as: </div>--}}
-            {{--                {{ Auth::user()->name }}--}}
-            {{--            </div>--}}
+
+            @if(auth()->check())
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    {{ auth()->user()->name }}
+                </div>
+            @endif
+
+{{--            <div class="sb-sidenav-footer">--}}
+{{--                <div class="small">Logged in as:</div>--}}
+{{--                {{ Auth::user()->name }}--}}
+{{--            </div>--}}
         </nav>
     </div>
     <div id="layoutSidenav_content">
