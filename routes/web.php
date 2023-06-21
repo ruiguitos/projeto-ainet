@@ -15,6 +15,7 @@ use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\CorController;
 use App\Http\Controllers\CamisolaController;
+use App\Http\Controllers\CartController;
 
 
 Route::get('/', function () {
@@ -88,23 +89,23 @@ Route::get('/perfil', [CustomerController::class, 'index'])
     ->name('perfil.index')
     ->middleware('verified');
 
-Route::get('/perfil/{user}', [App\Http\Controllers\CustomerController::class, 'indexclientes'])
+Route::get('/perfil/{id}', [App\Http\Controllers\CustomerController::class, 'index'])
     ->name('perfil.index')
     ->middleware('verified');
 
-Route::get('/perfil/{user}/edit', [UserController::class, 'edit'])
+Route::get('/perfil/{id}/edit', [UserController::class, 'edit'])
     ->name('perfil.shared.edit')
     ->middleware('verified');
 
-Route::put('/perfil/{user}', [UserController::class, 'update'])
+Route::put('/perfil/{id}', [UserController::class, 'update'])
     ->name('perfil.shared.update')
     ->middleware('verified');
 
-Route::delete('/perfil/{user}', [UserController::class, 'destroy'])
+Route::delete('/perfil/{id}', [UserController::class, 'destroy'])
     ->name('perfil.shared.destroy')
     ->middleware('verified');
 
-Route::delete('/perfil/{user}/photo', [UserController::class, 'destroy_photo'])
+Route::delete('/perfil/{id}/photo', [UserController::class, 'destroy_photo'])
     ->name('perfil.photo.destroy')
     ->middleware('verified');
 
@@ -139,6 +140,17 @@ Route::view('/pagamento', 'carrinho.pagamento')
 //Route::post('concluir', [EstampaController::class, 'concluirPagamento'])
 //    ->name('concluir')
 //    ->middleware('verified');
+
+
+// Show the cart:
+Route::get('cart', [CartController::class, 'show'])->name('cart.show');
+
+// Confirm (store) the cart and save disciplinas registration on the database:
+Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+
+// Clear the cart:
+Route::delete('cart', [CartController::class, 'destroy'])->name('cart.destroy');
+
 
 
 #############################################################################################################################################################################
