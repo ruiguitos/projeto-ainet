@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EncomendaController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\CorController;
-//use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\CamisolaController;
 
 
@@ -200,5 +200,6 @@ Route::delete('/encomendas/{encomenda}/destroy', [EncomendaController::class, 'd
 
 #######################################################################################################################################
 //CHANGE PASSWORD
-Route::view('/password/reset', 'auth.passwords.reset');
+Route::get('/password/change', [ChangePasswordController::class, 'show'])->name('password.change.show');
+Route::post('/password/change', [ChangePasswordController::class, 'store'])->name('password.change.store');
 
