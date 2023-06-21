@@ -9,14 +9,25 @@ use Illuminate\Http\Request;
 
 class CamisolaController extends Controller
 {
+//    public function index()
+//    {
+//        $tshirt = TShirt::select('id', 'order_id', 'tshirt_image_id', 'color_code', 'size', 'qty', 'unit_price', 'sub_total')->paginate(30);
+//        $prices = Preco::all();
+//
+//        $query = TShirt::all();
+//
+//        return view('catalogo.camisola', compact('tshirt', 'prices'));
+//
+//    }
+
     public function index()
     {
-        $tshirt = TShirt::select('id', 'order_id', 'tshirt_image_id', 'color_code', 'size', 'qty', 'unit_price', 'sub_total')->paginate(30);
+        $tshirts = TShirt::select('id', 'order_id', 'tshirt_image_id', 'color_code', 'size', 'qty', 'unit_price', 'sub_total')->paginate(20);
         $prices = Preco::all();
 
         $query = TShirt::all();
 
-        return view('catalogo.camisola', compact('tshirt', 'prices'));
+        return view('catalogo.camisola', compact('tshirts', 'prices'));
 
     }
 
