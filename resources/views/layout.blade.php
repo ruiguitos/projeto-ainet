@@ -248,25 +248,31 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     @if(auth()->check() && auth()->user()->user_type === 'C')
-                    <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
+                        <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
 
-                    <a class="nav-link {{ Route::currentRouteName() == 'catalogo.index' ? 'active' : '' }}"
-                       href="{{ route('catalogo.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Catálogo
-                    </a>
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.index' ? 'active' : '' }}"
+                           href="{{ route('catalogo.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Catálogo
+                        </a>
 
-                    <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
-                       href="{{ route('catalogo.camisola') }}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                        Camisolas
-                    </a>
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
+                           href="{{ route('catalogo.camisola') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
+                            Camisolas
+                        </a>
 
-                    <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
-                       href="{{ route('cart.show') }}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                        Carrinho
-                    </a>
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
+                           href="{{ route('catalogo.camisola') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
+                            Upload de Estampa Personalizada
+                        </a>
+
+                        <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
+                           href="{{ route('cart.show') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Carrinho
+                        </a>
 
                     @elseif(auth()->check() && auth()->user()->user_type === 'A')
 
@@ -282,6 +288,12 @@
                            href="{{ route('catalogo.camisola') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
                             Camisolas
+                        </a>
+
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
+                           href="{{ route('catalogo.camisola') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
+                            Upload de Estampa Personalizada
                         </a>
 
                         <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
@@ -313,6 +325,12 @@
                             Camisolas
                         </a>
 
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
+                           href="{{ route('catalogo.camisola') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
+                            Upload de Estampa Personalizada
+                        </a>
+
                         <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
                            href="{{ route('cart.show') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
@@ -336,10 +354,10 @@
                 </div>
             @endif
 
-{{--            <div class="sb-sidenav-footer">--}}
-{{--                <div class="small">Logged in as:</div>--}}
-{{--                {{ Auth::user()->name }}--}}
-{{--            </div>--}}
+            {{--            <div class="sb-sidenav-footer">--}}
+            {{--                <div class="small">Logged in as:</div>--}}
+            {{--                {{ Auth::user()->name }}--}}
+            {{--            </div>--}}
         </nav>
     </div>
     <div id="layoutSidenav_content">
