@@ -1,7 +1,6 @@
 @extends('layout')
 @section('main')
 
-    <h1 class="mt-4">@yield('titulo', 'Administradores')</h1>
     @yield('subtitulo')
     <div class="mt-4">
         @yield('main')

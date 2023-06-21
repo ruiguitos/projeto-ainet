@@ -1,14 +1,12 @@
 @extends('layout')
 @section('main')
 
-    <h1 class="mt-4">@yield('titulo', 'Empregados')</h1>
     @yield('subtitulo')
     <div class="mt-4">
         @yield('main')
     </div>
 
     <ol class="breadcrumb">
-        {{--        <li class="breadcrumb-item">Dashboard</li>--}}
         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
         <li class="breadcrumb-item active">Empregados</li>
     </ol>
