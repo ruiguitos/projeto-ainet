@@ -24,6 +24,20 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+#############################################################################################################################################################################
+
+Route::middleware('auth')->group(function () {
+    Route::resource('dashboard.index', DashboardController::class);
+    Route::resource('dashboard.charts', DashboardController::class);
+    Route::resource('dashboard.tables', DashboardController::class);
+    Route::resource('users.admins.index', UserController::class);
+    Route::resource('users.clientes.index', UserController::class);
+    Route::resource('users.empregados.index', UserController::class);
+    Route::resource('cores.index', CorController::class);
+    Route::resource('categorias.index', CategoriaController::class);
+    Route::resource('encomendas.index', EncomendaController::class);
+});
+
 Route::middleware('auth')->group(function () {
 
 #############################################################################################################################################################################
@@ -66,9 +80,11 @@ Route::middleware('auth')->group(function () {
         ->middleware('verified');
 
 #############################################################################################################################################################################
-    /*
-     * Admin Dashboard                                                                  //TODO
-     */
+
+
+/*
+ * Admin Dashboard                                                                  //TODO
+ */
     Route::view('/dashboard', 'dashboard.index')
         ->middleware('verified');
 
@@ -77,12 +93,10 @@ Route::middleware('auth')->group(function () {
 //    ->middleware('verified');
 
     Route::get('/dashboard/charts', [DashboardController::class, 'indexCharts'])
-        ->name('dashboard.charts')
-        ->middleware('verified');
+        ->name('dashboard.charts');
 
     Route::get('/dashboard/tables', [DashboardController::class, 'indexTables'])
-        ->name('dashboard.tables')
-        ->middleware('verified');
+        ->name('dashboard.tables');
 
 #############################################################################################################################################################################
     /*
