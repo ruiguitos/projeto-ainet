@@ -1,11 +1,15 @@
 @extends('layout')
 @section('main')
 
-    <h1 class="mt-4">@yield('titulo', 'Categorias')</h1>
     @yield('subtitulo')
     <div class="mt-4">
         @yield('main')
     </div>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Categorias</li>
+    </ol>
 
     <table class="table table-striped ">
         <thead class="thead-dark">

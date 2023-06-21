@@ -1,6 +1,11 @@
 @extends('layout')
 @section('subtitulo')
 
+    @yield('subtitulo')
+    <div class="mt-4">
+        @yield('main')
+    </div>
+
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand " href="{{ route('home') }}">
@@ -161,10 +166,11 @@
         </div>
 
         <div class="container-fluid">
-            <h1>Tables</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active"></li>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active">Tabelas</li>
             </ol>
+            <br>
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-primary text-white mb-4">

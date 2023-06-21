@@ -1,11 +1,15 @@
 @extends('layout')
 @section('main')
 
-    <h1 class="mt-4">@yield('titulo', 'Cores')</h1>
     @yield('subtitulo')
     <div class="mt-4">
         @yield('main')
     </div>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Cores</li>
+    </ol>
 
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -24,10 +28,12 @@
                 <td>{{$cor->code}}</td>
                 <td>{{$cor->name}}</td>
                 <td>
-                    <a href="{{route('cores.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                    <a href="{{route('cores.shared.create')}}" class="btn btn-success btn-sm" role="button"
+                       aria-pressed="true">Novo</a>
                 </td>
                 <td>
-                    <a href="{{route('cores.shared.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                    <a href="{{route('cores.shared.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm"
+                       role="button" aria-pressed="true">Alterar</a>
                 <td>
                     @can('delete', $cor)
                         <form action="{{route('cores.shared.destroy', ['cor' => $cor]) }}" method="POST">
@@ -69,7 +75,8 @@
                                         </a>
 
                                         <a class="nav-link" href="/dashboard">
-                                            <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
+                                            <div class="sb-nav-link-icon"><i class="fa fa-tachometer"
+                                                                             aria-hidden="true"></i></div>
                                             Admin Dashboard
                                         </a>
 
@@ -158,6 +165,12 @@
                 </div>
             </div>
 
+            <div
+                style="margin-top: 15px; margin-bottom: 15px; display: flex; justify-content: center; position: inherit">
+                <a href="{{ url()->previous() }}" class="btn btn-default" style="border-color: black">Voltar à Pagina
+                    Inicial
+                </a>
+            </div>
 
 @endsection
 
