@@ -2,153 +2,127 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CorPost;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserPost;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Throwable;
 
 class UserController extends Controller
 {
+//    public function showClientes(): View
+//    {
+//        $users = User::select('id', 'name', 'email', 'user_type', 'blocked')
+//            ->where('user_type', 'C')
+//            ->paginate(50);
+//
+//        return view('clients.index', compact('users'));
+//
+//    }
 
-    public function getUserTypeAttribute()
+    public function indexAdmins(): View
     {
-        $userTypeMapping = [
-            'admin' => ['letter' => 'A', 'designation' => 'Administrator'],
-            'employee' => ['letter' => 'E', 'designation' => 'Employee'],
-            'customer' => ['letter' => 'C', 'designation' => 'Customer'],
-        ];
-
-        $userType = $this->attributes['user_type'] ?? null;
-
-        if (array_key_exists($userType, $userTypeMapping)) {
-            $userTypeData = $userTypeMapping[$userType];
-            return $userTypeData['letter'] . ' - ' . $userTypeData['designation'];
-        }
-
-        return null;
+//        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
+        $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
+            ->where('user_type', 'A')
+            ->paginate(18);
+        return view('users.admins.index', compact('users'));
     }
 
-    public function admin_index(Request $request)
+    public function indexClientes(): View
     {
-        $qry = User::wherein('tipo', ['A', 'F']);
-        $users = $qry->paginate(14);
-
-        return view('users.admin')
-            ->withUsers($users);
+        //$customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref');
+        $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
+            ->where('user_type', 'C')
+            ->paginate(18);
+        return view('users.clientes.index', compact('users'));
     }
 
-    public function ativar(User $user)
+    public function indexEmpregados(): View
     {
-        $userId = $user->id;
-        try {
-            $user->bloqueado = false;
-            $user->save();
-            return redirect()->route('admin.users')
-                ->with('alert-msg', 'User "' . $userId . '" Ativado com sucesso!')
-                ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
+//        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
+        $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
+            ->where('user_type', 'E')
+            ->paginate(18);
 
-            return redirect()->route('admin.users')
-                ->with('alert-msg', 'Não foi possível ativar o User' . $userId)
-                ->with('alert-type', 'danger');
-        }
-
-    }
-    public function desativar(User $user)
-    {
-        $userId = $user->id;
-        try {
-            $user->bloqueado = true;
-            $user->save();
-            return redirect()->route('admin.users')
-                ->with('alert-msg', 'User "' . $userId . '" desativado com sucesso!')
-                ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
-
-            return redirect()->route('admin.users')
-                ->with('alert-msg', 'Não foi possível desativar o User')
-                ->with('alert-type', 'danger');
-        }
+        return view('users.empregados.index', compact('users'));
     }
 
-    public function create()
+    public function toggleBlocked(Request $request, $id)
     {
-        $user = new User;
-        $user_type = $user->user_type = 'A';
-        return view('users.create')
-            ->withUser($user)
-            ->withTipo($user_type);
+        $users = User::findOrFail($id);
+        $users->blocked = !$users->blocked;
+        $users->save();
+
+        // Redirect or return response as needed
+        return redirect()->back();
+    }
+
+    public function edit(User $User)
+    {
+        return view('users.admins.edit')
+            ->withAdmins($User)
+            ->withClientes($User)
+            ->withEmpregados($User);
+    }
+
+    public function create(User $User)
+    {
+        return view('users.admins.create')
+            ->withAdmins($User)
+            ->withClientes($User)
+            ->withEmpregados($User);
     }
 
     public function store(UserPost $request)
     {
         $validated_data = $request->validated();
-        $newUser = new User;
-        $newUser->email = $validated_data['email'];
-        $newUser->name = $validated_data['name'];
-        $newUser->user_type = $validated_data['user_type'];
-        $newUser->password = Hash::make('123');
-        if ($request->hasFile('photo_url')) {
-            $path = $request->photo_url->store('public/photos');
-            $newUser->photo_url = basename($path);
-        }
-        $newUser->save();
-        return redirect()->route('admin.users')
-            ->with('alert-msg', 'User "' . $validated_data['name'] . '" foi criado com sucesso!')
+        User::create($validated_data);
+        return redirect()->route('users.admins.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $validated_data['nome'] . '" foi criado(a) com sucesso!')
             ->with('alert-type', 'success');
     }
 
-    public function edit(User $user)
-    {
-        $user_type = $user->user_type;
-        return view('users.edit')
-            ->withUser($user)
-            ->withTipo($user_type);
-    }
-
-    public function update(UserPost $request, User $user)
+    public function update(UserPost $request, User $User)
     {
         $validated_data = $request->validated();
-        $user->email = $validated_data['email'];
-        $user->name = $validated_data['name'];
-        $user->user_type = $validated_data['user_type'];
-        if ($request->hasFile('photo_url')) {
-            Storage::delete('public/photos/' . $user->photo_url);
-            $path = $request->foto_url->store('public/photos');
-            $user->photo_url = basename($path);
-        }
-        $user->save();
-        return redirect()->route('admin.users')
-            ->with('alert-msg', 'User "' . $user->name . '" foi alterado com sucesso!')
+        $User->fill($validated_data);
+        $User->save();
+        return redirect()->route('users.admins.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $User->name . '" foi alterado(a) com sucesso!')
             ->with('alert-type', 'success');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $User)
     {
-        $oldName = $user->name;
-        $oldUrlPhoto = $user->photo_url;
+        $oldName = $User->nome;
         try {
-            $user->delete();
-            Storage::delete('public/photos/' . $oldUrlPhoto);
-            return redirect()->route('admin.users')
-                ->with('alert-msg', 'User "' . $user->name . '" foi apagado com sucesso!')
+            $User->delete();
+            return redirect()->route('users.admins.index')
+                ->with('alert-msg', 'Utilizador(a) "' . $User->name . '" foi apagado(a) com sucesso!')
                 ->with('alert-type', 'success');
         } catch (\Throwable $th) {
+            // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
+            // Descomentar a próxima linha para verificar qual a informação que a exceção tem
+            //dd($th, $th->errorInfo);
 
-            return redirect()->route('admin.users')
-                ->with('alert-msg', 'Não foi possível apagar o User "' . $oldName . '". Erro: ' . $th->errorInfo[2])
-                ->with('alert-type', 'danger');
+            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                return redirect()->route('users.admins.admin')
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a)"' . $oldName . '", porque está em uso!')
+                    ->with('alert-type', 'danger');
+            } else {
+                return redirect()->route('users.admins.admin')
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a)"' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-type', 'danger');
+            }
         }
     }
 
-    public function destroy_foto(User $user)
-    {
-        Storage::delete('public/photos/' . $user->photo_url);
-        $user->photo_url = null;
-        $user->save();
-        return redirect()->route('admin.users.edit', ['user' => $user])
-            ->with('alert-msg', 'Foto do User "' . $user->name . '" foi removida!')
-            ->with('alert-type', 'success');
-    }
+
+
+
+
 }

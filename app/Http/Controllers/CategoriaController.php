@@ -9,13 +9,13 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categories = Categoria::all();
-        return view('categories.index', compact('categories'));
+        $categories = Categoria::all('id','name');
+        return view('categorias.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('categories.create');
+        return view('categorias.create');
     }
 
     public function store(Request $request)
@@ -28,12 +28,12 @@ class CategoriaController extends Controller
             'name' => $request->input('name'),
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('categorias.index')->with('success', 'Category created successfully.');
     }
 
     public function edit(Categoria $category)
     {
-        return view('categories.edit', compact('category'));
+        return view('categorias.edit', compact('category'));
     }
 
     public function update(Request $request, Categoria $category)
@@ -46,12 +46,12 @@ class CategoriaController extends Controller
             'name' => $request->input('name'),
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('categorias.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroy(Categoria $category)
     {
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categorias.index')->with('success', 'Category deleted successfully.');
     }
 }

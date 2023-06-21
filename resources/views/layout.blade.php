@@ -8,6 +8,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>ImagineShirt</title>
+    <link rel="icon" type="image/x-icon" href="/img/plain_white.png">
     @vite('resources/sass/app.scss')
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -52,15 +53,19 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <img
-                        src="{{Auth::user()->photo_url ? asset('storage/photos/' . Auth::user()->photo_url) : asset('img/default_img.png') }}"
-                        alt="Imagem do Cliente" class="img-profile rounded-circle" height="45">
-
+                {{-- Adiciona foto de utilizador e verifica se tem foto ou nao. se tiver mete a foto, senão mete uma default --}}
+                    @if(Auth::user()->photo_url)
+                        <img src="{{ asset('storage/photos/' . Auth::user()->photo_url) }}"
+                             class="img-profile rounded-circle" height="45">
+                    @else
+                        <img src="{{ asset('img/default_img.png') }}" class="img-profile rounded-circle" height="45">
+                    @endif
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-                    <li><a class="dropdown-item" href="/password/reset">Alterar Senha</a></li>
+                    <li><a class="dropdown-item" href="/password/reset">Alterar Senha (NOT WORKING)</a></li>
+                    <li><a class="dropdown-item" href="/carrinho">Carrinho</a></li>
                     <li>
                         <hr class="dropdown-divider"/>
                     </li>
@@ -84,32 +89,24 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-
                     <div class="sb-sidenav-menu-heading">Espaço de Compras</div>
                         <a class="nav-link" href="/catalogo">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            T-Shirts
+                            Catálogo
                         </a>
 
-                        <a class="nav-link" href="/imagem">
+                        <a class="nav-link" href="/camisolas">
                             <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                            Imagens
+                            Camisolas
                         </a>
 
-                    <div class="sb-sidenav-menu-heading">Espaço Admin</div>
+{{--                    @if(Auth::user()->user_type === 'A') //CHANGE--}}
+                        <div class="sb-sidenav-menu-heading">Espaço Admin</div>
                         <a class="nav-link" href="/dashboard">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
                             Admin Dashboard
                         </a>
-                        <a class="nav-link" href="/clientes">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Clientes
-                        </a>
-                        <a class="nav-link" href="/encomendas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Encomendas
-                        </a>
-
+{{--                    @endif--}}
                 </div>
             </div>
 {{--            <div class="sb-sidenav-footer">--}}

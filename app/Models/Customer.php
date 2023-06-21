@@ -4,29 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\belongsTo;
-use Illuminate\Database\Eloquent\Relations\hasMany;
-use Illuminate\Notifications\Notifiable;
-
 
 class Customer extends Model
 {
-    use HasFactory, SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes;
+    public $timestamps = false;
+    protected $table = 'customers';
 
     protected $fillable = [
         'id',
         'nif',
         'address',
-        'payment_type',
-        'payment_ref'
+        'default_payment_type',
+        'default_payment_ref'
     ];
 
-    public function userRef(){
-        return $this->belongsTo(User::Class, 'id', 'id');
+    public function userId(): BelongsTo{
+        return $this->belongsTo(User::Class);
     }
 
-    public function order(){
-        return $this->hasMany(Encomenda::Class);
+    public function order(): HasMany{
+        return $this->hasMany(Encomenda::Class, 'id', 'id');
+    }
+
+    public function tshirtImage(): HasMany{
+        return $this->hasMany(Imagem::class, 'customer_id', 'id');
     }
 }

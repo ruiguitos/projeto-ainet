@@ -1,43 +1,63 @@
 @extends('layout')
-
 @section('subtitulo')
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     <div class="container-fluid">
         <div class="search-container">
-            <div class="search-bar">
-                <form action="{{ route('catalogo.index') }}" method="GET">
-                    <input type="text" name="search" placeholder="Search by Name">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+            <form action="{{ route('catalogo.index') }}" method="GET" class="form-group">
+                <input type="text" name="search" placeholder="Search by Name">
+                <select name="orderBy">
+                    <option value="name">Order by Name</option>
+                    <option value="price">Order by Price</option>
+                </select>
+                <select name="orderDirection">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+            </form>
         </div>
+
+{{--        <div class="row mb-5">--}}
+{{--            <div class="search-container">--}}
+{{--                <form method="GET" action="{{route('catalogo.index')}}" class="form-group">--}}
+{{--                    <div class="input-group">--}}
+{{--                        <select class="custom-select" name="category" id="inputCategory" aria-label="Category">--}}
+{{--                            <option value="" {{'' == old('category', $selectedCategory) ? 'selected' : ''}}>Todas as Categorias</option>--}}
+{{--                            @foreach ($categories as $abr => $name)--}}
+{{--                                <option value={{$abr}} {{$abr == old('categoria', $selectedCategory) ? 'selected' : ''}}>{{$name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                        <input type='text' class="form-control" name="search" placeholder="Procurar Nome">--}}
+{{--                        <input type='text' class="form-control" name="searchDesc" placeholder="Procurar Descrição">--}}
+{{--                        <div class="input-group-append">--}}
+{{--                            <button class="btn btn-outline-secondary" type="submit">Filtrar</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="grid-container">
             @foreach ($tshirt_images as $tshirt)
-                <div class="tshirt-item">
-                    <div class="tshirt-image">
-                        <a href="{{ route('catalogo.show', $tshirt->id) }}">
-                            <p>{{ $tshirt->name }}</p>
+                <div class="tshirt-container">
+                    <p>
+                        <a href="{{ route('catalogo.shared.show', $tshirt->id) }}">
+                            <img src="{{ asset('storage/tshirt_images/' . $tshirt->image_url) }}"
+                                 style="height: 15rem; width: 15rem; border: 5px">
                         </a>
-                        {{$tshirt->image_url}}
-
-                    </div>
+                    <p><strong>{{ $tshirt->name }}</strong></p>
+                    </p>
 
                     <div class="description">
                         <p>
                             <strong>Description:</strong> {{ $tshirt->description }}
                         </p>
                     </div>
-                    {{--                    <div class="category">--}}
-                    {{--                        <p>--}}
-                    {{--                            Category: {{ $tshirt->category_id }}--}}
-                    {{--                        </p>--}}
-                    {{--                    </div>--}}
                     @foreach($prices as $price)
                         <div class="price">
-                            <p> <strong>Price:</strong> {{ $price->unit_price_catalog }}€</p>
+                            <p><strong>Price:</strong> {{ $price->unit_price_catalog }}€</p>
                         </div>
                     @endforeach
                     <div class="add-to-cart">
@@ -54,12 +74,12 @@
             @endforeach
         </div>
 
-        <div class="footer">
-            <!-- Footer content goes here -->
-            {{ $tshirt_images->links() }}
+        <div style="margin-top: 15px; margin-bottom: 15px; display: flex; justify-content: center; position: inherit">
+            <a href="{{ url()->previous() }}" class="btn btn-default" style="border-color: black">Voltar à Pagina
+                Inicial
+            </a>
         </div>
-    </div>
+
+        <footer>{{ $tshirt_images->links() }}</footer>
+
 @endsection
-
-
-
