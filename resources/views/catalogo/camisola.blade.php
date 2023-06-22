@@ -1,5 +1,6 @@
 @extends('layout')
-@section('subtitulo')
+@section('titulo','Camisolas')
+@section('main')
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 

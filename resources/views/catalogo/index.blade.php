@@ -1,5 +1,6 @@
 @extends('layout')
-@section('subtitulo')
+@section('titulo','Catálogo')
+@section('main')
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -65,10 +66,10 @@
                             @csrf
                             <button type="submit" class="rounded-button">Add to Cart</button>
                         </form>
-                        <div class="add-quantity">
-                            <label for="quantity">Quantity: </label>
-                            <input type="number" id="quantity" name="quantity" min="1" value="1">
-                        </div>
+{{--                        <div class="add-quantity">--}}
+{{--                            <label for="quantity">Quantity: </label>--}}
+{{--                            <input type="number" id="quantity" name="quantity" min="1" value="1">--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             @endforeach

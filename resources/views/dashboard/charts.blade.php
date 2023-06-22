@@ -1,5 +1,6 @@
 @extends('layout')
-@section('subtitulo')
+@section('titulo','Gráficos')
+@section('main')
 
     @yield('subtitulo')
     <div class="mt-4">

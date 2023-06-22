@@ -1,4 +1,5 @@
 @extends('layout')
+@section('titulo','Administração')
 @section('subtitulo')
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

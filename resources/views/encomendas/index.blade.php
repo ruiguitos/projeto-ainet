@@ -1,4 +1,5 @@
 @extends('layout')
+@section('titulo','Encomendas')
 @section('subtitulo')
 
     @yield('subtitulo')
