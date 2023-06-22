@@ -2,8 +2,6 @@
 @section('titulo','Informações')
 @section('main')
 
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-
     <div>
         <br>
         <br>
