@@ -79,10 +79,10 @@
                             @csrf
                             <button type="submit" class="rounded-button">Add to Cart</button>
                         </form>
-                        <div class="add-quantity">
+{{--                        <div class="add-quantity">--}}
                             {{--                            <label for="quantity">Quantity: </label>--}}
                             {{--                            <input type="number" id="quantity" name="quantity" min="1" value="1">--}}
-                        </div>
+{{--                        </div>--}}
                     </div>
                 </div>
             @endforeach
@@ -98,13 +98,15 @@
                 {{--                    </div>--}}
             </div>
         </div>
-
+<br>
+<br>
+<br>
         <div style="margin-top: 15px; margin-bottom: 15px; display: flex; justify-content: center; position: inherit">
             <a href="{{ url()->previous() }}" class="btn btn-default" style="border-color: black">Voltar à Pagina
                 Inicial
             </a>
         </div>
 
-{{--        <footer>        {{ $tshirt->withQueryString()->links() }}     </footer>--}}
+{{--        <footer>        {{ $tshirt->links() }}     </footer>--}}
     </div>
 @endsection
