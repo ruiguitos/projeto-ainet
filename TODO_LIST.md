@@ -20,7 +20,7 @@ Em falta:
 
 
 
-Configurações iniciais:
+### Configurações iniciais:
 - alterar DB_DATABASE dentro do ficheiro .env de acordo com o ficheiro de base de dados fornecidos (linha 15)
 - alterar APP_NAME dentro do .env (opcional)
 - ou alterar ficheiro app.php (linha 18)
