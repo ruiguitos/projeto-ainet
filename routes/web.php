@@ -26,6 +26,9 @@ Auth::routes(['verify' => true]);
 
 #############################################################################################################################################################################
 
+Route::view('about-us', 'about-us');
+
+
 Route::middleware('auth')->group(function () {
     Route::resource('dashboard.index', DashboardController::class);
     Route::resource('dashboard.charts', DashboardController::class);
@@ -69,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/catalogo/{id}', [CatalogoController::class, 'show'])
         ->name('catalogo.shared.show')
         ->middleware('verified');
+
+    Route::view('about-us', 'about-us')->name('about-us');
+    Route::view('estampa', 'catalogo.estampa')->name('catalogo.estampa');
 
 
 #############################################################################################################################################################################

@@ -108,8 +108,8 @@
                             Camisolas
                         </a>
 
-                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
-                           href="{{ route('catalogo.camisola') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.estampa' ? 'active' : '' }}"
+                           href="{{ route('catalogo.estampa') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                             Upload de Estampa Personalizada
                         </a>
@@ -148,14 +148,17 @@
                             Carrinho
                         </a>
 
-                        <!-- Your dashboard content for user type A -->
                         <div class="sb-sidenav-menu-heading">Administração</div>
                         <a class="nav-link" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
                             Dashboard
                         </a>
-
                     @endif
+                        <div class="sb-sidenav-menu-heading">Contactos</div>
+                        <a class="nav-link" href="/about-us">
+                            <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                            Contactos
+                        </a>
                 </div>
             </div>
 
