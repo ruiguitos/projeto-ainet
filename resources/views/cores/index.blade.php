@@ -173,5 +173,9 @@
                 </a>
             </div>
 
+
+            <footer>{{ $colors->links() }}</footer>
+
+
 @endsection
 

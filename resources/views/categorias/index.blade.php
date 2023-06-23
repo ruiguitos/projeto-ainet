@@ -169,8 +169,8 @@
         </a>
     </div>
 
-{{--    <footer>--}}
-{{--        {{ $categories->links() }}--}}
-{{--    </footer>--}}
+    <footer>
+        {{ $categories->links() }}
+    </footer>
 
 @endsection
