@@ -22,10 +22,17 @@
                 <th>Nome</th>
                 <td>{{Auth::user()->name}}</td>
                 <td>
-                    <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
-                       aria-pressed="true" style="border-color: black">
-                        Editar Foto
-                    </a>
+{{--                    <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"--}}
+{{--                       aria-pressed="true" style="border-color: black">--}}
+{{--                        Editar Foto--}}
+{{--                    </a>--}}
+                    <form action="{{ route('perfil.shared.updatePhoto') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="photo" accept=".jpg, .jpeg, .png">
+                        <button type="submit" class="btn btn-primary btn-sm" style="border-color: black">
+                            Alterar Foto
+                        </button>
+                    </form>
                 </td>
             </tr>
             <tr>
