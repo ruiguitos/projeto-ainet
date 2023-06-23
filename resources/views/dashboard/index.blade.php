@@ -67,32 +67,33 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
+
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="/home">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-house-chimney"></i></div>
                             Homepage
                         </a>
 
+                        @if (Auth::user()->user_type == 'A')
                         <a class="nav-link" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
                             Admin Dashboard
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Área de Gestão</div>
-                        <a class="nav-link" href="/categorias">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-list"></i>
-                            </div>
-                            Categorias
-                        </a>
+                            <a class="nav-link" href="/categorias">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-solid fa-list"></i>
+                                </div>
+                                Categorias
+                            </a>
 
-                        <a class="nav-link" href="/cores">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-list"></i>
-                            </div>
-                            Cores
-                        </a>
-
+                            <a class="nav-link" href="/cores">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-solid fa-list"></i>
+                                </div>
+                                Cores
+                            </a>
                         <a class="nav-link" href="/encomendas">
                             <div class="sb-nav-link-icon">
                                 <i class="fa-solid fa-list"></i>
@@ -107,13 +108,32 @@
                             Status Encomendas
                         </a>
 
-                        <a class="nav-link" href="/dashboard/charts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Gráficos
+
+
+                        @endif
+                        @if (Auth::user()->user_type == 'E')
+                        <a class="nav-link" href="/encomendas">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
+                            Encomendas Registadas
                         </a>
+
+                        <a class="nav-link" href="/encomendas">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
+                            Status Encomendas
+                        </a>
+                        @endif
+                        @if (Auth::user()->user_type == 'A')
                         <a class="nav-link" href="/dashboard/tables">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Dados
+                        </a>
+                        <a class="nav-link" href="/dashboard/charts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Gráficos
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Utilizadores</div>
@@ -132,6 +152,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
                             Empregados
                         </a>
+                        @endif
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

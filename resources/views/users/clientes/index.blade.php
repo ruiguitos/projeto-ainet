@@ -8,7 +8,7 @@
     </div>
 
     <ol class="breadcrumb">
-{{--        <li class="breadcrumb-item">Dashboard</li>--}}
+        {{--        <li class="breadcrumb-item">Dashboard</li>--}}
         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
         <li class="breadcrumb-item active">Clientes</li>
     </ol>
@@ -32,13 +32,14 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-{{--                @if($user->blocked == 1)--}}
-{{--                    <td> Bloqueado </td>--}}
-{{--                @else--}}
-{{--                    <td> Ativo </td>--}}
-{{--                @endif--}}
+                {{--                @if($user->blocked == 1)--}}
+                {{--                    <td> Bloqueado </td>--}}
+                {{--                @else--}}
+                {{--                    <td> Ativo </td>--}}
+                {{--                @endif--}}
                 <td>
-                    <form id="toggleForm" action="{{ route('users.clientes.index', ['id' => $user->id]) }}" method="POST" style="display: inline;">
+                    <form id="toggleForm" action="{{ route('users.clientes.index', ['id' => $user->id]) }}"
+                          method="POST" style="display: inline;">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">
@@ -47,10 +48,12 @@
                     </form>
                 </td>
                 <td>
-                    <a href="{{route('encomendas.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
+                    <a href="{{route('encomendas.shared.create')}}" class="btn btn-success btn-sm" role="button"
+                       aria-pressed="true">Novo</a>
                 </td>
                 <td>
-                    <a href="{{route('users.clientes.shared.edit', ['cliente' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                    <a href="{{route('users.clientes.shared.edit', ['cliente' => $user]) }}"
+                       class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                 <td>
                     @can('delete', $user)
                         <form action="{{route('users.clientes.shared.destroy', ['cliente' => $user]) }}" method="POST">
@@ -85,6 +88,7 @@
                             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                                 <div class="sb-sidenav-menu">
                                     <div class="nav">
+
                                         <div class="sb-sidenav-menu-heading">Core</div>
                                         <a class="nav-link" href="/home">
                                             <div class="sb-nav-link-icon"><i class="fa-solid fa-house-chimney"></i>
@@ -92,65 +96,84 @@
                                             Homepage
                                         </a>
 
-                                        <a class="nav-link" href="/dashboard">
-                                            <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
-                                            Admin Dashboard
-                                        </a>
+                                        @if (Auth::user()->user_type == 'A')
+                                            <a class="nav-link" href="/dashboard">
+                                                <div class="sb-nav-link-icon"><i class="fa fa-tachometer"
+                                                                                 aria-hidden="true"></i></div>
+                                                Admin Dashboard
+                                            </a>
 
-                                        <div class="sb-sidenav-menu-heading">Área de Gestão</div>
-                                        <a class="nav-link" href="/categorias">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fa-solid fa-list"></i>
-                                            </div>
-                                            Categorias
-                                        </a>
+                                            <div class="sb-sidenav-menu-heading">Área de Gestão</div>
+                                            <a class="nav-link" href="/categorias">
+                                                <div class="sb-nav-link-icon">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </div>
+                                                Categorias
+                                            </a>
 
-                                        <a class="nav-link" href="/cores">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fa-solid fa-list"></i>
-                                            </div>
-                                            Cores
-                                        </a>
+                                            <a class="nav-link" href="/cores">
+                                                <div class="sb-nav-link-icon">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </div>
+                                                Cores
+                                            </a>
+                                            <a class="nav-link" href="/encomendas">
+                                                <div class="sb-nav-link-icon">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </div>
+                                                Encomendas Registadas
+                                            </a>
 
-                                        <a class="nav-link" href="/encomendas">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fa-solid fa-list"></i>
-                                            </div>
-                                            Encomendas Registadas
-                                        </a>
+                                            <a class="nav-link" href="/encomendas">
+                                                <div class="sb-nav-link-icon">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </div>
+                                                Status Encomendas
+                                            </a>
 
-                                        <a class="nav-link" href="/encomendas">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fa-solid fa-list"></i>
-                                            </div>
-                                            Status Encomendas
-                                        </a>
+                                        @endif
+                                        @if (Auth::user()->user_type == 'E')
+                                            <a class="nav-link" href="/encomendas">
+                                                <div class="sb-nav-link-icon">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </div>
+                                                Encomendas Registadas
+                                            </a>
 
-                                        <a class="nav-link" href="/dashboard/charts">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                            Gráficos
-                                        </a>
-                                        <a class="nav-link" href="/dashboard/tables">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                            Dados
-                                        </a>
+                                            <a class="nav-link" href="/encomendas">
+                                                <div class="sb-nav-link-icon">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </div>
+                                                Status Encomendas
+                                            </a>
+                                        @endif
+                                        @if (Auth::user()->user_type == 'A')
+                                            <a class="nav-link" href="/dashboard/tables">
+                                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                                Dados
+                                            </a>
+                                            <a class="nav-link" href="/dashboard/charts">
+                                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                                Gráficos
+                                            </a>
 
-                                        <div class="sb-sidenav-menu-heading">Utilizadores</div>
-                                        <a class="nav-link" href="/users/admins">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i>
-                                            </div>
-                                            Administradores
-                                        </a>
+                                            <div class="sb-sidenav-menu-heading">Utilizadores</div>
+                                            <a class="nav-link" href="/users/admins">
+                                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i>
+                                                </div>
+                                                Administradores
+                                            </a>
 
-                                        <a class="nav-link" href="/users/clientes">
-                                            <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
-                                            Clientes
-                                        </a>
+                                            <a class="nav-link" href="/users/clientes">
+                                                <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
+                                                Clientes
+                                            </a>
 
-                                        <a class="nav-link" href="/users/empregados">
-                                            <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
-                                            Empregados
-                                        </a>
+                                            <a class="nav-link" href="/users/empregados">
+                                                <div class="sb-nav-link-icon"><i class="fas fa fa-users"></i></div>
+                                                Empregados
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="sb-sidenav-footer">
@@ -182,7 +205,7 @@
                 </div>
             </div>
 
-    <footer>
-        {{ $users->links() }}
-    </footer>
+            <footer>
+                {{ $users->links() }}
+            </footer>
 @endsection
