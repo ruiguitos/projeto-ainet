@@ -12,18 +12,17 @@
         <li class="breadcrumb-item active">Empregados</li>
     </ol>
 
+    <div style="display: flex; justify-content: flex-end;">
+        <a href="{{ route('users.empregados.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Novo Empregado</a>
+    </div>
+
     <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-{{--            <th>User type</th>--}}
-            <th>Estado</th>
-            <th></th>
             <th>Actions</th>
-            <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -32,42 +31,59 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-{{--                <td>{{ $user->user_type }}</td>--}}
-{{--                @if($user->blocked == 1)--}}
-{{--                    <td> Bloqueado </td>--}}
-{{--                @else--}}
-{{--                    <td> Ativo </td>--}}
-{{--                @endif--}}
                 <td>
-                    <form id="toggleForm" action="{{ route('users.empregados.index', ['id' => $user->id]) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">
-                            {{ $user->blocked ? 'Desativado' : 'Ativado' }}
-                        </button>
-                    </form>
-                </td>
-                <td>
-                    <a href="{{route('users.empregados.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
-                </td>
-                <td>
-                    <a href="{{route('users.empregados.shared.edit', ['empregado' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
-                <td>
-                    @can('delete', $user)
-                        <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}" method="POST">
+                    <div style="display: flex; gap: 5px;">
+                        <a href="{{ route('users.empregados.shared.edit', ['id' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        @can('delete', $user)
+                            <form action="{{ route('users.empregados.shared.destroy', ['id' => $user]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
+                            </form>
+                        @endcan
+                        <form action="{{route('users.empregados.shared.destroy', ['id' => $user]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
                         </form>
-                    @endcan
+                    </div>
                 </td>
-                <td>
-                    <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
-                    </form>
-                </td>
+                {{--                <td>{{ $user->user_type }}</td>--}}
+                {{--                @if($user->blocked == 1)--}}
+                {{--                    <td> Bloqueado </td>--}}
+                {{--                @else--}}
+                {{--                    <td> Ativo </td>--}}
+                {{--                @endif--}}
+                {{--                <td>--}}
+                {{--                    <form id="toggleForm" action="{{ route('users.empregados.index', ['id' => $user->id]) }}"--}}
+                {{--                          method="POST" style="display: inline;">--}}
+                {{--                        @csrf--}}
+                {{--                        @method('PUT')--}}
+                {{--                        <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">--}}
+                {{--                            {{ $user->blocked ? 'Desativado' : 'Ativado' }}--}}
+                {{--                        </button>--}}
+                {{--                    </form>--}}
+                {{--                </td>--}}
+                {{--                <td>--}}
+                {{--                    <a href="{{route('users.empregados.shared.edit', ['empregado' => $user]) }}"--}}
+                {{--                       class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
+                {{--                <td>--}}
+                {{--                    @can('delete', $user)--}}
+                {{--                        <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}"--}}
+                {{--                              method="POST">--}}
+                {{--                            @csrf--}}
+                {{--                            @method("DELETE")--}}
+                {{--                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+                {{--                        </form>--}}
+                {{--                    @endcan--}}
+                {{--                </td>--}}
+                {{--                <td>--}}
+                {{--                    <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}" method="POST">--}}
+                {{--                        @csrf--}}
+                {{--                        @method("DELETE")--}}
+                {{--                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+                {{--                    </form>--}}
+                {{--                </td>--}}
             </tr>
         @endforeach
         </tbody>
@@ -88,13 +104,15 @@
 
                                         <div class="sb-sidenav-menu-heading">Core</div>
                                         <a class="nav-link" href="/home">
-                                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house-chimney"></i>
+                                            </div>
                                             Homepage
                                         </a>
 
                                         @if (Auth::user()->user_type == 'A')
                                             <a class="nav-link" href="/dashboard">
-                                                <div class="sb-nav-link-icon"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
+                                                <div class="sb-nav-link-icon"><i class="fa fa-tachometer"
+                                                                                 aria-hidden="true"></i></div>
                                                 Admin Dashboard
                                             </a>
 
@@ -125,8 +143,6 @@
                                                 </div>
                                                 Status Encomendas
                                             </a>
-
-
 
                                         @endif
                                         @if (Auth::user()->user_type == 'E')

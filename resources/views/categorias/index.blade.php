@@ -12,47 +12,89 @@
         <li class="breadcrumb-item active">Categorias</li>
     </ol>
 
-    <table class="table table-striped ">
+    <div style="display: flex; justify-content: flex-end;">
+        <a href="{{ route('categorias.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Nova Categoria</a>
+    </div>
+
+{{--    <table class="table table-striped ">--}}
+{{--        <thead class="thead-dark">--}}
+{{--        <tr>--}}
+{{--            <th scope="row" style="width:5%">ID</th>--}}
+{{--            <th scope="row">Nome Categoria</th>--}}
+{{--            <th></th>--}}
+{{--            <th></th>--}}
+{{--            <th></th>--}}
+{{--            <th scope="row">Actions</th>--}}
+{{--            <th></th>--}}
+
+{{--        </tr>--}}
+{{--        </thead>--}}
+{{--        <tbody>--}}
+{{--        @foreach ($categories as $category)--}}
+{{--            <tr>--}}
+{{--                <td>{{$category->id}}</td>--}}
+{{--                <td>{{$category->name}}</td>--}}
+{{--                <td></td>--}}
+{{--                <td></td>--}}
+{{--                <td>--}}
+{{--                    <a href="{{route('categorias.shared.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
+{{--                <td>--}}
+{{--                    @can('delete', $category)--}}
+{{--                        <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">--}}
+{{--                            @csrf--}}
+{{--                            @method("DELETE")--}}
+{{--                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+{{--                        </form>--}}
+{{--                    @endcan--}}
+{{--                </td>--}}
+{{--                <td>--}}
+{{--                    <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        @method("DELETE")--}}
+{{--                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+{{--                    </form>--}}
+{{--                </td>--}}
+{{--            </tr>--}}
+{{--        @endforeach--}}
+{{--        </tbody>--}}
+{{--    </table>--}}
+
+
+    <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
-            <th scope="row" style="width:5%">ID</th>
-            <th scope="row">Nome Categoria</th>
-            <th scope="row"></th>
-            <th scope="row">Actions</th>
-            <th scope="row"></th>
-            <th scope="row"></th>
+            <th scope="col" style="width: 5%">ID</th>
+            <th scope="col">Nome Categoria</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($categories as $category)
             <tr>
-                <td>{{$category->id}}</td>
-                <td>{{$category->name}}</td>
+                <td>{{ $category->id }}</td>
+                <td>{{ $category->name }}</td>
                 <td>
-                    <a href="{{route('categorias.shared.create')}}" class="btn btn-success btn-sm" role="button" aria-pressed="true">Novo</a>
-                </td>
-                <td>
-                    <a href="{{route('categorias.shared.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
-                <td>
-                    @can('delete', $category)
+                    <div style="display: flex; gap: 5px;">
+                        <a href="{{ route('categorias.shared.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        @can('delete', $category)
+                            <form action="{{ route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
+                            </form>
+                        @endcan
                         <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
                         </form>
-                    @endcan
-                </td>
-                <td>
-                    <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
-                    </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
+
 
     <div id="layoutSidenav_content">
         <main>

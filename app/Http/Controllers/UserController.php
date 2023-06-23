@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function edit(User $User)
     {
-        return view('users.admins.edit')
+        return view('users.empregados.edit')
             ->withAdmins($User)
             ->withClientes($User)
             ->withEmpregados($User);
