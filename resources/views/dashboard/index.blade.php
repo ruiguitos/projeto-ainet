@@ -33,8 +33,8 @@
             <!-- Navbar-->
             <ul class="navbar-nav me-1 me-lg-3">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
                         <img
                             src="{{Auth::user()->photo_url ? asset('storage/photos/' . Auth::user()->photo_url) : asset('img/default_img.png') }}"
                             alt="Imagem do Cliente" class="img-profile rounded-circle" height="45">
@@ -253,6 +253,11 @@
                 </table>
             </div>
         </div>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 crossorigin="anonymous">
         </script>
