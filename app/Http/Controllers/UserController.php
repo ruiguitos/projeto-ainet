@@ -13,20 +13,12 @@ use Throwable;
 
 class UserController extends Controller
 {
-//    public function showClientes(): View
-//    {
-//        $users = User::select('id', 'name', 'email', 'user_type', 'blocked')
-//            ->where('user_type', 'C')
-//            ->paginate(50);
-//
-//        return view('clients.index', compact('users'));
-//
-//    }
-
     public function indexAdmins(): View
     {
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
+            ->orderBy('id','asc')
+            ->orderBy('name','asc')
             ->where('user_type', 'A')
             ->paginate(18);
         return view('users.admins.index', compact('users'));
@@ -36,6 +28,8 @@ class UserController extends Controller
     {
         //$customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref');
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
+            ->orderBy('id','asc')
+            ->orderBy('name','asc')
             ->where('user_type', 'C')
             ->paginate(18);
         return view('users.clientes.index', compact('users'));
@@ -45,6 +39,8 @@ class UserController extends Controller
     {
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
+            ->orderBy('id', 'asc')
+            ->orderBy('name', 'asc')
             ->where('user_type', 'E')
             ->paginate(18);
 
@@ -120,9 +116,5 @@ class UserController extends Controller
             }
         }
     }
-
-
-
-
 
 }

@@ -9,7 +9,9 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categories = Categoria::all('id','name');
+        $categories = Categoria::select('id','name')
+            ->orderBy('name','asc')
+            ->paginate(15);
         return view('categorias.index', compact('categories'));
     }
 

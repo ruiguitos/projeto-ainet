@@ -10,7 +10,10 @@ class CorController
 
    public function index()
    {
-       $colors = Cor::select('name', 'code')->paginate(10);
+       $colors = Cor::select('name', 'code')
+           ->orderBy('name','asc')
+           ->orderBy('code','asc')
+           ->paginate(10);
 
        return view('cores.index', compact('colors'));
     }
