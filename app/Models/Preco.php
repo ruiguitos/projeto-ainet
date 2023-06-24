@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Preco extends Model
 {
+
+    use SoftDeletes;
     protected $table = 'prices'; //
 
     protected $fillable = [

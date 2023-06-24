@@ -10,6 +10,8 @@ class Tshirt extends Model{
 
     use HasFactory;
 
+    use SoftDeletes;
+
     protected $table = 'order_items';
     public $timestamps = false;
     protected $fillable = [

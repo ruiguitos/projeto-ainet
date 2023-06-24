@@ -12,6 +12,8 @@ class EncomendaStatus extends Model{
 
     use HasFactory;
 
+    use SoftDeletes;
+
     protected $table = 'orders';
 
     public $timestamps = false;

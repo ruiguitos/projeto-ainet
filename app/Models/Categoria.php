@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categoria extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'categories';
 
     protected $fillable = [
