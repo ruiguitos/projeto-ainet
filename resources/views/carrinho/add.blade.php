@@ -10,11 +10,13 @@
 
 <p>The item has been successfully added to your cart.</p>
 
-<a href="{{ route('cart.view') }}"><button>View Cart</button></a>
+<form action="{{ route('cart.view') }}" method="GET">
+    <button type="submit">View Cart</button>
+</form>
 
 <!-- Additional content for the cart.add view -->
 <footer>
-    <a href="{{ route('home')}}" class="btn btn-default" style="border-color: black; align-items: flex-end">Voltar à Pagina Inicial</a>
+    <a href="{{ route('home') }}" class="btn btn-default" style="border-color: black; align-items: flex-end">Voltar à Pagina Inicial</a>
 </footer>
 </body>
 </html>

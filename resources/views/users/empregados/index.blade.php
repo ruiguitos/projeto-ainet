@@ -13,7 +13,7 @@
     </ol>
 
     <div style="display: flex; justify-content: flex-end;">
-        <a href="{{ route('users.empregados.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Novo Empregado</a>
+        <a href="{{ route('users.empregados.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Utilizador</a>
     </div>
 
     <table class="table table-striped">
@@ -33,7 +33,7 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"
+                    <form id="toggleForm" action="{{ route('users.empregados.index', ['id' => $user->id]) }}"
                           method="POST" style="display: inline;">
                         @csrf
                         @method('PUT')

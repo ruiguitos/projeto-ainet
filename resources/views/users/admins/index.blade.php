@@ -14,7 +14,7 @@
 
     <div style="display: flex; justify-content: flex-end;">
         <a href="{{ route('users.admins.shared.create') }}" class="btn btn-success btn-m" role="button"
-           aria-pressed="true">Adicionar Novo Administrador</a>
+           aria-pressed="true">Adicionar Utilizador</a>
     </div>
 
     <div class="table-responsive">
@@ -31,75 +31,77 @@
             </thead>
             <tbody>
             @foreach($users as $user)
-{{--                @if($user->user_type == "A")--}}
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        @if($user->blocked == 1)
-                            <td> Bloqueado</td>
-                        @else
-                            <td> Ativo</td>
-                        @endif
-                        <td>
-                            <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"
-                                  method="POST" style="display: inline;">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">
-                                    {{ $user->blocked ? 'Desativado' : 'Ativado' }}
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <div style="display: flex; gap: 5px;">
-                                <a href="{{ route('users.admins.shared.edit', ['id' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
-                                @can('delete', $user)
-                                    <form action="{{ route('users.admins.shared.destroy', ['id' => $user]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
-                                    </form>
-                                @endcan
-                                <form action="{{route('users.admins.shared.destroy', ['id' => $user]) }}" method="POST">
+                {{--                @if($user->user_type == "A")--}}
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    @if($user->blocked == 1)
+                        <td> Bloqueado</td>
+                    @else
+                        <td> Ativo</td>
+                    @endif
+                    <td>
+                        <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"
+                              method="POST" style="display: inline;">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">
+                                {{ $user->blocked ? 'Desativado' : 'Ativado' }}
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 5px;">
+                            <a href="{{ route('users.admins.shared.edit', ['id' => $user]) }}"
+                               class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                            @can('delete', $user)
+                                <form action="{{ route('users.admins.shared.destroy', ['id' => $user]) }}"
+                                      method="POST">
                                     @csrf
-                                    @method("DELETE")
-                                    <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
                                 </form>
-                            </div>
-                        </td>
-                        {{--                        <td>--}}
-                        {{--                            <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"--}}
-                        {{--                                  method="POST" style="display: inline;">--}}
-                        {{--                                @csrf--}}
-                        {{--                                @method('PUT')--}}
-                        {{--                                <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">--}}
-                        {{--                                    {{ $user->blocked ? 'Desativado' : 'Ativado' }}--}}
-                        {{--                                </button>--}}
-                        {{--                            </form>--}}
-                        {{--                        </td>--}}
-                        {{--                        <td>--}}
-                        {{--                            <a href="{{route('users.admins.shared.edit', ['admin' => $user]) }}"--}}
-                        {{--                               class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
-                        {{--                        <td>--}}
-                        {{--                            @can('delete', $user)--}}
-                        {{--                                <form action="{{route('users.admins.shared.destroy', ['admin' => $user]) }}"--}}
-                        {{--                                      method="POST">--}}
-                        {{--                                    @csrf--}}
-                        {{--                                    @method("DELETE")--}}
-                        {{--                                    <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-                        {{--                                </form>--}}
-                        {{--                            @endcan--}}
-                        {{--                        </td>--}}
-                        {{--                        <td>--}}
-                        {{--                            <form action="{{route('users.admins.shared.destroy', ['admin' => $user]) }}" method="POST">--}}
-                        {{--                                @csrf--}}
-                        {{--                                @method("DELETE")--}}
-                        {{--                                <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-                        {{--                            </form>--}}
-                        {{--                        </td>--}}
-                    </tr>
-{{--                @endif--}}
+                            @endcan
+                            <form action="{{route('users.admins.shared.destroy', ['id' => $user]) }}" method="POST">
+                                @csrf
+                                @method("DELETE")
+                                <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                            </form>
+                        </div>
+                    </td>
+                    {{--                        <td>--}}
+                    {{--                            <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"--}}
+                    {{--                                  method="POST" style="display: inline;">--}}
+                    {{--                                @csrf--}}
+                    {{--                                @method('PUT')--}}
+                    {{--                                <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">--}}
+                    {{--                                    {{ $user->blocked ? 'Desativado' : 'Ativado' }}--}}
+                    {{--                                </button>--}}
+                    {{--                            </form>--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <a href="{{route('users.admins.shared.edit', ['admin' => $user]) }}"--}}
+                    {{--                               class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
+                    {{--                        <td>--}}
+                    {{--                            @can('delete', $user)--}}
+                    {{--                                <form action="{{route('users.admins.shared.destroy', ['admin' => $user]) }}"--}}
+                    {{--                                      method="POST">--}}
+                    {{--                                    @csrf--}}
+                    {{--                                    @method("DELETE")--}}
+                    {{--                                    <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+                    {{--                                </form>--}}
+                    {{--                            @endcan--}}
+                    {{--                        </td>--}}
+                    {{--                        <td>--}}
+                    {{--                            <form action="{{route('users.admins.shared.destroy', ['admin' => $user]) }}" method="POST">--}}
+                    {{--                                @csrf--}}
+                    {{--                                @method("DELETE")--}}
+                    {{--                                <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+                    {{--                            </form>--}}
+                    {{--                        </td>--}}
+                </tr>
+                {{--                @endif--}}
             @endforeach
             </tbody>
         </table>

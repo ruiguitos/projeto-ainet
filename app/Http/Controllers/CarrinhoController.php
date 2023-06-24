@@ -18,4 +18,9 @@ class CarrinhoController extends Controller
 
         return view('catalogo.index', compact('tshirt_images', 'prices'));
     }
+
+
+
+
+
 }

@@ -13,7 +13,8 @@
     </ol>
 
     <div style="display: flex; justify-content: flex-end;">
-        <a href="{{ route('users.clientes.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Novo Cliente</a>
+        <a href="{{ route('users.clientes.shared.create') }}" class="btn btn-success btn-m" role="button"
+           aria-pressed="true">Adicionar Utilizador</a>
     </div>
 
     <table class="table table-striped">
@@ -33,7 +34,7 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"
+                    <form id="toggleForm" action="{{ route('users.clientes.index', ['id' => $user->id]) }}"
                           method="POST" style="display: inline;">
                         @csrf
                         @method('PUT')
@@ -44,7 +45,8 @@
                 </td>
                 <td>
                     <div style="display: flex; gap: 5px;">
-                        <a href="{{ route('users.clientes.shared.edit', ['id' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        <a href="{{ route('users.clientes.shared.edit', ['id' => $user]) }}"
+                           class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                         @can('delete', $user)
                             <form action="{{ route('users.clientes.shared.destroy', ['id' => $user]) }}" method="POST">
                                 @csrf

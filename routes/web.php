@@ -261,34 +261,40 @@ Route::middleware('auth')->group(function () {
         ->name('users.admins.index')
         ->middleware('verified');
 
-    Route::put('/user/admins/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
+    Route::put('/users/admins/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
         ->name('users.admins.index')
         ->middleware('verified');
 
-    Route::get('/users/admins/{id}/edit', [UserController::class, 'editAdmin'])
+    Route::get('users/admins/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
+        ->name('users.admins.index');
+
+    Route::get('/users/admins/{id}/edit', [UserController::class, 'editA'])
         ->name('users.admins.shared.edit')
         ->middleware('verified');
 //        ->middleware('can:view,admin');
 
-    Route::get('/users/admins/create', [UserController::class, 'createAdmin'])
+    Route::get('/users/admins/create', [UserController::class, 'createA'])
         ->name('users.admins.shared.create')
 //        ->middleware('can:create,App\Models\User')
         ->middleware('verified');
 
-    Route::post('/users/admins/store', [UserController::class, 'storeAdmin'])
+    Route::post('/users/admins/store', [UserController::class, 'storeA'])
         ->name('users.admins.shared.store')
 //        ->middleware('can:create,App\Models\User')
         ->middleware('verified');
 
-    Route::put('/users/admins/{id}/update', [UserController::class, 'updateAdmin'])
+    Route::put('/users/admins/{id}/update', [UserController::class, 'updateA'])
         ->name('users.admins.shared.update')
 //        ->middleware('can:update,admin')
         ->middleware('verified');
 
-    Route::delete('/users/admins/{id}/destroy', [UserController::class, 'destroyAdmin'])
+    Route::delete('/users/admins/{id}/destroy', [UserController::class, 'destroyA'])
         ->name('users.admins.shared.destroy')
 //        ->middleware('can:delete,admin')
         ->middleware('verified');
+
+    Route::delete('users/{user}/photo', [UserController::class, 'destroy_fotoA'])->name('users.admins.photo.destroy')
+        ->middleware('can:update,user');
 
 #############################################################################################################################################################################
     /*
@@ -300,34 +306,39 @@ Route::middleware('auth')->group(function () {
         ->name('users.clientes.index')
         ->middleware('verified');
 
-    Route::put('/user/clientes/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
+    Route::put('/users/clientes/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
         ->name('users.clientes.index')
         ->middleware('verified');
 
-    Route::get('/users/clientes/{id}/edit', [UserController::class, 'edit'])
+    Route::get('/users/clientes/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
+        ->name('users.clientes.index');
+
+    Route::get('/users/clientes/{id}/edit', [UserController::class, 'editC'])
         ->name('users.clientes.shared.edit')
 //        ->middleware('can:view,cliente')
         ->middleware('verified');
 
-    Route::get('/users/clientes/create', [UserController::class, 'create'])
+    Route::get('/users/clientes/create', [UserController::class, 'createC'])
         ->name('users.clientes.shared.create')
 //        ->middleware('can:create,App\Models\User')
         ->middleware('verified');
 
-    Route::post('/users/clientes/store', [UserController::class, 'store'])
+    Route::post('/users/clientes/store', [UserController::class, 'storeC'])
         ->name('users.clientes.shared.store')
 //        ->middleware('can:create,App\Models\User')
         ->middleware('verified');
 
-    Route::put('/users/clientes/{id}/update', [UserController::class, 'update'])
+    Route::put('/users/clientes/{id}/update', [UserController::class, 'updateC'])
         ->name('users.clientes.shared.update')
 //        ->middleware('can:update,cliente')
         ->middleware('verified');
 
-    Route::delete('/users/clientes/{id}/destroy', [UserController::class, 'destroy'])
+    Route::delete('/users/clientes/{id}/destroy', [UserController::class, 'destroyC'])
         ->name('users.clientes.shared.destroy')
 //        ->middleware('can:delete,cliente')
         ->middleware('verified');
+    Route::delete('users/{user}/photo', [UserController::class, 'destroy_fotoC'])->name('users.clientes.photo.destroy')
+        ->middleware('can:update,user');
 
 #############################################################################################################################################################################
     /*
@@ -343,30 +354,35 @@ Route::middleware('auth')->group(function () {
         ->name('users.empregados.index')
         ->middleware('verified');
 
-    Route::get('/users/empregados/{id}/edit', [UserController::class, 'edit'])
+    Route::get('/users/empregados/{id}/toggle-blocked', [UserController::class, 'toggleBlocked'])
+        ->name('users.empregados.index');
+
+    Route::get('/users/empregados/{id}/edit', [UserController::class, 'editE'])
         ->name('users.empregados.shared.edit')
 //        ->middleware('can:view,empregado')
         ->middleware('verified');
 
-    Route::get('/users/empregados/create', [UserController::class, 'create'])
+    Route::get('/users/empregados/create', [UserController::class, 'createE'])
         ->name('users.empregados.shared.create')
 //        ->middleware('can:create,App\Models\User')
         ->middleware('verified');
 
-    Route::post('/users/empregados/store', [UserController::class, 'store'])
+    Route::post('/users/empregados/store', [UserController::class, 'storeE'])
         ->name('users.empregados.shared.store')
 //        ->middleware('can:create,App\Models\User')
         ->middleware('verified');
 
-    Route::put('/users/empregados/{id}/update', [UserController::class, 'update'])
+    Route::put('/users/empregados/{id}/update', [UserController::class, 'updateE'])
         ->name('users.empregados.shared.update')
 //        ->middleware('can:update,empregado')
         ->middleware('verified');
 
-    Route::delete('/users/empregados/{id}/destroy', [UserController::class, 'destroy'])
+    Route::delete('/users/empregados/{id}/destroy', [UserController::class, 'destroyE'])
         ->name('users.empregados.shared.destroy')
 //        ->middleware('can:delete,empregado')
         ->middleware('verified');
+    Route::delete('users/{user}/photo', [UserController::class, 'destroy_fotoE'])->name('users.empregados.photo.destroy')
+        ->middleware('can:update,user');
 
 #############################################################################################################################################################################
     /*
