@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Customer extends Model
 {
 
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     public $timestamps = false;
     protected $table = 'customers';
 

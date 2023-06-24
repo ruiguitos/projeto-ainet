@@ -4,14 +4,13 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthorizeAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && $request->user()->user_type === 'A') {
+        if (auth()->user()->user_type === 'A') {
             return $next($request);
         }
 

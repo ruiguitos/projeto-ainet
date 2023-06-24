@@ -25,12 +25,12 @@ class PerfilController extends Controller
 
     public function edit(User $User)
     {
-        return view('perfil.edit');
+        return view('perfil.shared.edit');
     }
 
     public function create(User $User)
     {
-        return view('perfil.create');
+        return view('perfil.shared.create');
 
     }
 

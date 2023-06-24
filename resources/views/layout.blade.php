@@ -66,7 +66,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="/carrinho">
+                        <a class="dropdown-item" href="/cart">
                             Carrinho
                         </a>
                     </li>

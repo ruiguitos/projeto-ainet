@@ -4,21 +4,21 @@
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
-{{--    <div class="container-fluid">--}}
-{{--        <div class="search-container">--}}
-{{--            <form action="{{ route('catalogo.index') }}" method="GET" class="form-group">--}}
-{{--                <input type="text" name="search" placeholder="Search by Name">--}}
-{{--                <select name="orderBy">--}}
-{{--                    <option value="name">Order by Name</option>--}}
-{{--                    <option value="price">Order by Price</option>--}}
-{{--                </select>--}}
-{{--                <select name="orderDirection">--}}
-{{--                    <option value="asc">Ascending</option>--}}
-{{--                    <option value="desc">Descending</option>--}}
-{{--                </select>--}}
-{{--                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>--}}
-{{--            </form>--}}
-{{--        </div>--}}
+    <div class="container-fluid">
+        <div class="search-container">
+            <form action="{{ route('catalogo.index') }}" method="GET" class="form-group">
+                <input type="text" name="search" placeholder="Search by Name">
+                <select name="orderBy">
+                    <option value="name">Order by Name</option>
+                    <option value="price">Order by Price</option>
+                </select>
+                <select name="orderDirection">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+            </form>
+        </div>
 
 {{--            <div class="search-container">--}}
 {{--                <form method="GET" action="{{route('catalogo.index')}}" class="form-group">--}}

@@ -21,13 +21,13 @@ class CorController
 
     public function edit(Cor $Cor)
     {
-        return view('cores.edit')
+        return view('cores.shared.edit')
             ->withCor($Cor);
     }
 
     public function create(Cor $Cor)
     {
-        return view('cores.create')
+        return view('cores.shared.create')
             ->withCor($Cor);
     }
 

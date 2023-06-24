@@ -33,7 +33,7 @@
                 <td>{{ $category->name }}</td>
                 <td>
                     <div style="display: flex; gap: 5px;">
-                        <a href="{{ route('categorias.shared.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        <a href="{{ route('categorias.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
                         @can('delete', $category)
                             <form action="{{ route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">
                                 @csrf

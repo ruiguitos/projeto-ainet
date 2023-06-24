@@ -70,38 +70,7 @@
                             </form>
                         </div>
                     </td>
-                    {{--                        <td>--}}
-                    {{--                            <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"--}}
-                    {{--                                  method="POST" style="display: inline;">--}}
-                    {{--                                @csrf--}}
-                    {{--                                @method('PUT')--}}
-                    {{--                                <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">--}}
-                    {{--                                    {{ $user->blocked ? 'Desativado' : 'Ativado' }}--}}
-                    {{--                                </button>--}}
-                    {{--                            </form>--}}
-                    {{--                        </td>--}}
-                    {{--                        <td>--}}
-                    {{--                            <a href="{{route('users.admins.shared.edit', ['admin' => $user]) }}"--}}
-                    {{--                               class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
-                    {{--                        <td>--}}
-                    {{--                            @can('delete', $user)--}}
-                    {{--                                <form action="{{route('users.admins.shared.destroy', ['admin' => $user]) }}"--}}
-                    {{--                                      method="POST">--}}
-                    {{--                                    @csrf--}}
-                    {{--                                    @method("DELETE")--}}
-                    {{--                                    <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-                    {{--                                </form>--}}
-                    {{--                            @endcan--}}
-                    {{--                        </td>--}}
-                    {{--                        <td>--}}
-                    {{--                            <form action="{{route('users.admins.shared.destroy', ['admin' => $user]) }}" method="POST">--}}
-                    {{--                                @csrf--}}
-                    {{--                                @method("DELETE")--}}
-                    {{--                                <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-                    {{--                            </form>--}}
-                    {{--                        </td>--}}
                 </tr>
-                {{--                @endif--}}
             @endforeach
             </tbody>
         </table>

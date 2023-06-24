@@ -44,16 +44,16 @@ class EncomendaController extends Controller
         return view('encomendas.clientes', compact('encomendas'));
     }
 
-    public function edit(Order $Order)
+    public function edit(Order $order)
     {
         return view('encomendas.edit')
-            ->withEncomenda($Order);
+            ->withEncomenda($order);
     }
 
-    public function create(Encomenda $Order)
+    public function create(Encomenda $order)
     {
         return view('encomendas.create')
-            ->withEncomenda($Order);
+            ->withEncomenda($order);
     }
 
     public function store(EncomendaPost $request)
@@ -65,23 +65,23 @@ class EncomendaController extends Controller
             ->with('alert-type', 'success');
     }
 
-    public function update(EncomendaPost $request, Encomenda $Order)
+    public function update(EncomendaPost $request, Encomenda $order)
     {
         $validated_data = $request->validated();
-        $Order->fill($validated_data);
-        $Order->save();
+        $order->fill($validated_data);
+        $order->save();
         return redirect()->route('encomendas.index')
-            ->with('alert-msg', 'Encomenda "' . $Order->name . '" foi alterada com sucesso!')
+            ->with('alert-msg', 'Encomenda "' . $order->id . '" foi alterada com sucesso!')
             ->with('alert-type', 'success');
     }
 
-    public function destroy(Encomenda $Order)
+    public function destroy(Encomenda $order)
     {
-        $oldName = $Order->nome;
+        $oldName = $order->id;
         try {
-            $Order->delete();
+            $order->delete();
             return redirect()->route('encomendas.index')
-                ->with('alert-msg', 'Encomenda "' . $Order->name . '" foi apagado com sucesso!')
+                ->with('alert-msg', 'Encomenda "' . $order->id . '" foi apagado com sucesso!')
                 ->with('alert-type', 'success');
         } catch (\Throwable $th) {
             // $th é a exceção lançada pelo sistema - por norma, erro oEncomendare no servidor BD MySQL
@@ -89,11 +89,11 @@ class EncomendaController extends Controller
             //dd($th, $th->errorInfo);
 
             if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
-                return redirect()->route('generos.admin')
+                return redirect()->route('encomendas.index')
                     ->with('alert-msg', 'Não foi possível apagar a Encomenda"' . $oldName . '", porque está em uso!')
                     ->with('alert-type', 'danger');
             } else {
-                return redirect()->route('generos.admin')
+                return redirect()->route('encomendas.index')
                     ->with('alert-msg', 'Não foi possível apagar a Encomenda "' . $oldName . '". Erro: ' . $th->errorInfo[2])
                     ->with('alert-type', 'danger');
             }

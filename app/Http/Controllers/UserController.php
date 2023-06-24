@@ -3,16 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CorPost;
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Http\Requests\UserPost;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Categoria;
+use App\Models\Cor;
+use App\Models\Encomenda;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use Throwable;
+use PDOException;
 
 class UserController extends Controller
 {
+
+    public function indexCount(): View
+    {
+        $ausers = User::where('user_type', 'A')->count();
+        $eusers = User::where('user_type', 'E')->count();
+        $cusers = User::where('user_type', 'C')->count();
+
+        $ncategorias = Categoria::where('deleted_at', null)->count();
+
+        $nEncomendasCanceladas = Encomenda::where('status', 'canceled')->count();
+        $nEncomendasFechadas = Encomenda::where('status', 'closed')->count();
+        $nTotalEncomendas = Encomenda::count('id');
+
+        $ncores = Cor::where('deleted_at', null)->count();
+
+        return view('dashboard.index', compact('ausers', 'eusers', 'cusers', 'ncategorias', 'ncores', 'nEncomendasCanceladas', 'nEncomendasFechadas', 'nTotalEncomendas'));
+    }
+
     public function indexAdmins(): View
     {
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
@@ -64,6 +84,7 @@ class UserController extends Controller
             ->withUser($user)
             ->withTipo($tipo);
     }
+
     public function editC(User $user)
     {
         $tipo = $user->tipo;
@@ -71,6 +92,7 @@ class UserController extends Controller
             ->withUser($user)
             ->withTipo($tipo);
     }
+
     public function editE(User $user)
     {
         $tipo = $user->tipo;
@@ -180,7 +202,7 @@ class UserController extends Controller
             return redirect()->route('users.admins.index', ['id' => $id])
                 ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi apagado(a) com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\PDOException $th) {
+        } catch (PDOException $th) {
             // $th is the exception thrown by the system - usually, the error occurs in the MySQL database server
             // Uncomment the next line to check the information available in the exception
             // dd($th, $th->errorInfo);
@@ -205,7 +227,7 @@ class UserController extends Controller
             return redirect()->route('users.empregados.index', ['id' => $id])
                 ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi apagado(a) com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\PDOException $th) {
+        } catch (PDOException $th) {
             // $th is the exception thrown by the system - usually, the error occurs in the MySQL database server
             // Uncomment the next line to check the information available in the exception
             // dd($th, $th->errorInfo);
@@ -230,7 +252,7 @@ class UserController extends Controller
             return redirect()->route('users.clientes.index', ['id' => $id])
                 ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi apagado(a) com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\PDOException $th) {
+        } catch (PDOException $th) {
             // $th is the exception thrown by the system - usually, the error occurs in the MySQL database server
             // Uncomment the next line to check the information available in the exception
             // dd($th, $th->errorInfo);
@@ -256,6 +278,7 @@ class UserController extends Controller
             ->with('alert-msg', 'Foto do User "' . $user->name . '" foi removida!')
             ->with('alert-type', 'success');
     }
+
     public function destroy_fotoE(User $user)
     {
         Storage::delete('public/photos/' . $user->photo_url);
@@ -265,6 +288,7 @@ class UserController extends Controller
             ->with('alert-msg', 'Foto do User "' . $user->name . '" foi removida!')
             ->with('alert-type', 'success');
     }
+
     public function destroy_fotoC(User $user)
     {
         Storage::delete('public/photos/' . $user->photo_url);

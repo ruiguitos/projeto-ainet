@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CorController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\EncomendaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -54,8 +55,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard/charts', [DashboardController::class, 'indexCharts'])
         ->name('dashboard.charts');
 
-    Route::get('/dashboard/tables', [DashboardController::class, 'indexTables'])
-        ->name('dashboard.tables');
+    Route::get('/dashboard', [UserController::class, 'indexCount']);
+
 
     /*
      * Perfil                                                                  //TODO
@@ -85,28 +86,28 @@ Route::group(['middleware' => 'admin'], function () {
         ->middleware('verified');
 
     Route::get('/categorias/{categoria}/edit', [CategoriaController::class, 'edit'])
-        ->name('categorias.shared.edit')
-        ->middleware('verified')
-        ->middleware('can:view,categoria');
+        ->name('categorias.edit');
+//        ->middleware('verified')
+//        ->middleware('can:view,categoria');
 
     Route::get('/categorias/create', [CategoriaController::class, 'create'])
-        ->name('categorias.shared.create')
-        ->middleware('verified');
+        ->name('categorias.shared.create');
+//        ->middleware('verified');
 //        ->middleware('can:create,App\Models\Categoria');
 
     Route::post('/categorias/store', [CategoriaController::class, 'store'])
-        ->name('categorias.shared.store')
-        ->middleware('verified');
+        ->name('categorias.store');
+//        ->middleware('verified');
 //        ->middleware('can:create,App\Models\Categoria');
 
     Route::put('/categorias/{categoria}/update', [CategoriaController::class, 'update'])
-        ->name('categorias.shared.update')
-        ->middleware('verified');
+        ->name('categorias.shared.update');
+//        ->middleware('verified')
 //        ->middleware('can:update,categoria');
 
     Route::delete('/categorias/{categoria}/destroy', [CategoriaController::class, 'destroy'])
-        ->name('categorias.shared.destroy')
-        ->middleware('verified');
+        ->name('categorias.shared.destroy');
+//        ->middleware('verified')
 //        ->middleware('can:delete,categoria');
 
 
@@ -129,7 +130,7 @@ Route::group(['middleware' => 'admin'], function () {
         ->middleware('verified');
 
     Route::post('/cores/store', [CorController::class, 'store'])
-        ->name('cores.shared.store')
+        ->name('cores.store')
 //        ->middleware('can:create,App\Models\Cor')
         ->middleware('verified');
 
@@ -283,7 +284,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/encomendas/{encomenda}/edit', [EncomendaController::class, 'edit'])
         ->name('encomendas.shared.edit')
-        ->middleware('can:view,encomenda')
+//        ->middleware('can:view,encomenda')
         ->middleware('verified');
 
     Route::put('/encomendas/{id}/update-status', [EncomendaController::class, 'toggleStatus'])
@@ -292,22 +293,22 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/encomendas/create', [EncomendaController::class, 'create'])
         ->name('encomendas.shared.create')
-        ->middleware('can:create,App\Models\Encomenda')
+//        ->middleware('can:create,App\Models\Encomenda')
         ->middleware('verified');
 
     Route::post('/encomendas/store', [EncomendaController::class, 'store'])
         ->name('encomendas.shared.store')
-        ->middleware('can:create,App\Models\Encomenda')
+//        ->middleware('can:create,App\Models\Encomenda')
         ->middleware('verified');
 
     Route::put('/encomendas/{encomenda}/update', [EncomendaController::class, 'update'])
         ->name('encomendas.shared.update')
-        ->middleware('can:update,encomenda')
+//        ->middleware('can:update,encomenda')
         ->middleware('verified');
 
     Route::delete('/encomendas/{encomenda}/destroy', [EncomendaController::class, 'destroy'])
         ->name('encomendas.shared.destroy')
-        ->middleware('can:delete,encomenda')
+//        ->middleware('can:delete,encomenda')
         ->middleware('verified');
 
 });
