@@ -25,7 +25,7 @@
                 <td>{{ $encomenda->id }}</td>
                 <td>{{ $encomenda->status }}</td>
                 <td>{{ $encomenda->date }}</td>
-                <td>{{ $encomenda->total_price }}</td>
+                <td>{{ $encomenda->total_price }} €</td>
                 <td>{{ $encomenda->address }}</td>
                 @if($encomenda->payment_type == 'MC')
                     <td> MasterCard</td>
