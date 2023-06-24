@@ -18,7 +18,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped table-auto">
+        <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>

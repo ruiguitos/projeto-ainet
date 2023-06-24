@@ -16,51 +16,9 @@
         <a href="{{ route('categorias.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Nova Categoria</a>
     </div>
 
-{{--    <table class="table table-striped ">--}}
-{{--        <thead class="thead-dark">--}}
-{{--        <tr>--}}
-{{--            <th scope="row" style="width:5%">ID</th>--}}
-{{--            <th scope="row">Nome Categoria</th>--}}
-{{--            <th></th>--}}
-{{--            <th></th>--}}
-{{--            <th></th>--}}
-{{--            <th scope="row">Actions</th>--}}
-{{--            <th></th>--}}
+    <br>
 
-{{--        </tr>--}}
-{{--        </thead>--}}
-{{--        <tbody>--}}
-{{--        @foreach ($categories as $category)--}}
-{{--            <tr>--}}
-{{--                <td>{{$category->id}}</td>--}}
-{{--                <td>{{$category->name}}</td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td>--}}
-{{--                    <a href="{{route('categorias.shared.edit', ['categoria' => $category]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
-{{--                <td>--}}
-{{--                    @can('delete', $category)--}}
-{{--                        <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">--}}
-{{--                            @csrf--}}
-{{--                            @method("DELETE")--}}
-{{--                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-{{--                        </form>--}}
-{{--                    @endcan--}}
-{{--                </td>--}}
-{{--                <td>--}}
-{{--                    <form action="{{route('categorias.shared.destroy', ['categoria' => $category]) }}" method="POST">--}}
-{{--                        @csrf--}}
-{{--                        @method("DELETE")--}}
-{{--                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-{{--                    </form>--}}
-{{--                </td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
-{{--        </tbody>--}}
-{{--    </table>--}}
-
-
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr>
             <th scope="col" style="width: 5%">ID</th>

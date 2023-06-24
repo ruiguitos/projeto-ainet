@@ -16,7 +16,7 @@
         <a href="{{ route('users.empregados.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Utilizador</a>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>

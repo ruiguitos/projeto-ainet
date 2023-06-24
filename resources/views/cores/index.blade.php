@@ -15,8 +15,9 @@
     <div style="display: flex; justify-content: flex-end;">
         <a href="{{ route('cores.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Nova Cor</a>
     </div>
+    <br>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr>
             <th>Código da Cor</th>
