@@ -17,8 +17,8 @@ class UserController extends Controller
     {
 //        $customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref')->paginate(20);
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
-            ->orderBy('id','asc')
-            ->orderBy('name','asc')
+            ->orderBy('id', 'asc')
+            ->orderBy('name', 'asc')
             ->where('user_type', 'A')
             ->paginate(18);
         return view('users.admins.index', compact('users'));
@@ -28,8 +28,8 @@ class UserController extends Controller
     {
         //$customers = Customer::select('id', 'nif', 'address', 'default_payment_type', 'default_payment_ref');
         $users = User::select('id', 'name', 'email', 'user_type', 'blocked', 'photo_url')
-            ->orderBy('id','asc')
-            ->orderBy('name','asc')
+            ->orderBy('id', 'asc')
+            ->orderBy('name', 'asc')
             ->where('user_type', 'C')
             ->paginate(18);
         return view('users.clientes.index', compact('users'));
@@ -53,27 +53,66 @@ class UserController extends Controller
         $users->blocked = !$users->blocked;
         $users->save();
 
-        // Redirect or return response as needed
         return redirect()->back();
     }
 
-    public function edit(User $User)
+    // EDIT
+    public function editA(User $user)
     {
+        $tipo = $user->tipo;
         return view('users.admins.edit')
-            ->withAdmins($User)
-            ->withClientes($User)
-            ->withEmpregados($User);
+            ->withUser($user)
+            ->withTipo($tipo);
     }
-
-    public function create(User $User)
+    public function editC(User $user)
     {
-        return view('users.admins.create')
-            ->withAdmins($User)
-            ->withClientes($User)
-            ->withEmpregados($User);
+        $tipo = $user->tipo;
+        return view('users.clientes.edit')
+            ->withUser($user)
+            ->withTipo($tipo);
+    }
+    public function editE(User $user)
+    {
+        $tipo = $user->tipo;
+        return view('users.empregados.edit')
+            ->withUser($user)
+            ->withTipo($tipo);
     }
 
-    public function store(UserPost $request)
+
+    // CREATE
+    public function createA(User $user)
+    {
+
+        $user = new User;
+        $user_type = $user->user_type = 'A';
+        return view('users.admins.create')
+            ->withUser($user)
+            ->withTipo($user_type);
+
+    }
+
+    public function createC(User $user)
+
+    {
+        $user = new User;
+        $user_type = $user->user_type = 'C';
+        return view('users.clientes.create')
+            ->withUser($user)
+            ->withTipo($user_type);
+    }
+
+    public function createE(User $user)
+    {
+        $user = new User;
+        $user_type = $user->user_type = 'E';
+        return view('users.empregados.create')
+            ->withUser($user)
+            ->withTipo($user_type);
+    }
+
+//    // STORE
+    public function storeA(UserPost $request)
     {
         $validated_data = $request->validated();
         User::create($validated_data);
@@ -82,39 +121,158 @@ class UserController extends Controller
             ->with('alert-type', 'success');
     }
 
-    public function update(UserPost $request, User $User)
+    public function storeC(UserPost $request)
     {
         $validated_data = $request->validated();
-        $User->fill($validated_data);
-        $User->save();
-        return redirect()->route('users.admins.index')
-            ->with('alert-msg', 'Utilizador(a) "' . $User->name . '" foi alterado(a) com sucesso!')
+        User::create($validated_data);
+        return redirect()->route('users.clientes.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $validated_data['nome'] . '" foi criado(a) com sucesso!')
             ->with('alert-type', 'success');
     }
 
-    public function destroy(User $User)
+    public function storeE(UserPost $request)
     {
-        $oldName = $User->nome;
+        $validated_data = $request->validated();
+        User::create($validated_data);
+        return redirect()->route('users.empregados.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $validated_data['nome'] . '" foi criado(a) com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
+
+//    //UPDATE
+    public function updateA(UserPost $request, User $user)
+    {
+        $validated_data = $request->validated();
+        $user->fill($validated_data);
+        $user->save();
+        return redirect()->route('users.admins.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi alterado(a) com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
+    public function updateE(UserPost $request, User $user)
+    {
+        $validated_data = $request->validated();
+        $user->fill($validated_data);
+        $user->save();
+        return redirect()->route('users.empregados.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi alterado(a) com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
+    public function updateC(UserPost $request, User $user)
+    {
+        $validated_data = $request->validated();
+        $user->fill($validated_data);
+        $user->save();
+        return redirect()->route('users.clientes.index')
+            ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi alterado(a) com sucesso!')
+            ->with('alert-type', 'success');
+    }
+//
+//    // DESTROY
+    public function destroyA(User $user, $id)
+    {
+        $oldName = $user->name;
         try {
-            $User->delete();
-            return redirect()->route('users.admins.index')
-                ->with('alert-msg', 'Utilizador(a) "' . $User->name . '" foi apagado(a) com sucesso!')
+            $user->delete();
+            return redirect()->route('users.admins.index', ['id' => $id])
+                ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi apagado(a) com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (\Throwable $th) {
-            // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
-            // Descomentar a próxima linha para verificar qual a informação que a exceção tem
-            //dd($th, $th->errorInfo);
+        } catch (\PDOException $th) {
+            // $th is the exception thrown by the system - usually, the error occurs in the MySQL database server
+            // Uncomment the next line to check the information available in the exception
+            // dd($th, $th->errorInfo);
 
             if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
-                return redirect()->route('users.admins.admin')
-                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a)"' . $oldName . '", porque está em uso!')
+                return redirect()->route('users.admins.index', ['id' => $id])
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a) "' . $oldName . '", porque está em uso!')
                     ->with('alert-type', 'danger');
             } else {
-                return redirect()->route('users.admins.admin')
-                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a)"' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                return redirect()->route('users.admins.index', ['id' => $id])
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a) "' . $oldName . '". Erro: ' . $th->errorInfo[2])
                     ->with('alert-type', 'danger');
             }
         }
+    }
+
+    public function destroyE(User $user, $id)
+    {
+        $oldName = $user->name;
+        try {
+            $user->delete();
+            return redirect()->route('users.empregados.index', ['id' => $id])
+                ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi apagado(a) com sucesso!')
+                ->with('alert-type', 'success');
+        } catch (\PDOException $th) {
+            // $th is the exception thrown by the system - usually, the error occurs in the MySQL database server
+            // Uncomment the next line to check the information available in the exception
+            // dd($th, $th->errorInfo);
+
+            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                return redirect()->route('users.empregados.index', ['id' => $id])
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a) "' . $oldName . '", porque está em uso!')
+                    ->with('alert-type', 'danger');
+            } else {
+                return redirect()->route('users.empregados.index', ['id' => $id])
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a) "' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-type', 'danger');
+            }
+        }
+    }
+
+    public function destroyC(User $user, $id)
+    {
+        $oldName = $user->name;
+        try {
+            $user->delete();
+            return redirect()->route('users.clientes.index', ['id' => $id])
+                ->with('alert-msg', 'Utilizador(a) "' . $user->name . '" foi apagado(a) com sucesso!')
+                ->with('alert-type', 'success');
+        } catch (\PDOException $th) {
+            // $th is the exception thrown by the system - usually, the error occurs in the MySQL database server
+            // Uncomment the next line to check the information available in the exception
+            // dd($th, $th->errorInfo);
+
+            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                return redirect()->route('users.clientes.index', ['id' => $id])
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a) "' . $oldName . '", porque está em uso!')
+                    ->with('alert-type', 'danger');
+            } else {
+                return redirect()->route('users.clientes.index', ['id' => $id])
+                    ->with('alert-msg', 'Não foi possível apagar o/a utilizador(a) "' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-type', 'danger');
+            }
+        }
+    }
+
+    public function destroy_fotoA(User $user)
+    {
+        Storage::delete('public/photos/' . $user->photo_url);
+        $user->photo_url = null;
+        $user->save();
+        return redirect()->route('users.admins.edit', ['user' => $user])
+            ->with('alert-msg', 'Foto do User "' . $user->name . '" foi removida!')
+            ->with('alert-type', 'success');
+    }
+    public function destroy_fotoE(User $user)
+    {
+        Storage::delete('public/photos/' . $user->photo_url);
+        $user->photo_url = null;
+        $user->save();
+        return redirect()->route('users.empregados.edit', ['user' => $user])
+            ->with('alert-msg', 'Foto do User "' . $user->name . '" foi removida!')
+            ->with('alert-type', 'success');
+    }
+    public function destroy_fotoC(User $user)
+    {
+        Storage::delete('public/photos/' . $user->photo_url);
+        $user->photo_url = null;
+        $user->save();
+        return redirect()->route('users.clientes.edit', ['user' => $user])
+            ->with('alert-msg', 'Foto do User "' . $user->name . '" foi removida!')
+            ->with('alert-type', 'success');
     }
 
 }

@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title','Change Profile')
 @section('content')
-    <form method="POST" action="{{ route('perfil.update', ['customer' => $customers]) }}" class="form-group" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('perfil.edit', ['customer' => $customers]) }}" class="form-group" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <input type="hidden" name="id" value="{{$customers->id}}">

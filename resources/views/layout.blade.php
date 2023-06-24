@@ -103,7 +103,7 @@
                         </a>
 
                         <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
-                           href="{{ route('catalogo.camisola') }}">
+                           href="{{ route('catalogo.estampa') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
                             Camisolas
                         </a>
@@ -136,8 +136,8 @@
                             Camisolas
                         </a>
 
-                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.camisola' ? 'active' : '' }}"
-                           href="{{ route('catalogo.camisola') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'catalogo.estampa' ? 'active' : '' }}"
+                           href="{{ route('catalogo.estampa') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                             Upload de Estampa Personalizada
                         </a>

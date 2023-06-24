@@ -12,15 +12,16 @@
         <li class="breadcrumb-item active">Cores</li>
     </ol>
 
+    <div style="display: flex; justify-content: flex-end;">
+        <a href="{{ route('cores.shared.create') }}" class="btn btn-success btn-m" role="button" aria-pressed="true">Adicionar Nova Cor</a>
+    </div>
+
     <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
             <th>Código da Cor</th>
             <th>Nome da Cor</th>
-            <th></th>
             <th>Actions</th>
-            <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -29,27 +30,21 @@
                 <td>{{$cor->code}}</td>
                 <td>{{$cor->name}}</td>
                 <td>
-                    <a href="{{route('cores.shared.create')}}" class="btn btn-success btn-sm" role="button"
-                       aria-pressed="true">Novo</a>
-                </td>
-                <td>
-                    <a href="{{route('cores.shared.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm"
-                       role="button" aria-pressed="true">Alterar</a>
-                <td>
-                    @can('delete', $cor)
+                    <div style="display: flex; gap: 5px;">
+                        <a href="{{ route('cores.shared.edit', ['cor' => $cor]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        @can('delete', $cor)
+                            <form action="{{ route('cores.shared.destroy', ['cor' => $cor]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
+                            </form>
+                        @endcan
                         <form action="{{route('cores.shared.destroy', ['cor' => $cor]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
                         </form>
-                    @endcan
-                </td>
-                <td>
-                    <form action="{{route('cores.shared.destroy', ['cor' => $cor]) }}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
-                    </form>
+                    </div>
                 </td>
             </tr>
         @endforeach

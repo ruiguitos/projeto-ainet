@@ -8,10 +8,14 @@
     </div>
 
     <ol class="breadcrumb">
-        {{--        <li class="breadcrumb-item">Dashboard</li>--}}
         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
         <li class="breadcrumb-item active">Clientes</li>
     </ol>
+
+    <div style="display: flex; justify-content: flex-end;">
+        <a href="{{ route('users.clientes.shared.create') }}" class="btn btn-success btn-m" role="button"
+           aria-pressed="true">Adicionar Utilizador</a>
+    </div>
 
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -19,11 +23,8 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>Estado</th>
             <th></th>
             <th>Actions</th>
-            <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -32,11 +33,6 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                {{--                @if($user->blocked == 1)--}}
-                {{--                    <td> Bloqueado </td>--}}
-                {{--                @else--}}
-                {{--                    <td> Ativo </td>--}}
-                {{--                @endif--}}
                 <td>
                     <form id="toggleForm" action="{{ route('users.clientes.index', ['id' => $user->id]) }}"
                           method="POST" style="display: inline;">
@@ -48,28 +44,52 @@
                     </form>
                 </td>
                 <td>
-                    <a href="{{route('encomendas.shared.create')}}" class="btn btn-success btn-sm" role="button"
-                       aria-pressed="true">Novo</a>
-                </td>
-                <td>
-                    <a href="{{route('users.clientes.shared.edit', ['cliente' => $user]) }}"
-                       class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
-                <td>
-                    @can('delete', $user)
-                        <form action="{{route('users.clientes.shared.destroy', ['cliente' => $user]) }}" method="POST">
+                    <div style="display: flex; gap: 5px;">
+                        <a href="{{ route('users.clientes.shared.edit', ['id' => $user]) }}"
+                           class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
+                        @can('delete', $user)
+                            <form action="{{ route('users.clientes.shared.destroy', ['id' => $user]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
+                            </form>
+                        @endcan
+                        <form action="{{route('users.clientes.shared.destroy', ['id' => $user]) }}" method="POST">
                             @csrf
                             @method("DELETE")
                             <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
                         </form>
-                    @endcan
+                    </div>
                 </td>
-                <td>
-                    <form action="{{route('users.clientes.shared.destroy', ['cliente' => $user]) }}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
-                    </form>
-                </td>
+                {{--                <td>--}}
+                {{--                    <form id="toggleForm" action="{{ route('users.clientes.index', ['id' => $user->id]) }}"--}}
+                {{--                          method="POST" style="display: inline;">--}}
+                {{--                        @csrf--}}
+                {{--                        @method('PUT')--}}
+                {{--                        <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">--}}
+                {{--                            {{ $user->blocked ? 'Desativado' : 'Ativado' }}--}}
+                {{--                        </button>--}}
+                {{--                    </form>--}}
+                {{--                </td>--}}
+                {{--                <td>--}}
+                {{--                    <a href="{{route('users.clientes.shared.edit', ['cliente' => $user]) }}"--}}
+                {{--                       class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
+                {{--                <td>--}}
+                {{--                    @can('delete', $user)--}}
+                {{--                        <form action="{{route('users.clientes.shared.destroy', ['cliente' => $user]) }}" method="POST">--}}
+                {{--                            @csrf--}}
+                {{--                            @method("DELETE")--}}
+                {{--                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+                {{--                        </form>--}}
+                {{--                    @endcan--}}
+                {{--                </td>--}}
+                {{--                <td>--}}
+                {{--                    <form action="{{route('users.clientes.shared.destroy', ['cliente' => $user]) }}" method="POST">--}}
+                {{--                        @csrf--}}
+                {{--                        @method("DELETE")--}}
+                {{--                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
+                {{--                    </form>--}}
+                {{--                </td>--}}
             </tr>
         @endforeach
 
