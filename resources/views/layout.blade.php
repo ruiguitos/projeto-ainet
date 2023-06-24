@@ -114,10 +114,16 @@
                             Upload de Estampa Personalizada
                         </a>
 
-                        <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
-                           href="{{ route('cart.show') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'cart.index' ? 'active' : '' }}"
+                           href="{{ route('cart.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                             Carrinho
+                        </a>
+
+                        <a class="nav-link {{ Route::currentRouteName() == 'encomendas.clientes' ? 'active' : '' }}"
+                           href="{{ route('encomendas.clientes') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Encomendas Cliente
                         </a>
 
                     @else
@@ -142,10 +148,16 @@
                             Upload de Estampa Personalizada
                         </a>
 
-                        <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
-                           href="{{ route('cart.show') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'cart.index' ? 'active' : '' }}"
+                           href="{{ route('cart.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                             Carrinho
+                        </a>
+
+                        <a class="nav-link {{ Route::currentRouteName() == 'encomendas.clientes' ? 'active' : '' }}"
+                           href="{{ route('encomendas.clientes') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Encomendas Cliente
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Administração</div>
@@ -154,6 +166,7 @@
                             Dashboard
                         </a>
                     @endif
+
                         <div class="sb-sidenav-menu-heading">Contactos</div>
                         <a class="nav-link" href="/about-us">
                             <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
