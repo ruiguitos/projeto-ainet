@@ -31,7 +31,7 @@ class EncomendaController extends Controller
         return view('perfil.index', compact('users'));
     }
 
-        public function encomendaClientes(): View
+        public function encomendaClientes()
     {
 //        dd('aqui');
         $user = Auth::user();

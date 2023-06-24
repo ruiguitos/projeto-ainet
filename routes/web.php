@@ -398,8 +398,10 @@ Route::middleware('auth')->group(function () {
      * Encomendas
      */
     Route::view('/encomendas/cliente', 'encomendas.clientes');
-    Route::get('/encomendas/cliente', [EncomendaController::class, 'encomendaClientes']);
 
+    Route::get('/encomendas/cliente', [EncomendaController::class, 'encomendaClientes'])
+        ->name('encomendas.clientes')
+        ->middleware('verified');
 
 
     Route::view('/encomendas', 'encomendas.index');
