@@ -70,11 +70,14 @@ Route::middleware('auth')->group(function () {
         ->middleware('verified');
 
     Route::get('/catalogo/{id}', [CatalogoController::class, 'show'])
-        ->name('catalogo.shared.show')
+        ->name('catalogo.details')
         ->middleware('verified');
 
     Route::view('about-us', 'about-us')->name('about-us');
     Route::view('estampa', 'catalogo.estampa')->name('catalogo.estampa');
+    Route::get('/estampa', [CatalogoController::class, 'uploadEstampa'])
+        ->name('catalogo.estampa')
+        ->middleware('verified');
 
 
 #############################################################################################################################################################################
