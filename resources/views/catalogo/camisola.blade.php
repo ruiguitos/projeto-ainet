@@ -35,12 +35,12 @@
                         <p><strong>Price:</strong> {{ $price->unit_price_catalog }}€</p>
                     </div>
                 @endforeach
-                <div class="add-to-cart">
-                    <form action="{{ route('carrinho.add', $tshirt->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="rounded-button">Add to Cart</button>
-                    </form>
-                </div>
+{{--                <div class="add-to-cart">--}}
+{{--                    <form action="{{ route('carrinho.add', $tshirt->id) }}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        <button type="submit" class="rounded-button">Add to Cart</button>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
             </div>
 
             @php
@@ -67,7 +67,7 @@
                         </div>
                     @endforeach
                     <div class="add-to-cart">
-                        <form action="{{ route('carrinho.add', $tshirt->id) }}" method="POST">
+                        <form action="{{ route('cart.add', $tshirt->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="rounded-button">Add to Cart</button>
                         </form>

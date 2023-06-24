@@ -2,138 +2,273 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\MailOrder;
-use App\Mail\MailRegister;
-use App\Models\TshirtImage;
 use App\Models\Cart;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\User;
+use App\Models\Cor;
+use App\Models\Encomenda;
+use App\Models\Preco;
+use App\Models\Tshirt;
+use App\Models\TshirtImage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index(Request $request){
-        if(!Session::has('cart')){
-            return view('front_pages.shoping-cart', ['items' =>null]);
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        return view('front_pages.shoping-cart', ['items' => $cart->items, 'totalPrice' => $cart->totalPrice()]);
-    }
-
-    public function checkout(Request $request){
-        if(!Session::has('cart')){
-            return view('front_pages.checkout', ['items' =>null]);
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        return view('front_pages.checkout', ['items' => $cart->items, 'totalPrice' => $cart->totalPrice()]);
-    }
-
-    public function addToCart(Request $request, $id){
-        if($request->qty == null){
-            $request->qty = 1;
-        }
-        $orderItemimage = TshirtImage::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-
-        $cart->add($orderItemimage, $orderItemimage->id, $request->qty,$request->size,$request->color);
-        $request->session()->put('cart',$cart);
-        return redirect()->back()->with('success', 'T-shirt com imagem adicionada com sucesso ao carrinho');
-    }
-
-    public function removeFromCart(Request $request, $index){
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->remove($index);
-
-        $request->session()->put('cart',$cart);
-        return redirect()->back()->with('success', 'T-shirt com Imagem removida do carrinho');
-    }
-
-    public function editItemFromCart(Request $request, $index, $operator){
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->editQuantity($index,$operator);
-
-        $request->session()->put('cart',$cart);
-        if($operator == "+"){
-            return redirect()->back()->with('success', 'Quantidade da t-shirt com imagem aumentada com sucesso');
-        }elseif($operator == "-"){
-            return redirect()->back()->with('success', 'Quantidade da t-shirt com imagem diminuida com sucesso');
-        }
-
-    }
-
-    public function checkoutCart(Request $request)
+    public function cart()
     {
+//        joao
         $user = Auth::user();
-        $oldCart = Session::get('cart');
-        $totalPrice = Session::get('cart')->totalPrice();
 
-        if ($user === null) {
-            // Create new user and customer
-            $newUser = new User();
-            $newUser->name = $request->name;
-            $newUser->email = $request->email;
-            $newUser->password = Hash::make($request->password);
-            $newUser->user_type = 'C';
-            $newUser->blocked = 0;
-            $newUser->save();
+        $items = Encomenda::select('orders.id', 'orders.status', 'orders.customer_id', 'orders.date', 'orders.total_price', 'orders.notes', 'orders.nif', 'orders.address', 'orders.payment_type', 'orders.payment_ref', 'orders.receipt_url',
+            'order_items.id', 'order_items.order_id', 'order_items.tshirt_image_id', 'order_items.color_code', 'order_items.size', 'order_items.qty', 'order_items.unit_price', 'order_items.sub_total')
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->where('orders.customer_id', $user->id);
+//        joao
 
-            $newCustomer = new Customer();
-            $newCustomer->id = $newUser->id;
-            $newCustomer->nif = $request->nif;
-            $newCustomer->address = $request->address1 . ", " . $request->address2 . ", " . $request->address3;
-            $newCustomer->default_payment_ref = $request->default_payment_ref;
-            $newCustomer->default_payment_type = $request->default_payment_type;
-            $newCustomer->save();
+        $total = 0;
+        $valorDesconto = 0;
+        $price = Preco::first();
+        $qtyDiscount = $price->unit_price_own_discount;
+        $catalogDiscount = $price->unit_price_catalog_discount;
 
-            $user = $newUser;
-            Auth::login($user);
-            Mail::to($user->email)->send(new MailRegister($user));
+        //if cart doesn't have products return the view
+        if(session('cart') == null) {
+            return view('cart.index')
+                ->withTotal($total)
+                ->withDesconto($valorDesconto);
+        }
+        //else
+        foreach(session('cart') as $id) {
+            //get total
+            $total += $id['price'] * $id['quantity'];
+
+            //add discount
+            $aux = $id['quantity'] - ($id['quantity'] % $qtyDiscount);
+            $aux2 = $aux / $qtyDiscount;
+            $valorDesconto += $aux2 * $catalogDiscount;
+        }
+        $total -= $valorDesconto;
+        return view('cart.index', compact('items'))
+            ->withTotal($total)
+            ->withDesconto($valorDesconto);
+    }
+
+    public function addToCart($id, Request $request)
+    {
+        $order = Tshirt::find($id);
+        $price = Preco::find(1);
+        $color = Cor::find($request->color_code);
+
+        if (!$order) {
+            abort(404);
         }
 
-        // Generate order
-        $order = new Order();
-        $order->status = "pending";
-        $order->customer_id = $user->id;
-        $order->date = Carbon::now()->toDateTimeString();
-        $order->total_price = $totalPrice;
-        $order->nif = $user->customer->nif;
-        $order->address = $user->customer->address;
-        $order->payment_type = $user->customer->default_payment_type;
-        $order->payment_ref = $user->customer->default_payment_ref;
-        $order->save();
-
-        // Generate order items
-        foreach ($oldCart->items as $item) {
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->tshirt_image_id = $item['id'];
-            $orderItem->color_code = $item['color'];
-            $orderItem->size = $item['size'];
-            $orderItem->qty = $item['qty'];
-            $orderItem->unit_price = $item['price'] / $item['qty'];
-            $orderItem->sub_total = $item['price'];
-            $orderItem->timestamps = false;
-            $orderItem->save();
+        if (!$color) {
+            abort(404);
+            return redirect()->back()->with('error', 'ERROR');
         }
 
-        // Generate receipt PDF
+        $cart = session()->get('cart');
 
-        // Clear session
-        Session::forget('cart');
-        Mail::to($user->email)->send(new MailOrder($order));
+        if (!$cart) {
+            $cart[] = [
+                "id" => $id,
+                "name" => $order->name,
+                "quantity" => $request->qty,
+                "price" => $price->unit_price_catalog,
+                "color_code" => $color->color_code,
+                "size" => $request->size
+            ];
 
-        return redirect()->route('myorders')->with('success', 'Encomenda criada com sucesso.');
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
+        }
+
+        for ($i = 0; $i < count($cart); $i++) {
+            if (
+                $cart[$i]['name'] == $order->name &&
+                $cart[$i]['color_code'] == $color->color_code &&
+                $cart[$i]['size'] == $request->size
+            ) {
+                $cart[$i]['quantity'] += $request->qty;
+                session()->put('cart', $cart);
+
+                return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
+            }
+        }
+
+        $cart[] = [
+            "id" => $id,
+            "name" => $order->name,
+            "quantity" => $request->qty,
+            "price" => $price->unit_price_catalog,
+            "color_code" => $color->color_code,
+            "size" => $request->size
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Produto adicionado ao carrinho com sucesso!');
+    }
+
+
+//    public function addToCart($id, Request $request)
+//    {
+//        $order = Tshirt::find($id);
+//        $price = Preco::find('1');
+//        $color = Cor::find($request->color_code);
+//
+//        if(!$order) {
+//            abort(404);
+//        }
+//
+//        $cart = session()->get('cart');
+//
+//        //if cart is empty then this is the first product
+//        if(!$cart) {
+//            $cart[] = [
+//                "id" => $id,
+//                "name" => $order->name,
+//                "quantity" => $request->qty,
+//                "price" => $price->unit_price_catalog,
+////                "color_code" => $color->color_code,
+//                "size" => $request->size
+//            ];
+//
+//            session()->put('cart', $cart);
+//
+//            return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
+//        }
+//
+//        //if cart isn't empty then check if this product exist and increment quantity
+//        if(isset($cart)) {
+//            //go true all cart items
+//            for($i = 0; $i < count($cart); $i++) {
+//                if($cart[$i]['name'] == $color->name) {
+//                    if($cart[$i]['color'] == $color->name) {
+//                        if($cart[$i]['size'] == $request->size) {
+//                            //if item already exist add quantity
+//                            $cart[$i]['quantity'] += $request->quantity;
+//
+//                            session()->put('cart', $cart);
+//
+//                            return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        //if item doesn't exist in cart then add to cart with quantity
+//        $cart[] = [
+//            "id" => $id,
+//            "name" => $order->name,
+//            "quantity" => $request->qty,
+//            "price" => $price->unit_price_catalog,
+////            "color_code" => $color->color_code,
+//            "size" => $request->size
+//        ];
+//
+//        session()->put('cart', $cart);
+//
+//        return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
+//    }
+
+    public function updateCarrinho(Request $request)
+    {
+        if(isset($request->id) && isset($request->quantity)) {
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('sucesso', 'Carrinho atualizado com sucesso');
+        }
+    }
+    public function removeCarrinho(Request $request)
+    {
+        if(isset($request->id)) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('sucesso', 'Produto removido com sucesso');
+        }
+    }
+
+    //PAGAMENTO
+    public function pagamento() {
+        return view('cart.pagamento');
+    }
+
+    public function concluirPagamento(Request $request) {
+        $dados = $request->validate([
+            'notes' => 'nullable|sometimes|string|max:255',
+            'nif' => 'required|int|digits:9',
+            'endereco' => 'string|max:255',
+            'tipo_envio' => 'required',
+            'tipo_pagamento' => 'required',
+            'ref_pagamento' => [($request['tipo_pagamento'] == 'PAYPAL' ? 'email' : 'digits:16')],
+        ]);
+
+        //passing data to email
+        $total = 0;
+        $valorDesconto = 0;
+        $price = Preco::first();
+        $qty_discount = $price->qty_discount;
+        $catalogDiscount = $price->unit_price_catalog_discount;
+
+        $cart = session()->get('cart');
+
+        if(session('cart') != null) {
+            foreach($cart as $id) {
+                //get total
+                $total += $id['price'] * $id['quantity'];
+
+                //add discount
+                $aux = $id['quantity'] - ($id['quantity'] % $qty_discount);
+                $aux2 = $aux / $qty_discount;
+                $valorDesconto += $aux2 * $catalogDiscount;
+            }
+            $total -= $valorDesconto;
+
+            Mail::to(auth()->user()->email)->send(new OrderSent($dados, $total));
+
+        }
+
+        $encomenda = Encomenda::create([
+            'status' => 'pending',
+            'customer_id' => auth()->user()->id,
+            'date' => date("Y-m-d"),
+            'total_price' => $total,
+            'notes' => $request['notes'],
+            'nif' => $request['nif'],
+            'address' => $request['address'],
+            'payment_type' => $request['payment_type'],
+            'payment_ref' => $request['payment_ref'],
+            'receipt_url' => null,
+        ]);
+        $encomenda->save();
+
+        foreach(session('cart') as $id) {
+            $product = TShirt::where('nome', $id['name'])->get();
+            $cor = Cor::where('nome', $id['color'])->get();
+            $unit_price = $price->preco_un_catalogo;
+            $tshirt = Tshirt::create([
+                'order_id' => $encomenda->id,
+                'tshirt_image_id' => $product[0]['id'],
+                'color_code' => $cor[0]['codigo'],
+                'size' => $id['tamanho'],
+                'qty' => $id['quantity'],
+                'unit_price' => $unit_price,
+                'sub_total' => $id['quantity']*$id['price'],
+            ]);
+            $tshirt->save();
+        }
+
+        $cart = session()->forget('cart');
+
+        return redirect('/')->with('sucesso', 'Dados da Encomenda Enviados para o Email');
     }
 }

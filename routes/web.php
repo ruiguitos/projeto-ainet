@@ -392,12 +392,12 @@ Route::middleware('auth')->group(function () {
      * Carrinho
      */
 
-    Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
-    Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart']);
-    Route::patch('/update-cart', [CartController::class, 'updateCarrinho']);
-    Route::delete('/remove-from-cart', [CartController::class, 'removeCarrinho']);
-    Route::get('/pagamento', [CartController::class, 'pagamento'])->name('pagamento');
-    Route::post('/concluir', [CartController::class, 'concluirPagamento'])->name('concluir');
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart.index')->middleware('auth');
+    Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
+    Route::patch('/update-cart', [CartController::class, 'updateCarrinho'])->middleware('auth');
+    Route::delete('/remove-from-cart', [CartController::class, 'removeCarrinho'])->middleware('auth');
+    Route::get('/pagamento', [CartController::class, 'pagamento'])->name('pagamento')->middleware('auth');
+    Route::post('/concluir', [CartController::class, 'concluirPagamento'])->name('concluir')->middleware('auth');
 
 #############################################################################################################################################################################
 
