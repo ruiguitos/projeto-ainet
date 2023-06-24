@@ -1,21 +1,19 @@
 <?php
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\CamisolaController;
+use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CorController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EncomendaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CatalogoController;
-use App\Http\Controllers\CarrinhoController;
-use App\Http\Controllers\CorController;
-use App\Http\Controllers\CamisolaController;
-use App\Http\Controllers\CartController;
 
 
 Route::get('/', function () {
@@ -28,8 +26,13 @@ Auth::routes(['verify' => true]);
 
 Route::view('about-us', 'about-us');
 
+Route::middleware('admin')->group(function () {
 
-Route::middleware('auth')->group(function () {
+});
+
+
+Route::group(['middleware' => 'admin'], function () {
+
     Route::resource('dashboard.index', DashboardController::class);
     Route::resource('dashboard.charts', DashboardController::class);
     Route::resource('dashboard.tables', DashboardController::class);
@@ -39,73 +42,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('cores.index', CorController::class);
     Route::resource('categorias.index', CategoriaController::class);
     Route::resource('encomendas.index', EncomendaController::class);
-});
 
-Route::middleware('auth')->group(function () {
 
-#############################################################################################################################################################################
     /*
-     * Password                                                                        //TODO
+     * Admin Dashboard                                                                  //TODO
      */
-    Route::get('/password/change', [ChangePasswordController::class, 'show'])
-        ->name('password.change.show');
-
-    Route::post('/password/change', [ChangePasswordController::class, 'store'])
-        ->name('password.change.store');
-
-#############################################################################################################################################################################
-    /*
-     * Home
-     */
-    Route::get('/home', [HomeController::class, 'index'])
-        ->name('home');
-
-
-#############################################################################################################################################################################
-    /*
-     * Catálogo
-     */
-    Route::get('/catalogo', [CatalogoController::class, 'index'])
-        ->name('catalogo.index')
-        ->middleware('verified');
-
-    Route::get('/catalogo/{id}', [CatalogoController::class, 'show'])
-        ->name('catalogo.details')
-        ->middleware('verified');
-
-    Route::view('about-us', 'about-us')->name('about-us');
-
-    ### ESTAMPA
-
-    Route::view('estampa', 'catalogo.estampa')->name('catalogo.estampa');
-
-    Route::get('/estampa', [CatalogoController::class, 'uploadEstampa'])
-        ->name('catalogo.estampa')
-        ->middleware('verified');
-
-    Route::post('/estampa', [App\Http\Controllers\CatalogoController::class, 'uploadEstampa'])
-        ->name('perfil.estampa');
-
-#############################################################################################################################################################################
-    /*
-     * Camisolas                                                                        //TODO
-     */
-    Route::get('/camisolas', [CamisolaController::class, 'index'])
-        ->name('catalogo.camisola')
-        ->middleware('verified');
-
-#############################################################################################################################################################################
-
-
-/*
- * Admin Dashboard                                                                  //TODO
- */
     Route::view('/dashboard', 'dashboard.index')
         ->middleware('verified');
 
-//Route::get('/dashboard', [DashboardController::class, 'index'])
-//    ->name('dashboard.index')
-//    ->middleware('verified');
 
     Route::get('/dashboard/charts', [DashboardController::class, 'indexCharts'])
         ->name('dashboard.charts');
@@ -113,21 +57,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/tables', [DashboardController::class, 'indexTables'])
         ->name('dashboard.tables');
 
-#############################################################################################################################################################################
     /*
-     * Perfil
+     * Perfil                                                                  //TODO
      */
-    Route::get('/perfil', [CustomerController::class, 'index'])
-        ->name('perfil.index')
-        ->middleware('auth');
-
-    Route::post('/perfil/foto', [App\Http\Controllers\PerfilController::class, 'updatePhoto'])
-        ->name('perfil.shared.updatePhoto');
-
-
-    Route::get('/perfil/{id}', [App\Http\Controllers\PerfilController::class, 'index'])
-        ->name('perfil.index')
-        ->middleware('auth');
 
     Route::get('/perfil/{id}/edit', [PerfilController::class, 'edit'])
         ->name('perfil.shared.edit')
@@ -145,50 +77,6 @@ Route::middleware('auth')->group(function () {
         ->name('perfil.photo.destroy')
         ->middleware('auth');
 
-#############################################################################################################################################################################
-    /*
-     * Carrinho                                                                         //TODO
-     */
-    Route::view('/carrinho', 'carrinho.index')
-        ->middleware('verified');
-
-    Route::post('/carrinho/add/{tshirt}', [CarrinhoController::class, 'add'])
-        ->name('carrinho.add')
-        ->middleware('verified');
-
-    Route::view('/pagamento', 'carrinho.pagamento')
-        ->middleware('verified');
-
-//Route::get('carrinho', [EstampaController::class, 'cart'])
-//->name('carrinho.index')
-//    ->middleware('verified');
-//
-//Route::post('add-to-cart/{id}', [EstampaController::class, 'addToCart']);
-//
-//Route::patch('update-cart', [EstampaController::class, 'updateCarrinho']);
-//
-//Route::delete('remove-from-cart', [EstampaController::class, 'removeCarrinho']);
-//
-//Route::get('pagamento', [EstampaController::class, 'pagamento'])
-//    ->name('pagamento')
-//    ->middleware('verified');
-//
-//Route::post('concluir', [EstampaController::class, 'concluirPagamento'])
-//    ->name('concluir')
-//    ->middleware('verified');
-
-
-// Show the cart:
-    Route::get('cart', [CartController::class, 'show'])->name('cart.show');
-
-// Confirm (store) the cart and save disciplinas registration on the database:
-    Route::post('cart', [CartController::class, 'store'])->name('cart.store');
-
-// Clear the cart:
-    Route::delete('cart', [CartController::class, 'destroy'])->name('cart.destroy');
-
-
-#############################################################################################################################################################################
     /*
      * Categorias
      */
@@ -230,10 +118,6 @@ Route::middleware('auth')->group(function () {
         ->name('cores.index')
         ->middleware('verified');
 
-//Route::get('/cores', [CorController::class, 'index'])->name('cores.index')
-//    ->middleware('can:viewAny,App\Models\Cor')
-// ->middleware('verified');;
-
     Route::get('/cores/{cor}/edit', [CorController::class, 'edit'])
         ->name('cores.shared.edit')
 //        ->middleware('can:view,cor')
@@ -257,7 +141,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cores/{cor}/destroy', [CorController::class, 'destroy'])->name('cores.shared.destroy')
 //        ->middleware('can:delete,cor')
         ->middleware('verified');
-
 
 #############################################################################################################################################################################
     /*
@@ -397,20 +280,6 @@ Route::middleware('auth')->group(function () {
     /*
      * Encomendas
      */
-    Route::view('/encomendas/cliente', 'encomendas.clientes');
-
-    Route::get('/encomendas/cliente', [EncomendaController::class, 'encomendaClientes'])
-        ->name('encomendas.clientes')
-        ->middleware('verified');
-
-
-    Route::view('/encomendas', 'encomendas.index');
-    Route::get('/encomendas', [EncomendaController::class, 'index'])
-        ->name('encomendas.index')
-        ->middleware('verified');
-
-//Route::get('/cores', [CorController::class, 'index'])->name('cores.index')
-//    ->middleware('can:viewAny,App\Models\Cor');
 
     Route::get('/encomendas/{encomenda}/edit', [EncomendaController::class, 'edit'])
         ->name('encomendas.shared.edit')
@@ -421,7 +290,7 @@ Route::middleware('auth')->group(function () {
         ->name('encomendas.index')
         ->middleware('verified');
 
-   Route::get('/encomendas/create', [EncomendaController::class, 'create'])
+    Route::get('/encomendas/create', [EncomendaController::class, 'create'])
         ->name('encomendas.shared.create')
         ->middleware('can:create,App\Models\Encomenda')
         ->middleware('verified');
@@ -439,6 +308,113 @@ Route::middleware('auth')->group(function () {
     Route::delete('/encomendas/{encomenda}/destroy', [EncomendaController::class, 'destroy'])
         ->name('encomendas.shared.destroy')
         ->middleware('can:delete,encomenda')
+        ->middleware('verified');
+
+});
+
+#############################################################################################################################################################################
+
+
+Route::middleware('auth')->group(function () {
+
+    /*
+     * Password                                                                        //TODO
+     */
+    Route::get('/password/change', [ChangePasswordController::class, 'show'])
+        ->name('password.change.show');
+
+    Route::post('/password/change', [ChangePasswordController::class, 'store'])
+        ->name('password.change.store');
+
+#############################################################################################################################################################################
+    /*
+     * Home
+     */
+    Route::get('/home', [HomeController::class, 'index'])
+        ->name('home');
+
+
+#############################################################################################################################################################################
+    /*
+     * Catálogo
+     */
+    Route::get('/catalogo', [CatalogoController::class, 'index'])
+        ->name('catalogo.index')
+        ->middleware('verified');
+
+    Route::get('/catalogo/{id}', [CatalogoController::class, 'show'])
+        ->name('catalogo.details')
+        ->middleware('verified');
+
+    Route::view('about-us', 'about-us')->name('about-us');
+
+    ### ESTAMPA
+
+    Route::view('estampa', 'catalogo.estampa')->name('catalogo.estampa');
+
+    Route::get('/estampa', [CatalogoController::class, 'uploadEstampa'])
+        ->name('catalogo.estampa')
+        ->middleware('verified');
+
+    Route::post('/estampa', [App\Http\Controllers\CatalogoController::class, 'uploadEstampa'])
+        ->name('perfil.estampa');
+
+#############################################################################################################################################################################
+    /*
+     * Camisolas                                                                        //TODO
+     */
+    Route::get('/camisolas', [CamisolaController::class, 'index'])
+        ->name('catalogo.camisola')
+        ->middleware('verified');
+
+#############################################################################################################################################################################
+
+
+#############################################################################################################################################################################
+    /*
+     * Perfil
+     */
+    Route::get('/perfil', [CustomerController::class, 'index'])
+        ->name('perfil.index')
+        ->middleware('auth');
+
+    Route::post('/perfil/foto', [App\Http\Controllers\PerfilController::class, 'updatePhoto'])
+        ->name('perfil.shared.updatePhoto');
+
+
+    Route::get('/perfil/{id}', [App\Http\Controllers\PerfilController::class, 'index'])
+        ->name('perfil.index')
+        ->middleware('auth');
+
+
+#############################################################################################################################################################################
+    /*
+     * Carrinho
+     */
+
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
+    Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart']);
+    Route::patch('/update-cart', [CartController::class, 'updateCarrinho']);
+    Route::delete('/remove-from-cart', [CartController::class, 'removeCarrinho']);
+    Route::get('/pagamento', [CartController::class, 'pagamento'])->name('pagamento');
+    Route::post('/concluir', [CartController::class, 'concluirPagamento'])->name('concluir');
+
+#############################################################################################################################################################################
+
+#############################################################################################################################################################################
+    /*
+     * Encomendas
+     */
+    Route::view('/encomendas/cliente', 'encomendas.clientes');
+
+    Route::get('/encomendas/cliente', [EncomendaController::class, 'encomendaClientes'])
+        ->name('encomendas.clientes')
+        ->middleware('verified');
+
+
+    Route::view('/encomendas', 'encomendas.index');
+    Route::get('/encomendas', [EncomendaController::class, 'index'])
+        ->name('encomendas.index')
         ->middleware('verified');
 
 });
