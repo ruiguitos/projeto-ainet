@@ -4,30 +4,29 @@
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
-    <div class="container-fluid">
-        <div class="search-container">
-            <form action="{{ route('catalogo.index') }}" method="GET" class="form-group">
-                <input type="text" name="search" placeholder="Search by Name">
-                <select name="orderBy">
-                    <option value="name">Order by Name</option>
-                    <option value="price">Order by Price</option>
-                </select>
-                <select name="orderDirection">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
-                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
-            </form>
-        </div>
+{{--    <div class="container-fluid">--}}
+{{--        <div class="search-container">--}}
+{{--            <form action="{{ route('catalogo.index') }}" method="GET" class="form-group">--}}
+{{--                <input type="text" name="search" placeholder="Search by Name">--}}
+{{--                <select name="orderBy">--}}
+{{--                    <option value="name">Order by Name</option>--}}
+{{--                    <option value="price">Order by Price</option>--}}
+{{--                </select>--}}
+{{--                <select name="orderDirection">--}}
+{{--                    <option value="asc">Ascending</option>--}}
+{{--                    <option value="desc">Descending</option>--}}
+{{--                </select>--}}
+{{--                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>--}}
+{{--            </form>--}}
+{{--        </div>--}}
 
-{{--        <div class="row mb-5">--}}
 {{--            <div class="search-container">--}}
 {{--                <form method="GET" action="{{route('catalogo.index')}}" class="form-group">--}}
 {{--                    <div class="input-group">--}}
 {{--                        <select class="custom-select" name="category" id="inputCategory" aria-label="Category">--}}
-{{--                            <option value="" {{'' == old('category', $selectedCategory) ? 'selected' : ''}}>Todas as Categorias</option>--}}
+{{--                            <option value="" {{'' == old('category', $id) ? 'selected' : ''}}>Todas as Categorias</option>--}}
 {{--                            @foreach ($categories as $abr => $name)--}}
-{{--                                <option value={{$abr}} {{$abr == old('categoria', $selectedCategory) ? 'selected' : ''}}>{{$name}}</option>--}}
+{{--                                <option value={{$abr}} {{$abr == old('categoria', $id) ? 'selected' : ''}}>{{$name}}</option>--}}
 {{--                            @endforeach--}}
 {{--                        </select>--}}
 {{--                        <input type='text' class="form-control" name="search" placeholder="Procurar Nome">--}}
@@ -38,17 +37,17 @@
 {{--                    </div>--}}
 {{--                </form>--}}
 {{--            </div>--}}
-{{--        </div>--}}
 
         <div class="grid-container">
             @foreach ($tshirt_images as $tshirt)
                 <div class="tshirt-container">
                     <p>
-                        <a href="{{ route('catalogo.shared.show', $tshirt->id) }}">
+                        <a href="{{ route('catalogo.details', $tshirt->id) }}">
                             <img src="{{ asset('storage/tshirt_images/' . $tshirt->image_url) }}"
                                  style="height: 15rem; width: 15rem; border: 5px">
                         </a>
-                    <p><strong>{{ $tshirt->name }}</strong></p>
+                    <p>
+                        <strong>{{ $tshirt->name }}</strong></p>
                     </p>
 
                     <div class="description">

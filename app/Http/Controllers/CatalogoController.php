@@ -12,7 +12,7 @@ class CatalogoController extends Controller
 {
     public function index()
     {
-        $tshirt_images = Imagem::select('id', 'name', 'category_id', 'description', 'image_url')->paginate(20);
+        $tshirt_images = Imagem::select('id', 'name', 'category_id', 'description', 'image_url')->paginate(35);
         $prices = Preco::all();
 
         $query = Imagem::query();
@@ -21,19 +21,20 @@ class CatalogoController extends Controller
         return view('catalogo.index', compact('tshirt_images', 'prices'));
     }
 
+    public function uploadEstampa() {
+
+        return view('catalogo.estampa');
+    }
+
     public function show($id)
     {
         $tshirt_images = Imagem::findOrFail($id);
         $prices = Preco::all();
         $categories = Categoria::select('id','name');
 
-        return view('catalogo.show', compact('tshirt_images', 'prices', 'categories'));
-
-//        return view('catalogo.show')
-//            ->withCatalogo($tshirt_images)
-//            ->withCatalogo($prices)
-//            ->withCatalogo($categories);
+        return view('catalogo.details', compact('tshirt_images', 'prices', 'categories'));
     }
+
 
     public function filter(Request $request)
     {

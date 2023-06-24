@@ -22,12 +22,22 @@ class CamisolaController extends Controller
 
     public function index()
     {
-        $tshirts = TShirt::select('id', 'order_id', 'tshirt_image_id', 'color_code', 'size', 'qty', 'unit_price', 'sub_total')->paginate(20);
+        $tshirts = TShirt::paginate(5);
         $prices = Preco::all();
 
         $query = TShirt::all();
 
-        return view('catalogo.camisola', compact('tshirts', 'prices'));
+        $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+
+
+        return view('catalogo.camisola', compact('tshirts', 'prices', 'sizes'));
+
+    }
+
+
+    public function showTshirts()
+    {
+        // Retrieve the available sizes from the database or any other data source
 
     }
 

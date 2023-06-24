@@ -22,10 +22,6 @@
                 <th>Nome</th>
                 <td>{{Auth::user()->name}}</td>
                 <td>
-{{--                    <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"--}}
-{{--                       aria-pressed="true" style="border-color: black">--}}
-{{--                        Editar Foto--}}
-{{--                    </a>--}}
                     <form action="{{ route('perfil.shared.updatePhoto') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="photo" accept=".jpg, .jpeg, .png">
@@ -102,21 +98,19 @@
 
             </thead>
         </table>
-
-
 <br>
 <br>
-        <div class="container">
-            <div style="display: flex; justify-content: center; margin-bottom: 15px">
-                <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
-                   aria-pressed="true" style="border-color: black">
-                    Editar Perfil
-                </a>
+        @if(auth()->user()->user_type === 'A')
+            <div class="container">
+                <div style="display: flex; justify-content: center; margin-bottom: 15px">
+                    <a href="{{ route('perfil.shared.edit', Auth::user()->id) }}" class="btn btn-primary btn-sm" role="button"
+                       aria-pressed="true" style="border-color: black">
+                        Editar Perfil
+                    </a>
+                </div>
+
             </div>
-
-        </div>
-        <!-- Edit Profile button -->
-
+        @endif
 <br>
 <br>
 <br>

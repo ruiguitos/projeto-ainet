@@ -74,11 +74,17 @@ Route::middleware('auth')->group(function () {
         ->middleware('verified');
 
     Route::view('about-us', 'about-us')->name('about-us');
+
+    ### ESTAMPA
+
     Route::view('estampa', 'catalogo.estampa')->name('catalogo.estampa');
+
     Route::get('/estampa', [CatalogoController::class, 'uploadEstampa'])
         ->name('catalogo.estampa')
         ->middleware('verified');
 
+    Route::post('/estampa', [App\Http\Controllers\CatalogoController::class, 'uploadEstampa'])
+        ->name('perfil.estampa');
 
 #############################################################################################################################################################################
     /*

@@ -59,42 +59,6 @@
                         </form>
                     </div>
                 </td>
-                {{--                <td>{{ $user->user_type }}</td>--}}
-                {{--                @if($user->blocked == 1)--}}
-                {{--                    <td> Bloqueado </td>--}}
-                {{--                @else--}}
-                {{--                    <td> Ativo </td>--}}
-                {{--                @endif--}}
-                {{--                <td>--}}
-                {{--                    <form id="toggleForm" action="{{ route('users.empregados.index', ['id' => $user->id]) }}"--}}
-                {{--                          method="POST" style="display: inline;">--}}
-                {{--                        @csrf--}}
-                {{--                        @method('PUT')--}}
-                {{--                        <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">--}}
-                {{--                            {{ $user->blocked ? 'Desativado' : 'Ativado' }}--}}
-                {{--                        </button>--}}
-                {{--                    </form>--}}
-                {{--                </td>--}}
-                {{--                <td>--}}
-                {{--                    <a href="{{route('users.empregados.shared.edit', ['empregado' => $user]) }}"--}}
-                {{--                       class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>--}}
-                {{--                <td>--}}
-                {{--                    @can('delete', $user)--}}
-                {{--                        <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}"--}}
-                {{--                              method="POST">--}}
-                {{--                            @csrf--}}
-                {{--                            @method("DELETE")--}}
-                {{--                            <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-                {{--                        </form>--}}
-                {{--                    @endcan--}}
-                {{--                </td>--}}
-                {{--                <td>--}}
-                {{--                    <form action="{{route('users.empregados.shared.destroy', ['empregado' => $user]) }}" method="POST">--}}
-                {{--                        @csrf--}}
-                {{--                        @method("DELETE")--}}
-                {{--                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">--}}
-                {{--                    </form>--}}
-                {{--                </td>--}}
             </tr>
         @endforeach
         </tbody>
