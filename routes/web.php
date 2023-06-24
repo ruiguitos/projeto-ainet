@@ -397,6 +397,11 @@ Route::middleware('auth')->group(function () {
     /*
      * Encomendas
      */
+    Route::view('/encomendas/cliente', 'encomendas.clientes');
+    Route::get('/encomendas/cliente', [EncomendaController::class, 'encomendaClientes']);
+
+
+
     Route::view('/encomendas', 'encomendas.index');
     Route::get('/encomendas', [EncomendaController::class, 'index'])
         ->name('encomendas.index')

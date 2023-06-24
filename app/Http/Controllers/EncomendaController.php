@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Encomenda;
-use App\Models\User;
+use App\Models\Imagem;
+use App\Models\Preco;
+use App\Models\TShirt;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
-use Throwable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class EncomendaController extends Controller
 {
@@ -17,32 +21,6 @@ class EncomendaController extends Controller
         return view('encomendas.index', compact('orders', 'order_items'));
     }
 
-    public function toggleStatus(Request $request, $id)
-    {
-        $orders = Encomenda::findOrFail($id);
-        $status = $request->input('status');
-
-        if ($status === 'canceled' || $status === 'closed') {
-            $orders->status = $status;
-            $orders->save();
-
-//            return redirect()->route('encomendas.index')->with('success', 'Status atualizado com sucesso.');
-        }
-                return redirect()->back();
-
-    }
-
-//    public function toggleStatus(Request $request, $id)
-//    {
-//        $users = User::findOrFail($id);
-//        $users->blocked = !$users->blocked;
-//        $users->save();
-//
-//        // Redirect or return response as needed
-//        return redirect()->back();
-//    }
-
-
     public function encomendaTshirt(): View
     {
         $users = Encomenda::select('orders.id', 'orders.status', 'orders.customer_id', 'orders.date', 'orders.total_price', 'orders.notes', 'orders.nif', 'orders.address', 'orders.payment_type', 'orders.payment_ref', 'orders.receipt_url',
@@ -53,7 +31,20 @@ class EncomendaController extends Controller
         return view('perfil.index', compact('users'));
     }
 
-    public function edit(Encomenda $Order)
+        public function encomendaClientes(): View
+    {
+//        dd('aqui');
+        $user = Auth::user();
+
+        $encomendas = Encomenda::select('id', 'status', 'customer_id', 'date', 'total_price', 'notes', 'nif', 'address', 'payment_type', 'payment_ref', 'receipt_url')
+//            ->where('customer_id', '$user->id')
+            ->where('customer_id', $user->id)
+            ->paginate(20);
+
+        return view('encomendas.clientes', compact('encomendas'));
+    }
+
+    public function edit(Order $Order)
     {
         return view('encomendas.edit')
             ->withEncomenda($Order);
@@ -92,7 +83,7 @@ class EncomendaController extends Controller
             return redirect()->route('encomendas.index')
                 ->with('alert-msg', 'Encomenda "' . $Order->name . '" foi apagado com sucesso!')
                 ->with('alert-type', 'success');
-        } catch (Throwable $th) {
+        } catch (\Throwable $th) {
             // $th é a exceção lançada pelo sistema - por norma, erro oEncomendare no servidor BD MySQL
             // Descomentar a próxima linha para verificar qual a informação que a exceção tem
             //dd($th, $th->errorInfo);
@@ -108,6 +99,7 @@ class EncomendaController extends Controller
             }
         }
     }
+
 
 
 }
