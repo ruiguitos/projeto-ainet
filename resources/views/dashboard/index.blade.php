@@ -127,10 +127,6 @@
                         </a>
                         @endif
                         @if (Auth::user()->user_type == 'A')
-                        <a class="nav-link" href="/dashboard/tables">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Dados
-                        </a>
                         <a class="nav-link" href="/dashboard/charts">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gráficos
