@@ -110,27 +110,31 @@ Route::middleware('auth')->group(function () {
      */
     Route::get('/perfil', [CustomerController::class, 'index'])
         ->name('perfil.index')
-        ->middleware('verified');
+        ->middleware('auth');
 
-    Route::get('/perfil/{id}', [App\Http\Controllers\CustomerController::class, 'index'])
+    Route::post('/perfil/foto', [App\Http\Controllers\PerfilController::class, 'updatePhoto'])
+        ->name('perfil.shared.updatePhoto');
+
+
+    Route::get('/perfil/{id}', [App\Http\Controllers\PerfilController::class, 'index'])
         ->name('perfil.index')
-        ->middleware('verified');
+        ->middleware('auth');
 
-    Route::get('/perfil/{id}/edit', [UserController::class, 'edit'])
+    Route::get('/perfil/{id}/edit', [PerfilController::class, 'edit'])
         ->name('perfil.shared.edit')
-        ->middleware('verified');
+        ->middleware('auth');
 
-    Route::put('/perfil/{id}', [UserController::class, 'update'])
+    Route::put('/perfil/{id}', [PerfilController::class, 'update'])
         ->name('perfil.shared.update')
-        ->middleware('verified');
+        ->middleware('auth');
 
-    Route::delete('/perfil/{id}', [UserController::class, 'destroy'])
+    Route::delete('/perfil/{id}', [PerfilController::class, 'destroy'])
         ->name('perfil.shared.destroy')
-        ->middleware('verified');
+        ->middleware('auth');
 
-    Route::delete('/perfil/{id}/photo', [UserController::class, 'destroy_photo'])
+    Route::delete('/perfil/{id}/photo', [PerfilController::class, 'destroy_photo'])
         ->name('perfil.photo.destroy')
-        ->middleware('verified');
+        ->middleware('auth');
 
 #############################################################################################################################################################################
     /*
@@ -368,6 +372,11 @@ Route::middleware('auth')->group(function () {
     /*
      * Encomendas
      */
+    Route::view('/encomendas/cliente', 'encomendas.clientes');
+    Route::get('/encomendas/cliente', [EncomendaController::class, 'encomendaClientes']);
+
+
+
     Route::view('/encomendas', 'encomendas.index');
     Route::get('/encomendas', [EncomendaController::class, 'index'])
         ->name('encomendas.index')

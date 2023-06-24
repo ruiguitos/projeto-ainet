@@ -8,6 +8,8 @@ use App\Models\Preco;
 use App\Models\TShirt;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class EncomendaController extends Controller
 {
@@ -27,6 +29,19 @@ class EncomendaController extends Controller
             ->where('users.user_type', 'C');
 
         return view('perfil.index', compact('users'));
+    }
+
+        public function encomendaClientes(): View
+    {
+//        dd('aqui');
+        $user = Auth::user();
+
+        $encomendas = Encomenda::select('id', 'status', 'customer_id', 'date', 'total_price', 'notes', 'nif', 'address', 'payment_type', 'payment_ref', 'receipt_url')
+//            ->where('customer_id', '$user->id')
+            ->where('customer_id', $user->id)
+            ->paginate(20);
+
+        return view('encomendas.clientes', compact('encomendas'));
     }
 
     public function edit(Order $Order)
