@@ -22,6 +22,7 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th></th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -31,6 +32,16 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
+                <td>
+                    <form id="toggleForm" action="{{ route('users.admins.index', ['id' => $user->id]) }}"
+                          method="POST" style="display: inline;">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn {{ $user->blocked ? 'btn-info' : 'btn-warning' }}">
+                            {{ $user->blocked ? 'Desativado' : 'Ativado' }}
+                        </button>
+                    </form>
+                </td>
                 <td>
                     <div style="display: flex; gap: 5px;">
                         <a href="{{ route('users.empregados.shared.edit', ['id' => $user]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a>
